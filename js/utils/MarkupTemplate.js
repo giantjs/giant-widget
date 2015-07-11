@@ -1,17 +1,17 @@
-/*global dessert, troop, sntls, shoeshine */
-troop.postpone(shoeshine, 'MarkupTemplate', function () {
+/*global giant, giant, giant, giant */
+giant.postpone(giant, 'MarkupTemplate', function () {
     "use strict";
 
-    var base = troop.Base,
+    var base = giant.Base,
         self = base.extend();
 
     /**
      * Creates a MarkupTemplate instance.
      * MarkupTemplate instances may also be created via conversion from string.
-     * @name shoeshine.MarkupTemplate.create
+     * @name giant.MarkupTemplate.create
      * @function
      * @param {string} text MarkupTemplate string.
-     * @returns {shoeshine.MarkupTemplate}
+     * @returns {giant.MarkupTemplate}
      * @see String#toMarkupTemplate
      */
 
@@ -19,10 +19,10 @@ troop.postpone(shoeshine, 'MarkupTemplate', function () {
      * Implements a template markup, where containers are identified by their CSS classes.
      * The template is filled in by specifying content for each container.
      * @class
-     * @extends troop.Base
+     * @extends giant.Base
      */
-    shoeshine.MarkupTemplate = self
-        .addConstants(/** @lends shoeshine.MarkupTemplate */{
+    giant.MarkupTemplate = self
+        .addConstants(/** @lends giant.MarkupTemplate */{
             /**
              * Splits along template placeholders and tags.
              * Leaves an empty slot after each tag and placeholder in the resulting array.
@@ -47,7 +47,7 @@ troop.postpone(shoeshine, 'MarkupTemplate', function () {
              */
             RE_CLASS_FROM_CLASS_LIST: /[\w-]+/g
         })
-        .addPrivateMethods(/** @lends shoeshine.MarkupTemplate */{
+        .addPrivateMethods(/** @lends giant.MarkupTemplate */{
             /**
              * @param {string} tag
              * @returns {string}
@@ -77,7 +77,7 @@ troop.postpone(shoeshine, 'MarkupTemplate', function () {
                 return classList && this._extractClassesFromClassList(classList);
             }
         })
-        .addMethods(/** @lends shoeshine.MarkupTemplate# */{
+        .addMethods(/** @lends giant.MarkupTemplate# */{
             /**
              * @param {string} templateString
              * @ignore
@@ -85,14 +85,14 @@ troop.postpone(shoeshine, 'MarkupTemplate', function () {
             init: function (templateString) {
                 /**
                  * Blown up string where the placeholders need to be substituted and joined to get the final text.
-                 * @type {sntls.Collection}
+                 * @type {giant.Collection}
                  */
                 this.preprocessedTemplate = templateString.split(this.RE_MARKUP_SPLITTER)
                     .toCollection();
 
                 /**
                  * Defines lookup between container names and positions in the preprocessed template.
-                 * @type {sntls.StringDictionary}
+                 * @type {giant.StringDictionary}
                  */
                 this.containerLookup = this.preprocessedTemplate
                     .mapValues(this._processTemplateFragment, this)
@@ -107,7 +107,7 @@ troop.postpone(shoeshine, 'MarkupTemplate', function () {
              * Appends template with specified content.
              * Do not call this on the original template. Clone first.
              * @param {object} contents Pairs of container CSS classes & associated content.
-             * @returns {shoeshine.MarkupTemplate}
+             * @returns {giant.MarkupTemplate}
              */
             appendContent: function (contents) {
                 var preprocessedTemplate = this.preprocessedTemplate.items,
@@ -142,7 +142,7 @@ troop.postpone(shoeshine, 'MarkupTemplate', function () {
 
             /**
              * Clones markup template.
-             * @returns {shoeshine.MarkupTemplate}
+             * @returns {giant.MarkupTemplate}
              */
             clone: function () {
                 var result = this.getBase().create('');
@@ -164,15 +164,15 @@ troop.postpone(shoeshine, 'MarkupTemplate', function () {
 (function () {
     "use strict";
 
-    troop.Properties.addProperties.call(
+    giant.Properties.addProperties.call(
         String.prototype,
         /** @lends String# */{
             /**
              * Converts `String` to `MarkupTemplate` instance.
-             * @returns {shoeshine.MarkupTemplate}
+             * @returns {giant.MarkupTemplate}
              */
             toMarkupTemplate: function () {
-                return shoeshine.MarkupTemplate.create(this);
+                return giant.MarkupTemplate.create(this);
             }
         },
         false, false, false

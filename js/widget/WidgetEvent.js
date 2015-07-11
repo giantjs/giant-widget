@@ -1,33 +1,33 @@
-/*global dessert, troop, sntls, evan, shoeshine */
-troop.postpone(shoeshine, 'WidgetEvent', function () {
+/*global giant, giant, giant, giant, giant */
+giant.postpone(giant, 'WidgetEvent', function () {
     "use strict";
 
-    var base = evan.Event,
+    var base = giant.Event,
         self = base.extend();
 
     /**
      * Creates a WidgetEvent instance.
-     * Do not instantiate this class directly. Spawn events on the event space `shoeshine.widgetEventSpace`,
+     * Do not instantiate this class directly. Spawn events on the event space `giant.widgetEventSpace`,
      * or an Evented instance, like a Widget.
-     * WidgetEvent may also be instantiated by creating an `evan.Event` with `shoeshine.WidgetEventSpace`
+     * WidgetEvent may also be instantiated by creating an `giant.Event` with `giant.WidgetEventSpace`
      * specified as event space.
-     * @name shoeshine.WidgetEvent.create
+     * @name giant.WidgetEvent.create
      * @function
      * @param {string} eventName Event name
-     * @param {evan.EventSpace} eventSpace Event space associated with event
-     * @returns {shoeshine.WidgetEvent}
+     * @param {giant.EventSpace} eventSpace Event space associated with event
+     * @returns {giant.WidgetEvent}
      */
 
     /**
      * The WidgetEvent implements special event features for widgets.
      * @class
-     * @extends evan.Event
+     * @extends giant.Event
      */
-    shoeshine.WidgetEvent = self
-        .addMethods(/** @lends shoeshine.WidgetEvent# */{
+    giant.WidgetEvent = self
+        .addMethods(/** @lends giant.WidgetEvent# */{
             /**
              * @param {string} [eventName]
-             * @param {evan.EventSpace} [eventSpace]
+             * @param {giant.EventSpace} [eventSpace]
              * @ignore
              */
             init: function (eventName, eventSpace) {
@@ -35,25 +35,25 @@ troop.postpone(shoeshine, 'WidgetEvent', function () {
 
                 /**
                  * Widget from which the event originated.
-                 * @type {shoeshine.Widget}
+                 * @type {giant.Widget}
                  */
                 this.senderWidget = undefined;
             },
 
             /**
              * Sets `senderWidget` property.
-             * @param {shoeshine.Widget} senderWidget
-             * @returns {shoeshine.WidgetEvent}
+             * @param {giant.Widget} senderWidget
+             * @returns {giant.WidgetEvent}
              */
             setSenderWidget: function (senderWidget) {
-                dessert.isWidget(senderWidget, "Invalid sender widget");
+                giant.isWidget(senderWidget, "Invalid sender widget");
                 this.senderWidget = senderWidget;
                 return this;
             },
 
             /**
              * Clones Event instance. Copies `senderWidget` reference to the new event instance.
-             * @returns {shoeshine.WidgetEvent}
+             * @returns {giant.WidgetEvent}
              */
             clone: function () {
                 return base.clone.apply(this, arguments)
@@ -62,11 +62,11 @@ troop.postpone(shoeshine, 'WidgetEvent', function () {
         });
 });
 
-troop.amendPostponed(evan, 'Event', function () {
+giant.amendPostponed(giant, 'Event', function () {
     "use strict";
 
-    evan.Event
-        .addSurrogate(shoeshine, 'WidgetEvent', function (eventName, eventSpace) {
-            return eventSpace === shoeshine.widgetEventSpace;
+    giant.Event
+        .addSurrogate(giant, 'WidgetEvent', function (eventName, eventSpace) {
+            return eventSpace === giant.widgetEventSpace;
         });
 });

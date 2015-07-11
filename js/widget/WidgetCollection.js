@@ -1,27 +1,27 @@
-/*global dessert, troop, sntls, evan, shoeshine */
-troop.postpone(shoeshine, 'WidgetCollection', function () {
+/*global giant, giant, giant, giant, giant */
+giant.postpone(giant, 'WidgetCollection', function () {
     "use strict";
 
-    var base = sntls.Collection.of(shoeshine.Widget),
+    var base = giant.Collection.of(giant.Widget),
         self = base.extend();
 
     /**
      * Creates a WidgetCollection instance.
-     * @name shoeshine.WidgetCollection.create
+     * @name giant.WidgetCollection.create
      * @function
      * @param {object} [items]
-     * @returns {shoeshine.WidgetCollection}
+     * @returns {giant.WidgetCollection}
      */
 
     /**
      * The WidgetCollection is a specified collection merging the Collection API with the Widget API.
      * Also allows serialization of all widgets in the collection into a single string.
      * @class
-     * @extends sntls.Collection
-     * @extends shoeshine.Widget
+     * @extends giant.Collection
+     * @extends giant.Widget
      */
-    shoeshine.WidgetCollection = self
-        .addMethods(/** @lends shoeshine.WidgetCollection# */{
+    giant.WidgetCollection = self
+        .addMethods(/** @lends giant.WidgetCollection# */{
             /**
              * Generates the markup for all widgets in the collection, in the order of their names.
              * @returns {string}
@@ -34,17 +34,17 @@ troop.postpone(shoeshine, 'WidgetCollection', function () {
         });
 });
 
-troop.amendPostponed(sntls, 'Hash', function () {
+giant.amendPostponed(giant, 'Hash', function () {
     "use strict";
 
-    sntls.Hash
-        .addMethods(/** @lends sntls.Hash# */{
+    giant.Hash
+        .addMethods(/** @lends giant.Hash# */{
             /**
              * Converts `Hash` to `WidgetCollection`.
-             * @returns {shoeshine.WidgetCollection}
+             * @returns {giant.WidgetCollection}
              */
             toWidgetCollection: function () {
-                return shoeshine.WidgetCollection.create(this.items);
+                return giant.WidgetCollection.create(this.items);
             }
         });
 });
@@ -52,15 +52,15 @@ troop.amendPostponed(sntls, 'Hash', function () {
 (function () {
     "use strict";
 
-    troop.Properties.addProperties.call(
+    giant.Properties.addProperties.call(
         Array.prototype,
         /** @lends Array# */{
             /**
              * Converts array of `Widget` instances to a `WidgetCollection`.
-             * @returns {shoeshine.WidgetCollection}
+             * @returns {giant.WidgetCollection}
              */
             toWidgetCollection: function () {
-                return shoeshine.WidgetCollection.create(this);
+                return giant.WidgetCollection.create(this);
             }
         },
         false, false, false

@@ -1,17 +1,17 @@
-/*global dessert, troop, sntls, shoeshine */
-troop.postpone(shoeshine, 'HandlebarsTemplate', function () {
+/*global giant, giant, giant, giant */
+giant.postpone(giant, 'HandlebarsTemplate', function () {
     "use strict";
 
-    var base = troop.Base,
+    var base = giant.Base,
         self = base.extend();
 
     /**
      * Creates a HandlebarsTemplate instance.
      * HandlebarsTemplate instances may also be created via conversion from string.
-     * @name shoeshine.HandlebarsTemplate.create
+     * @name giant.HandlebarsTemplate.create
      * @function
      * @param {string} text HandlebarsTemplate string.
-     * @returns {shoeshine.HandlebarsTemplate}
+     * @returns {giant.HandlebarsTemplate}
      * @see String#toHandlebarsTemplate
      */
 
@@ -19,10 +19,10 @@ troop.postpone(shoeshine, 'HandlebarsTemplate', function () {
      * Implements basic, placeholder-based templating. Converting any string containing placeholders
      * to a HandlebarsTemplate instance allows those placeholders to be replaced via a simple API.
      * @class
-     * @extends troop.Base
+     * @extends giant.Base
      */
-    shoeshine.HandlebarsTemplate = self
-        .addConstants(/** @lends shoeshine.HandlebarsTemplate */{
+    giant.HandlebarsTemplate = self
+        .addConstants(/** @lends giant.HandlebarsTemplate */{
             /**
              * Used for replacing placeholders in the template.
              * @type {RegExp}
@@ -30,7 +30,7 @@ troop.postpone(shoeshine, 'HandlebarsTemplate', function () {
              */
             RE_TEMPLATE_PLACEHOLDER: /{{([\w-]+)}}/g
         })
-        .addMethods(/** @lends shoeshine.HandlebarsTemplate# */{
+        .addMethods(/** @lends giant.HandlebarsTemplate# */{
             /**
              * @param {string} templateString
              * @ignore
@@ -71,15 +71,15 @@ troop.postpone(shoeshine, 'HandlebarsTemplate', function () {
 (function () {
     "use strict";
 
-    troop.Properties.addProperties.call(
+    giant.Properties.addProperties.call(
         String.prototype,
         /** @lends String# */{
             /**
              * Converts `String` to `HandlebarsTemplate` instance.
-             * @returns {shoeshine.HandlebarsTemplate}
+             * @returns {giant.HandlebarsTemplate}
              */
             toHandlebarsTemplate: function () {
-                return shoeshine.HandlebarsTemplate.create(this);
+                return giant.HandlebarsTemplate.create(this);
             },
 
             /**

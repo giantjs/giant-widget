@@ -1,4 +1,4 @@
-/*global dessert, troop, sntls, shoeshine */
+/*global giant, giant, giant, giant */
 /*global module, test, expect, ok, equal, strictEqual, notStrictEqual, deepEqual, notDeepEqual, raises */
 (function () {
     "use strict";
@@ -7,15 +7,15 @@
 
     /**
      * @class
-     * @extends troop.Base
-     * @extends shoeshine.Progenitor
+     * @extends giant.Base
+     * @extends giant.Progenitor
      */
-    var Progenitor = troop.Base.extend()
-        .addTrait(shoeshine.Progenitor)
+    var Progenitor = giant.Base.extend()
+        .addTrait(giant.Progenitor)
         .extend('myClass')
         .addMethods({
             init: function () {
-                shoeshine.Progenitor.init.call(this);
+                giant.Progenitor.init.call(this);
             }
         });
 
@@ -24,7 +24,7 @@
 
         ok(instance.hasOwnProperty('parent'), "should add 'patent' property");
         equal(typeof instance.parent, 'undefined', "should set 'patent' property to undefined");
-        ok(instance.children.isA(sntls.Collection), "should add children property");
+        ok(instance.children.isA(giant.Collection), "should add children property");
         equal(instance.childName, instance.instanceId.toString(), "should set (default) child name to instance ID");
     });
 
@@ -228,13 +228,13 @@
 
         var children = parent.getChildren(child1.childName, child2.childName);
 
-        ok(children.isA(sntls.Collection), "should return a collection");
+        ok(children.isA(giant.Collection), "should return a collection");
         deepEqual(children.getValues(), [child1, child2], "should return collection w/ specified children");
     });
 
     test("Descendant collector", function () {
         var items = [],
-            firstId = sntls.Documented.nextInstanceId,
+            firstId = giant.Documented.nextInstanceId,
             parent = Progenitor.create()
                 .addChild(Progenitor.create()
                     .addChild(Progenitor.create()))
@@ -243,7 +243,7 @@
                     .addChild(Progenitor.create()))
                 .addChild(Progenitor.create());
 
-        sntls.Collection.addMocks({
+        giant.Collection.addMocks({
             setItem: function (itemName) {
                 items.push(itemName);
                 return this;
@@ -252,9 +252,9 @@
 
         var descendants = parent.getAllDescendants();
 
-        sntls.Collection.removeMocks();
+        giant.Collection.removeMocks();
 
-        ok(descendants.isA(sntls.Collection), "should return Collection instance");
+        ok(descendants.isA(giant.Collection), "should return Collection instance");
         deepEqual(
             items.sort(),
             [firstId + 1, firstId + 2, firstId + 3, firstId + 4, firstId + 5, firstId + 6],
@@ -291,7 +291,7 @@
     });
 
     test("Lineage getter", function () {
-        var firstId = sntls.Documented.nextInstanceId,
+        var firstId = giant.Documented.nextInstanceId,
             child = Progenitor.create()
                 .addToParent(Progenitor.create()
                     .addToParent(Progenitor.create()
@@ -300,7 +300,7 @@
 
         result = child.getLineage();
 
-        ok(result.isA(sntls.Path), "should return Path instance");
+        ok(result.isA(giant.Path), "should return Path instance");
         deepEqual(result.asArray, [firstId + 3, firstId + 2, firstId + 1, firstId],
             "should return path containing lineage");
     });

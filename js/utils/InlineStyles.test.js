@@ -1,4 +1,4 @@
-/*global dessert, troop, sntls, evan, shoeshine */
+/*global giant, giant, giant, giant, giant */
 /*global module, test, expect, ok, equal, strictEqual, notStrictEqual, deepEqual, notDeepEqual, raises */
 (function () {
     "use strict";
@@ -6,7 +6,7 @@
     module("Inline Styles");
 
     test("Serialization", function () {
-        var inlineStyles = shoeshine.InlineStyles.create()
+        var inlineStyles = giant.InlineStyles.create()
             .setItem('foo', 'bar')
             .setItem('hello', 'world');
 

@@ -1,4 +1,4 @@
-/*global dessert, troop, sntls, evan, shoeshine */
+/*global giant, giant, giant, giant, giant */
 /*global module, test, expect, ok, equal, strictEqual, notStrictEqual, deepEqual, notDeepEqual, raises */
 (function () {
     "use strict";
@@ -6,7 +6,7 @@
     module("Css Classes");
 
     test("Adding CSS class", function () {
-        var cssClasses = shoeshine.CssClasses.create();
+        var cssClasses = giant.CssClasses.create();
 
         strictEqual(cssClasses.addCssClass('foo'), cssClasses, "should be chainable");
         deepEqual(cssClasses.items, {
@@ -20,7 +20,7 @@
     });
 
     test("Decreasing ref count CSS class", function () {
-        var cssClasses = shoeshine.CssClasses.create()
+        var cssClasses = giant.CssClasses.create()
             .addCssClass('foo')
             .addCssClass('foo');
 
@@ -34,7 +34,7 @@
     });
 
     test("Removing CSS class", function () {
-        var cssClasses = shoeshine.CssClasses.create()
+        var cssClasses = giant.CssClasses.create()
             .addCssClass('foo');
 
         strictEqual(cssClasses.removeCssClass('foo'), cssClasses, "should be chainable");
@@ -42,7 +42,7 @@
     });
 
     test("Serialization", function () {
-        var cssClasses = shoeshine.CssClasses.create()
+        var cssClasses = giant.CssClasses.create()
             .addCssClass('foo')
             .addCssClass('bar');
 

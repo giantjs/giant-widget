@@ -1,18 +1,18 @@
-/*global dessert, troop, sntls, shoeshine */
-troop.postpone(shoeshine, 'Progenitor', function (ns, className) {
+/*global giant, giant, giant, giant */
+giant.postpone(giant, 'Progenitor', function (ns, className) {
     "use strict";
 
-    var base = sntls.Managed,
+    var base = giant.Managed,
         self = base.extend(className),
         slice = Array.prototype.slice;
 
     /**
      * The Progenitor trait manages parent-children relation between instances of the host class.
      * @class
-     * @extends sntls.Managed
+     * @extends giant.Managed
      */
-    shoeshine.Progenitor = self
-        .addMethods(/** @lends shoeshine.Progenitor# */{
+    giant.Progenitor = self
+        .addMethods(/** @lends giant.Progenitor# */{
             /** Call from host's .init */
             init: function () {
                 base.init.call(this);
@@ -20,7 +20,7 @@ troop.postpone(shoeshine, 'Progenitor', function (ns, className) {
                 /**
                  * Parent of current instance.
                  * When undefined, progenitor is considered a root instance.
-                 * @type {shoeshine.Progenitor}
+                 * @type {giant.Progenitor}
                  */
                 this.parent = undefined;
 
@@ -32,15 +32,15 @@ troop.postpone(shoeshine, 'Progenitor', function (ns, className) {
 
                 /**
                  * Children: collection of other Progenitor instances.
-                 * @type {sntls.Collection}
+                 * @type {giant.Collection}
                  */
-                this.children = sntls.Collection.create();
+                this.children = giant.Collection.create();
             },
 
             /**
              * Adds current instance to the specified parent Progenitor instance as child.
-             * @param {shoeshine.Progenitor} parent
-             * @returns {shoeshine.Progenitor}
+             * @param {giant.Progenitor} parent
+             * @returns {giant.Progenitor}
              */
             addToParent: function (parent) {
                 var childName, currentChild;
@@ -75,8 +75,8 @@ troop.postpone(shoeshine, 'Progenitor', function (ns, className) {
 
             /**
              * Adds the specified Progenitor instance to the current instance as child.
-             * @param {shoeshine.Progenitor} child
-             * @returns {shoeshine.Progenitor}
+             * @param {giant.Progenitor} child
+             * @returns {giant.Progenitor}
              */
             addChild: function (child) {
                 child.addToParent(this);
@@ -86,7 +86,7 @@ troop.postpone(shoeshine, 'Progenitor', function (ns, className) {
             /**
              * Removes current instance from its parent.
              * Has no effect when current instance has no parent.
-             * @returns {shoeshine.Progenitor}
+             * @returns {giant.Progenitor}
              */
             removeFromParent: function () {
                 var parent = this.parent;
@@ -105,8 +105,8 @@ troop.postpone(shoeshine, 'Progenitor', function (ns, className) {
             /**
              * Removes specified Progenitor instance from current instance.
              * Has no effect if the specified instance is not child of the current instance.
-             * @param {shoeshine.Progenitor} child
-             * @returns {shoeshine.Progenitor}
+             * @param {giant.Progenitor} child
+             * @returns {giant.Progenitor}
              */
             removeChild: function (child) {
                 if (this.children.getItem(child.childName) === child) {
@@ -117,7 +117,7 @@ troop.postpone(shoeshine, 'Progenitor', function (ns, className) {
 
             /**
              * Removes all children from the current instance.
-             * @returns {shoeshine.Progenitor}
+             * @returns {giant.Progenitor}
              */
             removeChildren: function () {
                 this.children.callOnEachItem('removeFromParent');
@@ -128,10 +128,10 @@ troop.postpone(shoeshine, 'Progenitor', function (ns, className) {
              * Changes child name for current instance.
              * Has no effect when specified child name is same as the current child name.
              * @param {string} childName
-             * @returns {shoeshine.Progenitor}
+             * @returns {giant.Progenitor}
              */
             setChildName: function (childName) {
-                dessert.isString(childName, "Invalid child name");
+                giant.isString(childName, "Invalid child name");
 
                 var parent = this.parent;
 
@@ -156,7 +156,7 @@ troop.postpone(shoeshine, 'Progenitor', function (ns, className) {
             /**
              * Retrieves child instance matching the specified child name.
              * @param {string} childName
-             * @returns {shoeshine.Progenitor}
+             * @returns {giant.Progenitor}
              */
             getChild: function (childName) {
                 return this.children.getItem(childName);
@@ -165,7 +165,7 @@ troop.postpone(shoeshine, 'Progenitor', function (ns, className) {
             /**
              * Retrieves a collection of child instances matching the names specified as arguments.
              * When no argument is given, retrieves reference to the children collection.
-             * @returns {sntls.Collection}
+             * @returns {giant.Collection}
              */
             getChildren: function () {
                 if (arguments.length) {
@@ -177,10 +177,10 @@ troop.postpone(shoeshine, 'Progenitor', function (ns, className) {
 
             /**
              * Retrieves a collection of all instances in the current instance's progeny.
-             * @returns {sntls.Collection}
+             * @returns {giant.Collection}
              */
             getAllDescendants: function () {
-                var result = sntls.Collection.create();
+                var result = giant.Collection.create();
 
                 (function getAllDescendants(parent) {
                     parent.children
@@ -198,10 +198,10 @@ troop.postpone(shoeshine, 'Progenitor', function (ns, className) {
              * matching the specified tester function. The tester receives one argument, which
              * is the Progenitor instance being traversed in the parent chain.
              * @param {function} tester
-             * @returns {shoeshine.Progenitor}
+             * @returns {giant.Progenitor}
              */
             getAncestor: function (tester) {
-                dessert.isFunction(tester, "Invalid tester function");
+                giant.isFunction(tester, "Invalid tester function");
 
                 var parent = this.parent;
 
@@ -215,7 +215,7 @@ troop.postpone(shoeshine, 'Progenitor', function (ns, className) {
             /**
              * Retrieves the path that identifies the position of the current instance
              * relative to the root instance.
-             * @returns {sntls.Path}
+             * @returns {giant.Path}
              */
             getLineage: function () {
                 var asArray = [],

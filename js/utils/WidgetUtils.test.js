@@ -1,4 +1,4 @@
-/*global dessert, troop, sntls, evan, shoeshine */
+/*global giant, giant, giant, giant, giant */
 /*global module, test, expect, ok, equal, strictEqual, notStrictEqual, deepEqual, notDeepEqual, raises */
 (function () {
     "use strict";
@@ -6,15 +6,15 @@
     module("Widget Utils");
 
     test("HTML escape", function () {
-        equal(shoeshine.WidgetUtils.htmlEscape("Q&A"), "Q&amp;A",
+        equal(giant.WidgetUtils.htmlEscape("Q&A"), "Q&amp;A",
             "should escape ampersand");
         equal(
-            shoeshine.WidgetUtils.htmlEscape("<script>alert('foo');</script>"),
+            giant.WidgetUtils.htmlEscape("<script>alert('foo');</script>"),
             "&lt;script&gt;alert(&#39;foo&#39;);&lt;/script&gt;",
             "should escape injected HTML"
         );
         equal(
-            shoeshine.WidgetUtils.htmlEscape("Hello {{name}}!"),
+            giant.WidgetUtils.htmlEscape("Hello {{name}}!"),
             "Hello &#123;&#123;name&#125;&#125;!",
             "should escape template"
         );
@@ -39,11 +39,11 @@
             e2 = element.getElementsByClassName('middle')[0],
             e3 = element.getElementsByClassName('innermost')[0];
 
-        strictEqual(shoeshine.WidgetUtils.getParentNodeByClassName(e3, 'innermost'), e3,
+        strictEqual(giant.WidgetUtils.getParentNodeByClassName(e3, 'innermost'), e3,
             "should fetch self when specified class is matching");
-        strictEqual(shoeshine.WidgetUtils.getParentNodeByClassName(e3, 'middle'), e2,
+        strictEqual(giant.WidgetUtils.getParentNodeByClassName(e3, 'middle'), e2,
             "should fetch parent with specified class");
-        equal(typeof shoeshine.WidgetUtils.getParentNodeByClassName(e3, 'foo'), 'undefined',
+        equal(typeof giant.WidgetUtils.getParentNodeByClassName(e3, 'foo'), 'undefined',
             "should return undefined when no such parent exists");
     });
 }());

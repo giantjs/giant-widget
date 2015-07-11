@@ -1,14 +1,14 @@
-/*global dessert, troop, sntls, evan, shoeshine, Event */
-troop.postpone(shoeshine, 'Widget', function (ns, className) {
+/*global giant, giant, giant, giant, giant, Event */
+giant.postpone(giant, 'Widget', function (ns, className) {
     "use strict";
 
     var slice = Array.prototype.slice,
-        base = troop.Base,
+        base = giant.Base,
         self = base.extend()
             // trait methods do not overlap, can go on same prototype level
-            .addTrait(shoeshine.Progenitor)
-            .addTrait(shoeshine.Renderable)
-            .addTrait(evan.Evented)
+            .addTrait(giant.Progenitor)
+            .addTrait(giant.Renderable)
+            .addTrait(giant.Evented)
             .extend(className);
 
     /**
@@ -16,24 +16,24 @@ troop.postpone(shoeshine, 'Widget', function (ns, className) {
      * Widgets already inserted into the hierarchy may be retrieved via conversion from their widget IDs.
      * @example
      * 'w1'.toWidget()
-     * @name shoeshine.Widget.create
+     * @name giant.Widget.create
      * @function
-     * @returns {shoeshine.Widget}
+     * @returns {giant.Widget}
      */
 
     /**
-     * The Widget class is the base class for all *shoeshine*-based widgets.
+     * The Widget class is the base class for all *giant*-based widgets.
      * As stateful view-controllers, the widgets' role is to keep the view (DOM) in sync with the model.
      * The Widget implements the life cycle: created - added - rendered - removed, to each stage of which user-defined
      * handlers may be added.
      * @class
-     * @extends troop.Base
-     * @extends evan.Evented
-     * @extends shoeshine.Progenitor
-     * @extends shoeshine.Renderable
+     * @extends giant.Base
+     * @extends giant.Evented
+     * @extends giant.Progenitor
+     * @extends giant.Renderable
      */
-    shoeshine.Widget = self
-        .addConstants(/** @lends shoeshine.Widget */{
+    giant.Widget = self
+        .addConstants(/** @lends giant.Widget */{
             /** @constant */
             EVENT_CHILD_ADD: 'child-add',
 
@@ -41,34 +41,34 @@ troop.postpone(shoeshine, 'Widget', function (ns, className) {
             EVENT_CHILD_REMOVE: 'child-remove',
 
             /**
-             * @type {sntls.Path}
+             * @type {giant.Path}
              * @constant
              */
             ATTACHED_EVENT_PATH_ROOT: 'widget>attached'.toPath(),
 
             /**
-             * @type {sntls.Path}
+             * @type {giant.Path}
              * @constant
              */
             DETACHED_EVENT_PATH_ROOT: 'widget>detached'.toPath()
         })
-        .addPublic(/** @lends shoeshine.Widget */{
+        .addPublic(/** @lends giant.Widget */{
             /**
              * Stores all HTML attributes, including CSS classes and inline styles.
-             * @type {shoeshine.HtmlAttributes}
+             * @type {giant.HtmlAttributes}
              */
-            htmlAttributes: shoeshine.HtmlAttributes.create()
+            htmlAttributes: giant.HtmlAttributes.create()
                 .addCssClass(className),
 
             /**
              * Root widget. All other widgets descend from this.
              * There can be only one root widget at a time, but the root widget may be replaced at any time.
-             * @type {shoeshine.Widget}
-             * @see shoeshine.Widget#setRootWidget
+             * @type {giant.Widget}
+             * @see giant.Widget#setRootWidget
              */
             rootWidget: undefined
         })
-        .addPrivateMethods(/** @lends shoeshine.Widget# */{
+        .addPrivateMethods(/** @lends giant.Widget# */{
             /**
              * Retrieves a list of widget IDs to be found under the specified DOM element.
              * @param {HTMLElement} element
@@ -113,7 +113,7 @@ troop.postpone(shoeshine, 'Widget', function (ns, className) {
 
             /**
              * Retrieves current child widgets grouped by container CSS class name.
-             * @returns {sntls.Collection}
+             * @returns {giant.Collection}
              * @private
              */
             _getChildrenGroupedByContainer: function () {
@@ -131,19 +131,19 @@ troop.postpone(shoeshine, 'Widget', function (ns, className) {
                     });
             }
         })
-        .addMethods(/** @lends shoeshine.Widget# */{
+        .addMethods(/** @lends giant.Widget# */{
             /**
-             * Extends the widget class. Same as `troop.Base.extend()` in all respects except for incorporating the
+             * Extends the widget class. Same as `giant.Base.extend()` in all respects except for incorporating the
              * functionality of `Documented.extend()`, and adding the class name to the HTML attributes as CSS class.
              * @example
-             * var MyWidget = shoeshine.Widget.extend('MyWidget');
+             * var MyWidget = giant.Widget.extend('MyWidget');
              * @param {string} className
-             * @returns {shoeshine.Widget}
-             * @see troop.Base.extend
-             * @see sntls.Documented.extend
+             * @returns {giant.Widget}
+             * @see giant.Base.extend
+             * @see giant.Documented.extend
              */
             extend: function (className) {
-                var that = sntls.Documented.extend.call(this, className);
+                var that = giant.Documented.extend.call(this, className);
 
                 that.htmlAttributes = this.htmlAttributes.clone()
                     .addCssClass(className);
@@ -152,17 +152,17 @@ troop.postpone(shoeshine, 'Widget', function (ns, className) {
             },
 
             /**
-             * Adds trait to widget class. Same as `troop.addTrait()`, except for optionally adding the trait name
+             * Adds trait to widget class. Same as `giant.addTrait()`, except for optionally adding the trait name
              * to the widget's HTML attributes as CSS class.
              * @example
-             * var MyWidget = shoeshine.Widget.extend('MyWidget')
+             * var MyWidget = giant.Widget.extend('MyWidget')
              *     .addTrait(TraitClass, 'TraitClass');
              * @param {object} trait
              * @param {string} [traitName] Name of trait. Must be the same as the name of the trait object.
-             * @returns {shoeshine.Widget} Widget class the method was called on.
+             * @returns {giant.Widget} Widget class the method was called on.
              */
             addTrait: function (trait, traitName) {
-                dessert.isStringOptional(traitName, "Invalid trait name");
+                giant.isStringOptional(traitName, "Invalid trait name");
 
                 base.addTrait.call(this, trait);
 
@@ -174,11 +174,11 @@ troop.postpone(shoeshine, 'Widget', function (ns, className) {
             },
 
             /**
-             * Adds trait to widget class, and extends the class afterwards. Same as `troop.addTrait()`,
+             * Adds trait to widget class, and extends the class afterwards. Same as `giant.addTrait()`,
              * except for optionally adding the trait name to the widget's HTML attributes as CSS class.
-             * @param {troop.Base} trait
+             * @param {giant.Base} trait
              * @param {string} [traitName] Name of trait. Must be the same as the name of the trait object.
-             * @returns {shoeshine.Widget} Extended widget class.
+             * @returns {giant.Widget} Extended widget class.
              */
             addTraitAndExtend: function (trait, traitName) {
                 return this
@@ -188,11 +188,11 @@ troop.postpone(shoeshine, 'Widget', function (ns, className) {
 
             /** @ignore */
             init: function () {
-                shoeshine.Progenitor.init.call(this);
+                giant.Progenitor.init.call(this);
 
                 var widgetId = this.instanceId.toWidgetId();
 
-                shoeshine.Renderable.init.call(this,
+                giant.Renderable.init.call(this,
                     this.htmlAttributes.clone()
                         .setIdAttribute(widgetId));
 
@@ -205,14 +205,14 @@ troop.postpone(shoeshine, 'Widget', function (ns, className) {
                 this.containerCssClass = undefined;
 
                 /**
-                 * Child widgets. Modifies the `children` property delegated by `shoeshine.Progenitor`
-                 * by treating it as a `WidgetCollection` rather than a regular `sntls.Collection`.
-                 * @type {shoeshine.WidgetCollection}
+                 * Child widgets. Modifies the `children` property delegated by `giant.Progenitor`
+                 * by treating it as a `WidgetCollection` rather than a regular `giant.Collection`.
+                 * @type {giant.WidgetCollection}
                  */
                 this.children = this.children.toWidgetCollection();
 
                 // initializing Evented trait
-                this.setEventSpace(shoeshine.widgetEventSpace)
+                this.setEventSpace(giant.widgetEventSpace)
                     .setEventPath(this.getLineage().prepend(this.DETACHED_EVENT_PATH_ROOT));
 
                 // setting default child name to (unique) widget ID
@@ -223,10 +223,10 @@ troop.postpone(shoeshine, 'Widget', function (ns, className) {
              * Sets container CSS class property. The widget, when added to a parent, will be rendered inside the first
              * element to be found inside the parent's DOM bearing this CSS class.
              * @param {string} containerCssClass
-             * @returns {shoeshine.Widget}
+             * @returns {giant.Widget}
              */
             setContainerCssClass: function (containerCssClass) {
-                dessert.isString(containerCssClass, "Invalid container selector");
+                giant.isString(containerCssClass, "Invalid container selector");
                 this.containerCssClass = containerCssClass;
                 return this;
             },
@@ -246,17 +246,17 @@ troop.postpone(shoeshine, 'Widget', function (ns, className) {
             /**
              * Adds current widget to specified parent as child.
              * Also triggers rendering the child inside the parent's DOM, according to `.containerCssClass`.
-             * @param {shoeshine.Widget} parentWidget
-             * @returns {shoeshine.Widget}
-             * @see shoeshine.Widget#containerCssClass
+             * @param {giant.Widget} parentWidget
+             * @returns {giant.Widget}
+             * @see giant.Widget#containerCssClass
              */
             addToParent: function (parentWidget) {
-                dessert.isWidget(parentWidget, "Invalid parent widget");
+                giant.isWidget(parentWidget, "Invalid parent widget");
 
                 var childName = this.childName,
                     currentChild = parentWidget.children.getItem(childName);
 
-                shoeshine.Progenitor.addToParent.call(this, parentWidget);
+                giant.Progenitor.addToParent.call(this, parentWidget);
 
                 if (currentChild !== this) {
                     // child on parent may be replaced
@@ -283,7 +283,7 @@ troop.postpone(shoeshine, 'Widget', function (ns, className) {
 
             /**
              * Sets / replaces root widget with current widget.
-             * @returns {shoeshine.Widget}
+             * @returns {giant.Widget}
              */
             setRootWidget: function () {
                 var rootWidget = this.rootWidget;
@@ -293,7 +293,7 @@ troop.postpone(shoeshine, 'Widget', function (ns, className) {
                         rootWidget.removeRootWidget();
                     }
 
-                    shoeshine.Widget.rootWidget = this;
+                    giant.Widget.rootWidget = this;
 
                     this.addToHierarchy()
                         .afterAdd();
@@ -309,14 +309,14 @@ troop.postpone(shoeshine, 'Widget', function (ns, className) {
             /**
              * Removes current widget from its parent.
              * Has no effect when current widget has no parent.
-             * @returns {shoeshine.Widget}
+             * @returns {giant.Widget}
              */
             removeFromParent: function () {
                 var element = this.getElement(),
                     parent = this.parent,
                     wasAttachedToRoot = this.isOnRoot();
 
-                shoeshine.Progenitor.removeFromParent.call(this);
+                giant.Progenitor.removeFromParent.call(this);
 
                 if (element && element.parentNode) {
                     element.parentNode.removeChild(element);
@@ -340,7 +340,7 @@ troop.postpone(shoeshine, 'Widget', function (ns, className) {
 
             /**
              * Removes current widget as root widget.
-             * @returns {shoeshine.Widget}
+             * @returns {giant.Widget}
              */
             removeRootWidget: function () {
                 this.removeFromParent();
@@ -352,12 +352,12 @@ troop.postpone(shoeshine, 'Widget', function (ns, className) {
              * Sets name of current widget in the context of its parent.
              * For widgets it also determines the order in which they are rendered inside the same container element.
              * @param {string} childName
-             * @returns {shoeshine.Widget}
+             * @returns {giant.Widget}
              */
             setChildName: function (childName) {
                 var oldChildName = this.childName;
 
-                shoeshine.Progenitor.setChildName.call(this, childName);
+                giant.Progenitor.setChildName.call(this, childName);
 
                 if (childName !== oldChildName) {
                     this.removeCssClass(oldChildName)
@@ -369,11 +369,11 @@ troop.postpone(shoeshine, 'Widget', function (ns, className) {
 
             /**
              * Fetches child widgets and returns them as a WidgetCollection.
-             * @returns {shoeshine.WidgetCollection}
+             * @returns {giant.WidgetCollection}
              */
             getChildren: function () {
-                return shoeshine.Progenitor.getChildren.apply(this, arguments)
-                    .filterByType(shoeshine.Widget)
+                return giant.Progenitor.getChildren.apply(this, arguments)
+                    .filterByType(giant.Widget)
                     .toWidgetCollection();
             },
 
@@ -382,10 +382,10 @@ troop.postpone(shoeshine, 'Widget', function (ns, className) {
              * in the context of the specified parent (DOM) element.
              * @param {string} childName
              * @param {HTMLElement} parentElement
-             * @returns {shoeshine.Widget}
+             * @returns {giant.Widget}
              */
             getAdjacentWidget: function (childName, parentElement) {
-                var childWidgetIds = sntls.Collection.create(this._getWidgetIdsInDom(parentElement)),
+                var childWidgetIds = giant.Collection.create(this._getWidgetIdsInDom(parentElement)),
                     childWidgets = childWidgetIds
                         .callOnEachItem('toWidget'),
                     childWidgetNames = childWidgets
@@ -399,18 +399,18 @@ troop.postpone(shoeshine, 'Widget', function (ns, className) {
             /**
              * Renders current widget into the specified (DOM) element.
              * @param {HTMLElement} element
-             * @returns {shoeshine.Widget}
+             * @returns {giant.Widget}
              */
             renderInto: function (element) {
-                dessert.isElement(element, "Invalid target element");
+                giant.isElement(element, "Invalid target element");
 
                 var adjacentWidget = this.getAdjacentWidget(this.childName, element);
 
                 if (adjacentWidget && adjacentWidget.childName >= this.childName) {
                     // when there is an adjacent widget whose childName is bigger than that of the current widget
-                    shoeshine.Renderable.renderBefore.call(this, adjacentWidget.getElement());
+                    giant.Renderable.renderBefore.call(this, adjacentWidget.getElement());
                 } else {
-                    shoeshine.Renderable.renderInto.call(this, element);
+                    giant.Renderable.renderInto.call(this, element);
                 }
 
                 this.afterRender();
@@ -421,11 +421,11 @@ troop.postpone(shoeshine, 'Widget', function (ns, className) {
             /**
              * Renders current widget before the specified (DOM) element.
              * @param {HTMLElement} element
-             * @returns {shoeshine.Widget}
+             * @returns {giant.Widget}
              */
             renderBefore: function (element) {
-                dessert.isElement(element, "Invalid target element");
-                shoeshine.Renderable.renderBefore.call(this, element);
+                giant.isElement(element, "Invalid target element");
+                giant.Renderable.renderBefore.call(this, element);
                 this.afterRender();
                 return this;
             },
@@ -435,10 +435,10 @@ troop.postpone(shoeshine, 'Widget', function (ns, className) {
              * Using `reRender` is considered an anti-pattern. Even though re-rendering an already rendered widget
              * does update the widget's DOM, but it is proven to be slow, and risks memory leaks in case there are
              * hard references held to the old DOM. It also makes transitions, input focus, etc. harder to manage.
-             * @returns {shoeshine.Widget}
+             * @returns {giant.Widget}
              */
             reRender: function () {
-                shoeshine.Renderable.reRender.call(this);
+                giant.Renderable.reRender.call(this);
                 this.afterRender();
                 return this;
             },
@@ -449,10 +449,10 @@ troop.postpone(shoeshine, 'Widget', function (ns, className) {
              * widget does update the widget's DOM, but it is proven to be slow, and risks memory leaks
              * in case there are hard references held to the old DOM contents. It also makes transitions,
              * input focus, etc. harder to manage.
-             * @returns {shoeshine.Widget}
+             * @returns {giant.Widget}
              */
             reRenderContents: function () {
-                shoeshine.Renderable.reRenderContents.call(this);
+                giant.Renderable.reRenderContents.call(this);
                 this.afterRender();
                 return this;
             },
@@ -460,11 +460,11 @@ troop.postpone(shoeshine, 'Widget', function (ns, className) {
             /**
              * Retrieves content markup as a filled-in MarkupTemplate.
              * Override this method to add more content to the template.
-             * @returns {shoeshine.MarkupTemplate}
+             * @returns {giant.MarkupTemplate}
              * @ignore
              */
             contentMarkupAsTemplate: function () {
-                return shoeshine.Renderable.contentMarkupAsTemplate.call(this)
+                return giant.Renderable.contentMarkupAsTemplate.call(this)
                     .appendContent(this._getChildrenGroupedByContainer().items);
             },
 
@@ -483,7 +483,7 @@ troop.postpone(shoeshine, 'Widget', function (ns, className) {
             /**
              * Adds widget and its children to the hierarchy, updating their event paths and adding them to registry.
              * Not part of the public Widget API, do not call directly.
-             * @returns {shoeshine.Widget}
+             * @returns {giant.Widget}
              */
             addToHierarchy: function () {
                 // setting event path for triggering widget events
@@ -511,7 +511,7 @@ troop.postpone(shoeshine, 'Widget', function (ns, className) {
              * Removes widget and its children from the hierarchy, updating their event path,
              * unsubscribing from widget events, and removing them from registry.
              * Not part of the public Widget API, do not call directly.
-             * @returns {shoeshine.Widget}
+             * @returns {giant.Widget}
              */
             removeFromHierarchy: function () {
                 this.children.removeFromHierarchy();
@@ -553,10 +553,10 @@ troop.postpone(shoeshine, 'Widget', function (ns, className) {
             /**
              * Spawns a widget event that has the senderWidget property set.
              * @param {string} eventName
-             * @returns {shoeshine.WidgetEvent}
+             * @returns {giant.WidgetEvent}
              */
             spawnEvent: function (eventName) {
-                return evan.Evented.spawnEvent.call(this, eventName)
+                return giant.Evented.spawnEvent.call(this, eventName)
                     .setSenderWidget(this);
             }
         });
@@ -565,16 +565,16 @@ troop.postpone(shoeshine, 'Widget', function (ns, className) {
 (function () {
     "use strict";
 
-    dessert.addTypes(/** @lends dessert */{
-        /** @param {shoeshine.Widget} expr */
+    giant.addTypes(/** @lends giant */{
+        /** @param {giant.Widget} expr */
         isWidget: function (expr) {
-            return shoeshine.Widget.isBaseOf(expr);
+            return giant.Widget.isBaseOf(expr);
         },
 
-        /** @param {shoeshine.Widget} expr */
+        /** @param {giant.Widget} expr */
         isWidgetOptional: function (expr) {
             return typeof expr === 'undefined' ||
-                   shoeshine.Widget.isBaseOf(expr);
+                   giant.Widget.isBaseOf(expr);
         },
 
         /** @param {Element} expr */
@@ -583,17 +583,17 @@ troop.postpone(shoeshine, 'Widget', function (ns, className) {
         }
     });
 
-    troop.Properties.addProperties.call(
+    giant.Properties.addProperties.call(
         String.prototype,
         /** @lends String# */{
             /**
              * Converts `String` to `Widget` by looking up the widget corresponding to the current string
              * as its widget ID. Conversion yields no result when the widget is not in the hierarchy.
              * String must be in the 'w#' format (lowercase 'w' followed by digits).
-             * @returns {shoeshine.Widget}
+             * @returns {giant.Widget}
              */
             toWidget: function () {
-                return sntls.Managed.getInstanceById(this.toInstanceIdFromWidgetId());
+                return giant.Managed.getInstanceById(this.toInstanceIdFromWidgetId());
             },
 
             /**
@@ -607,7 +607,7 @@ troop.postpone(shoeshine, 'Widget', function (ns, className) {
         false, false, false
     );
 
-    troop.Properties.addProperties.call(
+    giant.Properties.addProperties.call(
         Number.prototype,
         /** @lends Number# */{
             /**
@@ -623,15 +623,15 @@ troop.postpone(shoeshine, 'Widget', function (ns, className) {
     );
 
     if (Element) {
-        troop.Properties.addProperties.call(
+        giant.Properties.addProperties.call(
             Element.prototype,
             /** @lends Element# */{
                 /**
                  * Converts `Element` to `Widget` using the element's ID attribute as widget ID.
-                 * @returns {shoeshine.Widget}
+                 * @returns {giant.Widget}
                  */
                 toWidget: function () {
-                    return sntls.Managed.getInstanceById(this.id.toInstanceIdFromWidgetId());
+                    return giant.Managed.getInstanceById(this.id.toInstanceIdFromWidgetId());
                 }
             },
             false, false, false
@@ -639,7 +639,7 @@ troop.postpone(shoeshine, 'Widget', function (ns, className) {
     }
 
     if (Event) {
-        troop.Properties.addProperties.call(
+        giant.Properties.addProperties.call(
             Event.prototype,
             /** @lends Event# */{
                 /**
@@ -647,17 +647,17 @@ troop.postpone(shoeshine, 'Widget', function (ns, className) {
                  * Uses the event's target to look up the nearest parent element matching the specified class name.
                  * Then uses the element that was found as basis for conversion from `Element` to `Widget`.
                  * @param {string} [cssClassName]
-                 * @returns {shoeshine.Widget}
+                 * @returns {giant.Widget}
                  * @see Element#toWidget
                  */
                 toWidget: function (cssClassName) {
-                    cssClassName = cssClassName || shoeshine.Widget.className;
+                    cssClassName = cssClassName || giant.Widget.className;
 
                     var childElement = this.target,
-                        widgetElement = shoeshine.WidgetUtils.getParentNodeByClassName(childElement, cssClassName);
+                        widgetElement = giant.WidgetUtils.getParentNodeByClassName(childElement, cssClassName);
 
                     return widgetElement ?
-                        sntls.Managed.getInstanceById(widgetElement.id.toInstanceIdFromWidgetId()) :
+                        giant.Managed.getInstanceById(widgetElement.id.toInstanceIdFromWidgetId()) :
                         undefined;
                 }
             },

@@ -1,8 +1,8 @@
-/*global dessert, troop, sntls, jQuery, shoeshine */
-troop.postpone(shoeshine, 'JqueryWidget', function (ns, className, /**jQuery*/$) {
+/*global giant, giant, giant, jQuery, giant */
+giant.postpone(giant, 'JqueryWidget', function (ns, className, /**jQuery*/$) {
     "use strict";
 
-    var base = troop.Base,
+    var base = giant.Base,
         self = base.extend(),
         $document = document && $(document);
 
@@ -10,11 +10,11 @@ troop.postpone(shoeshine, 'JqueryWidget', function (ns, className, /**jQuery*/$)
      * The JqueryWidget trait adds class-level (delegated) jQuery event subscription capability to the host.
      * When used on other traits, call methods directly on JqueryWidget.
      * @class
-     * @extends troop.Base
-     * @extends shoeshine.Widget
+     * @extends giant.Base
+     * @extends giant.Widget
      */
-    shoeshine.JqueryWidget = self
-        .addPrivateMethods(/** @lends shoeshine.JqueryWidget */{
+    giant.JqueryWidget = self
+        .addPrivateMethods(/** @lends giant.JqueryWidget */{
             /**
              * @param {string} eventName
              * @param {string} selector
@@ -55,13 +55,13 @@ troop.postpone(shoeshine, 'JqueryWidget', function (ns, className, /**jQuery*/$)
                     selector;
             }
         })
-        .addMethods(/** @lends shoeshine.JqueryWidget */{
+        .addMethods(/** @lends giant.JqueryWidget */{
             /**
              * Subscribes to DOM events, jQuery-style.
              * @param {string} eventName
              * @param {string} selector
              * @param {string} methodName
-             * @returns {shoeshine.JqueryWidget}
+             * @returns {giant.JqueryWidget}
              */
             on: function (eventName, selector, methodName) {
                 var globalSelector = this._getGlobalSelector(selector),
@@ -81,7 +81,7 @@ troop.postpone(shoeshine, 'JqueryWidget', function (ns, className, /**jQuery*/$)
              * Unsubscribes from DOM events, jQuery-style.
              * @param {string} eventName
              * @param {string} selector
-             * @returns {shoeshine.JqueryWidget}
+             * @returns {giant.JqueryWidget}
              */
             off: function (eventName, selector) {
                 var globalSelector = this._getGlobalSelector(selector);

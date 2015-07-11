@@ -1,4 +1,4 @@
-/*global dessert, troop, sntls, shoeshine */
+/*global giant, giant, giant, giant */
 /*global module, test, expect, ok, equal, strictEqual, notStrictEqual, deepEqual, notDeepEqual, raises */
 (function () {
     "use strict";
@@ -7,23 +7,23 @@
 
     /**
      * @class
-     * @extends troop.Base
-     * @extends shoeshine.Renderable
+     * @extends giant.Base
+     * @extends giant.Renderable
      */
-    var Renderable = troop.Base.extend()
-        .addTrait(shoeshine.Renderable)
+    var Renderable = giant.Base.extend()
+        .addTrait(giant.Renderable)
         .addMethods({
             init: function () {
-                shoeshine.Renderable.init.apply(this, arguments);
+                giant.Renderable.init.apply(this, arguments);
             }
         });
 
     test("Instantiation", function () {
-        var htmlAttributes = shoeshine.HtmlAttributes.create({foo: 'bar'}),
+        var htmlAttributes = giant.HtmlAttributes.create({foo: 'bar'}),
             instance = Renderable.create(htmlAttributes);
 
         equal(instance.tagName, 'div', "should set tag name to 'div'");
-        ok(instance.htmlAttributes.isA(shoeshine.HtmlAttributes), "should add HTML attribute collection");
+        ok(instance.htmlAttributes.isA(giant.HtmlAttributes), "should add HTML attribute collection");
         strictEqual(instance.htmlAttributes, htmlAttributes, "should set HTML attribute");
     });
 
@@ -295,7 +295,7 @@
         instance.htmlAttributes.addMocks({
             getFinalAttributes: function () {
                 ok(true, "should fetch final HTML attributes");
-                return shoeshine.HtmlAttributes.create({foo: 'bar'});
+                return giant.HtmlAttributes.create({foo: 'bar'});
             }
         });
 
@@ -305,7 +305,7 @@
     test("Element getter", function () {
         expect(2);
 
-        var instance = Renderable.create(shoeshine.HtmlAttributes.create().setIdAttribute('hello')),
+        var instance = Renderable.create(giant.HtmlAttributes.create().setIdAttribute('hello')),
             instanceElement = {};
 
         instance.addMocks({

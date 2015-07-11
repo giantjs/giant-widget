@@ -1,31 +1,31 @@
-/*global dessert, troop, sntls, shoeshine */
-troop.postpone(shoeshine, 'InlineStyles', function () {
+/*global giant, giant, giant, giant */
+giant.postpone(giant, 'InlineStyles', function () {
     "use strict";
 
-    var base = sntls.Collection,
+    var base = giant.Collection,
         self = base.extend();
 
     /**
      * Creates an InlineStyles instance.
-     * @name shoeshine.InlineStyles.create
+     * @name giant.InlineStyles.create
      * @function
      * @param {object|Array} [items] Initial contents.
-     * @returns {shoeshine.InlineStyles}
+     * @returns {giant.InlineStyles}
      */
 
     /**
      * The InlineStyles class is a collection of style key-value pairs that can be
      * serialized in the correct style definition format.
      * @class
-     * @extends sntls.Collection
+     * @extends giant.Collection
      */
-    shoeshine.InlineStyles = self
-        .addMethods(/** @lends shoeshine.InlineStyles# */{
+    giant.InlineStyles = self
+        .addMethods(/** @lends giant.InlineStyles# */{
             /**
              * Serializes style collection so that it can be used in a tag as attribute.
              * The order of styles is not determined.
              * @example
-             * shoeshine.InlineStyles.create()
+             * giant.InlineStyles.create()
              *      .setItem('display', 'inline-block')
              *      .setItem('overflow', 'hidden')
              *      .toString() // "display: inline-block; overflow: hidden"

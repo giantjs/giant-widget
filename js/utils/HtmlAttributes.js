@@ -1,26 +1,26 @@
-/*global dessert, troop, sntls, shoeshine */
-troop.postpone(shoeshine, 'HtmlAttributes', function () {
+/*global giant, giant, giant, giant */
+giant.postpone(giant, 'HtmlAttributes', function () {
     "use strict";
 
-    var base = sntls.Collection,
+    var base = giant.Collection,
         self = base.extend();
 
     /**
      * Creates a HtmlAttributes instance.
-     * @name shoeshine.HtmlAttributes.create
+     * @name giant.HtmlAttributes.create
      * @function
      * @param {object|Array} [items] Initial contents.
-     * @returns {shoeshine.HtmlAttributes}
+     * @returns {giant.HtmlAttributes}
      */
 
     /**
      * The HtmlAttributes class manages all aspects of an HTML element's attributes,
      * including CSS classes and inline styles.
      * @class
-     * @extends sntls.Collection
+     * @extends giant.Collection
      */
-    shoeshine.HtmlAttributes = self
-        .addMethods(/** @lends shoeshine.HtmlAttributes# */{
+    giant.HtmlAttributes = self
+        .addMethods(/** @lends giant.HtmlAttributes# */{
             /**
              * @param {object|Array} [items] Initial contents.
              * @ignore
@@ -36,22 +36,22 @@ troop.postpone(shoeshine, 'HtmlAttributes', function () {
 
                 /**
                  * Collection of CSS classes.
-                 * @type {shoeshine.CssClasses}
+                 * @type {giant.CssClasses}
                  */
-                this.cssClasses = shoeshine.CssClasses.create();
+                this.cssClasses = giant.CssClasses.create();
 
                 /**
                  * Collection of inline styles.
-                 * @type {shoeshine.InlineStyles}
+                 * @type {giant.InlineStyles}
                  */
-                this.inlineStyles = shoeshine.InlineStyles.create();
+                this.inlineStyles = giant.InlineStyles.create();
             },
 
             /**
              * Removes the specified attribute from the collection.
              * @param {string} attributeName Name of attribute to be removed. Values 'class' and 'style' also
              * clear the corresponding collections. Use carefully!
-             * @returns {shoeshine.HtmlAttributes}
+             * @returns {giant.HtmlAttributes}
              */
             deleteItem: function (attributeName) {
                 switch (attributeName) {
@@ -74,11 +74,11 @@ troop.postpone(shoeshine, 'HtmlAttributes', function () {
             /**
              * Sets ID attribute. ID attribute set this way will override ID attribute set via `setItem`.
              * @param {string} idAttribute
-             * @returns {shoeshine.HtmlAttributes}
-             * @see shoeshine.HtmlAttributes#setItem
+             * @returns {giant.HtmlAttributes}
+             * @see giant.HtmlAttributes#setItem
              */
             setIdAttribute: function (idAttribute) {
-                dessert.isString(idAttribute, "Invalid ID attribute");
+                giant.isString(idAttribute, "Invalid ID attribute");
                 this.idAttribute = idAttribute;
                 return this;
             },
@@ -86,7 +86,7 @@ troop.postpone(shoeshine, 'HtmlAttributes', function () {
             /**
              * Adds CSS class to the 'class' attribute.
              * @param {string} cssClass
-             * @returns {shoeshine.HtmlAttributes}
+             * @returns {giant.HtmlAttributes}
              */
             addCssClass: function (cssClass) {
                 this.cssClasses.addCssClass(cssClass);
@@ -96,7 +96,7 @@ troop.postpone(shoeshine, 'HtmlAttributes', function () {
             /**
              * Decreases ref count on specified CSS class.
              * @param {string} cssClass
-             * @returns {shoeshine.HtmlAttributes}
+             * @returns {giant.HtmlAttributes}
              */
             decreaseCssClassRefCount: function (cssClass) {
                 this.cssClasses.decreaseRefCount(cssClass);
@@ -106,7 +106,7 @@ troop.postpone(shoeshine, 'HtmlAttributes', function () {
             /**
              * Removes CSS class from the 'class' attribute.
              * @param {string} cssClass
-             * @returns {shoeshine.HtmlAttributes}
+             * @returns {giant.HtmlAttributes}
              */
             removeCssClass: function (cssClass) {
                 this.cssClasses.removeCssClass(cssClass);
@@ -117,7 +117,7 @@ troop.postpone(shoeshine, 'HtmlAttributes', function () {
              * Adds style definition to the 'style' attribute.
              * @param {string} styleName Style name, eg. "overflow".
              * @param {string} styleValue Style value, eg. "hidden".
-             * @returns {shoeshine.HtmlAttributes}
+             * @returns {giant.HtmlAttributes}
              */
             addInlineStyle: function (styleName, styleValue) {
                 this.inlineStyles.setItem(styleName, styleValue);
@@ -127,7 +127,7 @@ troop.postpone(shoeshine, 'HtmlAttributes', function () {
             /**
              * Adds style definition to the 'style' attribute.
              * @param {string} styleName Style name, eg. "overflow".
-             * @returns {shoeshine.HtmlAttributes}
+             * @returns {giant.HtmlAttributes}
              */
             removeInlineStyle: function (styleName) {
                 this.inlineStyles.deleteItem(styleName);
@@ -137,7 +137,7 @@ troop.postpone(shoeshine, 'HtmlAttributes', function () {
             /**
              * Generates a new HtmlAttributes instance on which the `id`, `class`, and `style` attributes are set
              * based on the corresponding properties of the current instance.
-             * @returns {shoeshine.HtmlAttributes}
+             * @returns {giant.HtmlAttributes}
              */
             getFinalAttributes: function () {
                 // not cloning on purpose so collections and properties don't carry over
@@ -162,7 +162,7 @@ troop.postpone(shoeshine, 'HtmlAttributes', function () {
 
             /**
              * Clones HTML attributes with attached ID attribute, inline styles, and CSS classes.
-             * @returns {shoeshine.HtmlAttributes}
+             * @returns {giant.HtmlAttributes}
              */
             clone: function () {
                 var result = base.clone.call(this);
@@ -178,7 +178,7 @@ troop.postpone(shoeshine, 'HtmlAttributes', function () {
              * Serializes HTML attributes to string so that it can be used when composing an HTML tag.
              * The order of attributes is not determined.
              * @example
-             * shoeshine.HtmlAttributes.create()
+             * giant.HtmlAttributes.create()
              *     .setIdAttribute('foo')
              *     .addCssClass('bar')
              *     .addInlineStyle('overflow', 'hidden')
@@ -199,16 +199,16 @@ troop.postpone(shoeshine, 'HtmlAttributes', function () {
 (function () {
     "use strict";
 
-    dessert.addTypes(/** @lends dessert */{
-        /** @param {shoeshine.HtmlAttributes} expr */
+    giant.addTypes(/** @lends giant */{
+        /** @param {giant.HtmlAttributes} expr */
         isHtmlAttributes: function (expr) {
-            return shoeshine.HtmlAttributes.isBaseOf(expr);
+            return giant.HtmlAttributes.isBaseOf(expr);
         },
 
-        /** @param {shoeshine.HtmlAttributes} [expr] */
+        /** @param {giant.HtmlAttributes} [expr] */
         isHtmlAttributesOptional: function (expr) {
             return typeof expr === 'undefined' ||
-                   shoeshine.HtmlAttributes.isBaseOf(expr);
+                   giant.HtmlAttributes.isBaseOf(expr);
         }
     });
 }());

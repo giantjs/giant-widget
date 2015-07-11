@@ -1,10 +1,10 @@
-/*global dessert, troop, sntls, evan, shoeshine */
-troop.postpone(shoeshine, 'widgetEventSpace', function () {
+/*global giant, giant, giant, giant, giant */
+giant.postpone(giant, 'widgetEventSpace', function () {
     "use strict";
 
     /**
      * Event space dedicated to widget events.
-     * @type {evan.EventSpace}
+     * @type {giant.EventSpace}
      */
-    shoeshine.widgetEventSpace = evan.EventSpace.create();
+    giant.widgetEventSpace = giant.EventSpace.create();
 });

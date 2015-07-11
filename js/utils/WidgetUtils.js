@@ -1,18 +1,18 @@
-/*global dessert, troop, sntls, shoeshine */
-troop.postpone(shoeshine, 'WidgetUtils', function () {
+/*global giant, giant, giant, giant */
+giant.postpone(giant, 'WidgetUtils', function () {
     "use strict";
 
-    var base = troop.Base,
+    var base = giant.Base,
         self = base.extend(),
         slice = Array.prototype.slice;
 
     /**
      * The WidgetUtils class is a static class containing general purpose utilities used by widgets.
      * @class
-     * @extends troop.Base
+     * @extends giant.Base
      */
-    shoeshine.WidgetUtils = self
-        .addConstants(/** @lends shoeshine.WidgetUtils */{
+    giant.WidgetUtils = self
+        .addConstants(/** @lends giant.WidgetUtils */{
             /**
              * @type {RegExp}
              * @constant
@@ -33,7 +33,7 @@ troop.postpone(shoeshine, 'WidgetUtils', function () {
                 '}}': '&#125;&#125;'
             }
         })
-        .addMethods(/** @lends shoeshine.WidgetUtils */{
+        .addMethods(/** @lends giant.WidgetUtils */{
             /**
              * Replace callback function for escaping HTML entities.
              * @param {string} hit
@@ -76,7 +76,7 @@ troop.postpone(shoeshine, 'WidgetUtils', function () {
 (function () {
     "use strict";
 
-    troop.Properties.addProperties.call(
+    giant.Properties.addProperties.call(
         String.prototype,
         /** @lends String# */{
             /**
@@ -84,7 +84,7 @@ troop.postpone(shoeshine, 'WidgetUtils', function () {
              * @returns {string}
              */
             toHtml: function () {
-                return shoeshine.WidgetUtils.htmlEscape(this);
+                return giant.WidgetUtils.htmlEscape(this);
             }
         },
         false, false, false

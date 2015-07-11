@@ -1,24 +1,24 @@
-/*global dessert, troop, sntls, shoeshine */
-troop.postpone(shoeshine, 'Renderable', function () {
+/*global giant, giant, giant, giant */
+giant.postpone(giant, 'Renderable', function () {
     "use strict";
 
-    var base = troop.Base,
+    var base = giant.Base,
         self = base.extend();
 
     /**
      * The Renderable trait allows the host class to be rendered into the DOM.
      * Adds managed HTML attributes, markup, and rendering methods.
      * @class
-     * @extends troop.Base
+     * @extends giant.Base
      */
-    shoeshine.Renderable = self
-        .addPublic(/** @lends shoeshine.Renderable */{
+    giant.Renderable = self
+        .addPublic(/** @lends giant.Renderable */{
             /**
-             * @type {shoeshine.MarkupTemplate}
+             * @type {giant.MarkupTemplate}
              */
             contentTemplate: undefined
         })
-        .addPrivateMethods(/** @lends shoeshine.Renderable# */{
+        .addPrivateMethods(/** @lends giant.Renderable# */{
             /**
              * Proxy for document.createElement.
              * @param {string} tagName
@@ -123,10 +123,10 @@ troop.postpone(shoeshine, 'Renderable', function () {
                 element.style.cssText = styleAttribute;
             }
         })
-        .addMethods(/** @lends shoeshine.Renderable# */{
+        .addMethods(/** @lends giant.Renderable# */{
             /**
              * Call from host's .init.
-             * @param {shoeshine.HtmlAttributes} htmlAttributes
+             * @param {giant.HtmlAttributes} htmlAttributes
              */
             init: function (htmlAttributes) {
                 /**
@@ -135,18 +135,18 @@ troop.postpone(shoeshine, 'Renderable', function () {
                 this.tagName = 'div';
 
                 /**
-                 * @type {shoeshine.HtmlAttributes}
+                 * @type {giant.HtmlAttributes}
                  */
-                this.htmlAttributes = htmlAttributes || shoeshine.HtmlAttributes.create();
+                this.htmlAttributes = htmlAttributes || giant.HtmlAttributes.create();
             },
 
             /**
              * Sets tag name property.
              * @param {string} tagName
-             * @returns {shoeshine.Renderable}
+             * @returns {giant.Renderable}
              */
             setTagName: function (tagName) {
-                dessert.isString(tagName, "Invalid tag name");
+                giant.isString(tagName, "Invalid tag name");
                 this.tagName = tagName;
                 return this;
             },
@@ -154,7 +154,7 @@ troop.postpone(shoeshine, 'Renderable', function () {
             /**
              * Adds CSS class to the instance, modifying both buffer and DOM element.
              * @param {string} cssClass
-             * @returns {shoeshine.Renderable}
+             * @returns {giant.Renderable}
              */
             addCssClass: function (cssClass) {
                 var htmlAttributes = this.htmlAttributes,
@@ -172,7 +172,7 @@ troop.postpone(shoeshine, 'Renderable', function () {
             /**
              * Decreases ref count of CSS class on the instance, modifying both buffer and DOM element.
              * @param {string} cssClass
-             * @returns {shoeshine.Renderable}
+             * @returns {giant.Renderable}
              */
             decreaseCssClassRefCount: function (cssClass) {
                 var htmlAttributes = this.htmlAttributes,
@@ -190,7 +190,7 @@ troop.postpone(shoeshine, 'Renderable', function () {
             /**
              * Removes a CSS class from the instance, modifying both buffer and DOM element.
              * @param {string} cssClass
-             * @returns {shoeshine.Renderable}
+             * @returns {giant.Renderable}
              */
             removeCssClass: function (cssClass) {
                 var htmlAttributes = this.htmlAttributes,
@@ -218,7 +218,7 @@ troop.postpone(shoeshine, 'Renderable', function () {
              * Sets inline style on instance, modifying both buffer and DOM element.
              * @param {string} styleName
              * @param {string} [styleValue]
-             * @returns {shoeshine.Renderable}
+             * @returns {giant.Renderable}
              */
             setInlineStyle: function (styleName, styleValue) {
                 var htmlAttributes = this.htmlAttributes,
@@ -242,7 +242,7 @@ troop.postpone(shoeshine, 'Renderable', function () {
              * TODO: Handle 'id' and 'class' attributes.
              * @param {string} attributeName
              * @param {string} attributeValue
-             * @returns {shoeshine.Renderable}
+             * @returns {giant.Renderable}
              */
             addAttribute: function (attributeName, attributeValue) {
                 this.htmlAttributes.setItem(attributeName, attributeValue);
@@ -259,7 +259,7 @@ troop.postpone(shoeshine, 'Renderable', function () {
              * Removes attribute from instance, modifying both buffer and DOM element.
              * @param {string} attributeName Name of the HTML attribute to remove. Values 'class' and 'style' also
              * clear the corresponding collections. Use carefully!
-             * @returns {shoeshine.Renderable}
+             * @returns {giant.Renderable}
              */
             removeAttribute: function (attributeName) {
                 this.htmlAttributes.deleteItem(attributeName);
@@ -311,7 +311,7 @@ troop.postpone(shoeshine, 'Renderable', function () {
              * Moves existing element to new location by default. Override by forcing rendering.
              * @param {HTMLElement} parentElement
              * @param {boolean} [force]
-             * @returns {shoeshine.Renderable}
+             * @returns {giant.Renderable}
              */
             renderInto: function (parentElement, force) {
                 var element = (!force && this.getElement()) || this.createElement();
@@ -324,7 +324,7 @@ troop.postpone(shoeshine, 'Renderable', function () {
              * Moves existing element to new location by default. Override by forcing rendering.
              * @param {HTMLElement} adjacentElement
              * @param {boolean} [force]
-             * @returns {shoeshine.Renderable}
+             * @returns {giant.Renderable}
              */
             renderBefore: function (adjacentElement, force) {
                 var parentElement = adjacentElement.parentNode,
@@ -339,7 +339,7 @@ troop.postpone(shoeshine, 'Renderable', function () {
              * Re-renders instance by replacing the current DOM element with a new one.
              * Has no effect when instance has never been rendered.
              * External references to the instance's DOM must be invalidated afterwards.
-             * @returns {shoeshine.Renderable}
+             * @returns {giant.Renderable}
              */
             reRender: function () {
                 var element = this.getElement();
@@ -354,7 +354,7 @@ troop.postpone(shoeshine, 'Renderable', function () {
              * Has no effect when instance has never been rendered.
              * External references to the instance's internal DOM must be invalidated afterwards.
              * TODO: Remove template conversion & placeholder clearing.
-             * @returns {shoeshine.Renderable}
+             * @returns {giant.Renderable}
              */
             reRenderContents: function () {
                 var element = this.getElement(),
@@ -375,7 +375,7 @@ troop.postpone(shoeshine, 'Renderable', function () {
 
             /**
              * Retrieves the widget's markup as a MarkupTemplate instance.
-             * @returns {shoeshine.MarkupTemplate}
+             * @returns {giant.MarkupTemplate}
              */
             contentMarkupAsTemplate: function () {
                 return this.contentTemplate.clone();

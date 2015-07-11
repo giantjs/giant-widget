@@ -1,6 +1,6 @@
-/out/
+/*.tgz
 /.idea/
 /doc/
+/giant-widget.js
 /node_modules/
-shoeshine.js
-*.tgz
+/out/

@@ -1,4 +1,4 @@
-/*global dessert, troop, sntls, evan, shoeshine */
+/*global giant, giant, giant, giant, giant */
 /*global module, test, expect, ok, equal, strictEqual, notStrictEqual, deepEqual, notDeepEqual, raises */
 (function () {
     "use strict";
@@ -7,23 +7,23 @@
 
     module("Html Attributes", {
         setup: function () {
-            htmlAttributes = shoeshine.HtmlAttributes.create();
+            htmlAttributes = giant.HtmlAttributes.create();
         }
     });
 
     test("Instantiation", function () {
         ok(htmlAttributes.hasOwnProperty('idAttribute'), "should add idAttribute property");
         equal(typeof htmlAttributes.idAttribute, 'undefined', "should set idAttribute property to undefined");
-        ok(htmlAttributes.cssClasses.isA(sntls.Collection), "should set cssClasses property");
+        ok(htmlAttributes.cssClasses.isA(giant.Collection), "should set cssClasses property");
         equal(htmlAttributes.cssClasses.getKeyCount(), 0, "should set cssClasses collection to empty");
-        ok(htmlAttributes.inlineStyles.isA(sntls.Collection), "should set inlineStyles property");
+        ok(htmlAttributes.inlineStyles.isA(giant.Collection), "should set inlineStyles property");
         equal(htmlAttributes.inlineStyles.getKeyCount(), 0, "should set inlineStyles collection to empty");
     });
 
     test("Attribute (item) removal", function () {
         expect(4);
 
-        sntls.Collection.addMocks({
+        giant.Collection.addMocks({
             deleteItem: function () {
                 strictEqual(this, htmlAttributes, "should delete specified attribute");
             }
@@ -31,7 +31,7 @@
 
         strictEqual(htmlAttributes.deleteItem('foo'), htmlAttributes, "should be chainable");
 
-        sntls.Collection.removeMocks();
+        giant.Collection.removeMocks();
 
         htmlAttributes.cssClasses.addMocks({
             clear: function () {
@@ -62,7 +62,7 @@
     test("Adding CSS class", function () {
         expect(2);
 
-        shoeshine.CssClasses.addMocks({
+        giant.CssClasses.addMocks({
             addCssClass: function (cssClass) {
                 equal(cssClass, 'foo', "should add class to collection");
             }
@@ -70,13 +70,13 @@
 
         strictEqual(htmlAttributes.addCssClass('foo'), htmlAttributes, "should be chainable");
 
-        shoeshine.CssClasses.removeMocks();
+        giant.CssClasses.removeMocks();
     });
 
     test("Removing CSS class", function () {
         expect(2);
 
-        shoeshine.CssClasses.addMocks({
+        giant.CssClasses.addMocks({
             removeCssClass: function (cssClass) {
                 equal(cssClass, 'foo', "should remove class from collection");
             }
@@ -84,13 +84,13 @@
 
         strictEqual(htmlAttributes.removeCssClass('foo'), htmlAttributes, "should be chainable");
 
-        shoeshine.CssClasses.removeMocks();
+        giant.CssClasses.removeMocks();
     });
 
     test("Decreasing reference count of CSS class", function () {
         expect(2);
 
-        shoeshine.CssClasses.addMocks({
+        giant.CssClasses.addMocks({
             decreaseRefCount: function (cssClass) {
                 equal(cssClass, 'foo', "should decrease ref count on CSS class");
             }
@@ -98,13 +98,13 @@
 
         strictEqual(htmlAttributes.decreaseCssClassRefCount('foo'), htmlAttributes, "should be chainable");
 
-        shoeshine.CssClasses.removeMocks();
+        giant.CssClasses.removeMocks();
     });
 
     test("Adding inline style", function () {
         expect(3);
 
-        shoeshine.InlineStyles.addMocks({
+        giant.InlineStyles.addMocks({
             setItem: function (styleName, styleValue) {
                 equal(styleName, 'foo', "should pass style name to addition");
                 equal(styleValue, 'bar', "should pass style value to addition");
@@ -113,13 +113,13 @@
 
         strictEqual(htmlAttributes.addInlineStyle('foo', 'bar'), htmlAttributes, "should be chainable");
 
-        shoeshine.InlineStyles.removeMocks();
+        giant.InlineStyles.removeMocks();
     });
 
     test("Removing inline style", function () {
         expect(2);
 
-        shoeshine.InlineStyles.addMocks({
+        giant.InlineStyles.addMocks({
             deleteItem: function (styleName) {
                 equal(styleName, 'foo', "should pass style name to removal");
             }
@@ -127,7 +127,7 @@
 
         strictEqual(htmlAttributes.removeInlineStyle('foo'), htmlAttributes, "should be chainable");
 
-        shoeshine.InlineStyles.removeMocks();
+        giant.InlineStyles.removeMocks();
     });
 
     test("Final attribute list getter", function () {
@@ -147,7 +147,7 @@
 
         var finalAttributes = htmlAttributes.getFinalAttributes();
 
-        ok(finalAttributes.isA(shoeshine.HtmlAttributes), "should return an HtmlAttributes instance");
+        ok(finalAttributes.isA(giant.HtmlAttributes), "should return an HtmlAttributes instance");
         notStrictEqual(finalAttributes, htmlAttributes, "should return a different HtmlAttributes instance");
 
         deepEqual(
@@ -168,7 +168,7 @@
         htmlAttributes.addMocks({
             getFinalAttributes: function () {
                 ok(true, "should get final attribute list");
-                return shoeshine.HtmlAttributes.create({
+                return giant.HtmlAttributes.create({
                     foo  : 'bar',
                     hello: 'world'
                 });

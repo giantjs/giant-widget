@@ -1,4 +1,4 @@
-/*global dessert, troop, sntls, shoeshine */
+/*global giant, giant, giant, giant */
 /*global module, test, expect, ok, equal, strictEqual, notStrictEqual, deepEqual, notDeepEqual, raises */
 (function () {
     "use strict";
@@ -16,7 +16,7 @@
                 '</foo> '
                 //@formatter:on
             ].join(''),
-            template = shoeshine.MarkupTemplate.create(markup);
+            template = giant.MarkupTemplate.create(markup);
 
 //        console.log(JSON.stringify(template.preprocessedTemplate.items, null, 2));
 //        console.log(JSON.stringify(template.containerLookup.items, null, 2));
@@ -37,7 +37,7 @@
     });
 
     test("Instantiation with empty template", function () {
-        var template = shoeshine.MarkupTemplate.create('');
+        var template = giant.MarkupTemplate.create('');
 
 //        console.log(JSON.stringify(template.preprocessedTemplate.items, null, 2));
 //        console.log(JSON.stringify(template.containerLookup.items, null, 2));
@@ -61,7 +61,7 @@
             //@formatter:on
         ].join('').toMarkupTemplate();
 
-        ok(template.isA(shoeshine.MarkupTemplate), "should return a MarkupTemplate instance");
+        ok(template.isA(giant.MarkupTemplate), "should return a MarkupTemplate instance");
 
         deepEqual(template.preprocessedTemplate.items, [
             "<foo class=\"hello \">",
@@ -162,7 +162,7 @@
             ].join('').toMarkupTemplate(),
             clone = template.clone();
 
-        ok(clone.instanceOf(shoeshine.MarkupTemplate), "should return MarkupTemplate instance");
+        ok(clone.instanceOf(giant.MarkupTemplate), "should return MarkupTemplate instance");
         notStrictEqual(clone.preprocessedTemplate.items, template.preprocessedTemplate.items,
             "should create new preprocessedTemplate buffer");
         notStrictEqual(clone.containerLookup.items, template.containerLookup.items,

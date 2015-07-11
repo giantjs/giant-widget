@@ -1,29 +1,29 @@
-/*global dessert, troop, sntls, shoeshine */
-troop.postpone(shoeshine, 'CssClasses', function () {
+/*global giant, giant, giant, giant */
+giant.postpone(giant, 'CssClasses', function () {
     "use strict";
 
-    var base = sntls.Collection,
+    var base = giant.Collection,
         self = base.extend();
 
     /**
      * Creates a CssClasses instance.
-     * @name shoeshine.CssClasses.create
+     * @name giant.CssClasses.create
      * @function
      * @param {object|Array} [items] Initial contents.
-     * @returns {shoeshine.CssClasses}
+     * @returns {giant.CssClasses}
      */
 
     /**
      * The CssClasses class is a serializable Collection of CSS class names.
      * @class
-     * @extends troop.Base
+     * @extends giant.Base
      */
-    shoeshine.CssClasses = self
-        .addMethods(/** @lends shoeshine.CssClasses# */{
+    giant.CssClasses = self
+        .addMethods(/** @lends giant.CssClasses# */{
             /**
              * Adds specified CSS class to the collection.
              * @param {string} cssClass
-             * @returns {shoeshine.CssClasses}
+             * @returns {giant.CssClasses}
              */
             addCssClass: function (cssClass) {
                 var refCount = this.getItem(cssClass) || 0;
@@ -35,7 +35,7 @@ troop.postpone(shoeshine, 'CssClasses', function () {
              * Decreases reference count on the specified CSS class.
              * Removes CSS class when reference count drops below 1.
              * @param {string} cssClass
-             * @returns {shoeshine.CssClasses}
+             * @returns {giant.CssClasses}
              */
             decreaseRefCount: function (cssClass) {
                 var refCount = this.getItem(cssClass) || 0;
@@ -50,7 +50,7 @@ troop.postpone(shoeshine, 'CssClasses', function () {
             /**
              * Removes specified CSS class from the collection.
              * @param {string} cssClass
-             * @returns {shoeshine.CssClasses}
+             * @returns {giant.CssClasses}
              */
             removeCssClass: function (cssClass) {
                 this.deleteItem(cssClass);
@@ -60,7 +60,7 @@ troop.postpone(shoeshine, 'CssClasses', function () {
             /**
              * Serializes CSS classes into a space separated string that can be used as an HTML "class" attribute.
              * @example
-             * shoeshine.CssClasses.create()
+             * giant.CssClasses.create()
              *     .addCssClass('foo')
              *     .addCssClass('bar')
              *     .toString() // "foo bar"

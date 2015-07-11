@@ -1,4 +1,4 @@
-/*global dessert, troop, sntls, shoeshine */
+/*global giant, giant, giant, giant */
 /*global module, test, expect, ok, equal, strictEqual, notStrictEqual, deepEqual, notDeepEqual, raises */
 (function () {
     "use strict";
@@ -16,7 +16,7 @@
                 '</foo> '
                 //@formatter:on
             ].join(''),
-            template = shoeshine.HandlebarsTemplate.create(markup);
+            template = giant.HandlebarsTemplate.create(markup);
 
         equal(template.templateString, markup, "should set template string");
     });
@@ -24,7 +24,7 @@
     test("Conversion from string", function () {
         var template = 'foo bar'.toHandlebarsTemplate();
 
-        ok(template.isA(shoeshine.HandlebarsTemplate), "should return a HandlebarsTemplate instance");
+        ok(template.isA(giant.HandlebarsTemplate), "should return a HandlebarsTemplate instance");
         equal(template.templateString, "foo bar", "should set template string");
     });
 
