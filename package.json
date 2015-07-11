@@ -18,6 +18,7 @@
         "giant-assertion": "0.0.3",
         "giant-data"     : "0.0.3",
         "giant-event"    : "0.0.3",
+        "giant-namespace": "0.0.3",
         "giant-oop"      : "0.0.3",
         "jquery"         : "~2.1.0",
         "q"              : "^1.4.0"

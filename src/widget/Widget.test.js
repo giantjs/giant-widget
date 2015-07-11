@@ -1,4 +1,4 @@
-/*global giant, e$, Event */
+/*global giant, Event */
 /*global module, test, expect, ok, equal, strictEqual, notStrictEqual, deepEqual, notDeepEqual, raises */
 (function () {
     "use strict";
@@ -18,7 +18,7 @@
 
     test("Trait addition", function () {
         var CustomWidget = giant.Widget.extend('CustomWidget')
-            .addTrait(e$.Evented, 'Evented');
+            .addTrait(giant.Evented, 'Evented');
 
         ok(!!CustomWidget.htmlAttributes.cssClasses.getItem('CustomWidget'),
             "should add trait name to CSS class collection");
