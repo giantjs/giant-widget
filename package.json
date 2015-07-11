@@ -1,6 +1,6 @@
 {
-    "name"           : "shoeshine",
-    "version"        : "0.3.0",
+    "name"           : "giant-widget",
+    "version"        : "0.0.3",
     "description"    : "Widget framework",
     "keywords"       : [
         "widgets",
@@ -13,7 +13,7 @@
     "license"        : "MIT",
     "repository"     : {
         "type": "git",
-        "url" : "https://github.com/danstocker/shoeshine.git"
+        "url" : "git@github.com:giantjs/giant-widget.git"
     },
     "dependencies"   : {
         "dessert": "~0.3.2",
