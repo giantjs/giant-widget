@@ -4,27 +4,27 @@ module.exports = function (grunt) {
 
     var params = {
         files: [
-            'js/namespace.js',
-            'js/utils/WidgetUtils.js',
-            'js/utils/HandlebarsTemplate.js',
-            'js/utils/MarkupTemplate.js',
-            'js/utils/CssClasses.js',
-            'js/utils/InlineStyles.js',
-            'js/utils/HtmlAttributes.js',
-            'js/behaviors/Progenitor.js',
-            'js/behaviors/Renderable.js',
-            'js/behaviors/JqueryWidget.js',
-            'js/widget/widgetEventSpace.js',
-            'js/widget/WidgetEvent.js',
-            'js/widget/Widget.js',
-            'js/widget/WidgetCollection.js',
-            'js/exports.js'
+            'src/namespace.js',
+            'src/utils/WidgetUtils.js',
+            'src/utils/HandlebarsTemplate.js',
+            'src/utils/MarkupTemplate.js',
+            'src/utils/CssClasses.js',
+            'src/utils/InlineStyles.js',
+            'src/utils/HtmlAttributes.js',
+            'src/behaviors/Progenitor.js',
+            'src/behaviors/Renderable.js',
+            'src/behaviors/JqueryWidget.js',
+            'src/widget/widgetEventSpace.js',
+            'src/widget/WidgetEvent.js',
+            'src/widget/Widget.js',
+            'src/widget/WidgetCollection.js',
+            'src/exports.js'
         ],
 
         test: [
-            'js/utils/jsTestDriver.conf',
-            'js/behaviors/jsTestDriver.conf',
-            'js/widget/jsTestDriver.conf'
+            'src/utils/jsTestDriver.conf',
+            'src/behaviors/jsTestDriver.conf',
+            'src/widget/jsTestDriver.conf'
         ],
 
         globals: {}
