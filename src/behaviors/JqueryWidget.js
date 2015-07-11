@@ -1,4 +1,4 @@
-/*global giant, giant, giant, jQuery, giant */
+/*global giant, jQuery */
 giant.postpone(giant, 'JqueryWidget', function (ns, className, /**jQuery*/$) {
     "use strict";
 

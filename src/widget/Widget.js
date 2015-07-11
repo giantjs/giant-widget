@@ -1,4 +1,4 @@
-/*global giant, giant, giant, giant, giant, Event */
+/*global giant, Event */
 giant.postpone(giant, 'Widget', function (ns, className) {
     "use strict";
 
