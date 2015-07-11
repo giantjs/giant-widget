@@ -1,9 +1,8 @@
 {
     "name"           : "giant-widget",
     "version"        : "0.0.3",
-    "description"    : "Widget framework",
+    "description"    : "Widget module for Giant",
     "keywords"       : [
-        "widgets",
         "widget",
         "stateful",
         "viewcontroller"
