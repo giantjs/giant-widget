@@ -71,25 +71,21 @@ giant.postpone(giant, 'HandlebarsTemplate', function () {
 (function () {
     "use strict";
 
-    giant.Properties.addProperties.call(
-        String.prototype,
-        /** @lends String# */{
-            /**
-             * Converts `String` to `HandlebarsTemplate` instance.
-             * @returns {giant.HandlebarsTemplate}
-             */
-            toHandlebarsTemplate: function () {
-                return giant.HandlebarsTemplate.create(this);
-            },
-
-            /**
-             * Converts string to placeholder string by wrapping it in double handlebars.
-             * @returns {string}
-             */
-            toPlaceholder: function () {
-                return '{{' + this + '}}';
-            }
+    giant.extendBuiltIn(String.prototype, /** @lends String# */{
+        /**
+         * Converts `String` to `HandlebarsTemplate` instance.
+         * @returns {giant.HandlebarsTemplate}
+         */
+        toHandlebarsTemplate: function () {
+            return giant.HandlebarsTemplate.create(this);
         },
-        false, false, false
-    );
+
+        /**
+         * Converts string to placeholder string by wrapping it in double handlebars.
+         * @returns {string}
+         */
+        toPlaceholder: function () {
+            return '{{' + this + '}}';
+        }
+    });
 }());

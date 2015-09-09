@@ -574,7 +574,7 @@ giant.postpone(giant, 'Widget', function (ns, className) {
         /** @param {giant.Widget} expr */
         isWidgetOptional: function (expr) {
             return typeof expr === 'undefined' ||
-                   giant.Widget.isBaseOf(expr);
+                giant.Widget.isBaseOf(expr);
         },
 
         /** @param {Element} expr */
@@ -583,85 +583,69 @@ giant.postpone(giant, 'Widget', function (ns, className) {
         }
     });
 
-    giant.Properties.addProperties.call(
-        String.prototype,
-        /** @lends String# */{
+    giant.extendBuiltIn(String.prototype, /** @lends String# */{
+        /**
+         * Converts `String` to `Widget` by looking up the widget corresponding to the current string
+         * as its widget ID. Conversion yields no result when the widget is not in the hierarchy.
+         * String must be in the 'w#' format (lowercase 'w' followed by digits).
+         * @returns {giant.Widget}
+         */
+        toWidget: function () {
+            return giant.Managed.getInstanceById(this.toInstanceIdFromWidgetId());
+        },
+
+        /**
+         * Converts string widget ID ('w###') to an instance ID (number).
+         * @returns {number}
+         */
+        toInstanceIdFromWidgetId: function () {
+            return parseInt(this.slice(1), 10);
+        }
+    });
+
+    giant.extendBuiltIn(Number.prototype, /** @lends Number# */{
+        /**
+         * Converts current number as instance ID to widget ID.
+         * The widget ID is used as the ID attribute of the rendered widget's container element.
+         * @returns {string}
+         */
+        toWidgetId: function () {
+            return 'w' + this;
+        }
+    });
+
+    if (Element) {
+        giant.extendBuiltIn(Element.prototype, /** @lends Element# */{
             /**
-             * Converts `String` to `Widget` by looking up the widget corresponding to the current string
-             * as its widget ID. Conversion yields no result when the widget is not in the hierarchy.
-             * String must be in the 'w#' format (lowercase 'w' followed by digits).
+             * Converts `Element` to `Widget` using the element's ID attribute as widget ID.
              * @returns {giant.Widget}
              */
             toWidget: function () {
-                return giant.Managed.getInstanceById(this.toInstanceIdFromWidgetId());
-            },
-
-            /**
-             * Converts string widget ID ('w###') to an instance ID (number).
-             * @returns {number}
-             */
-            toInstanceIdFromWidgetId: function () {
-                return parseInt(this.slice(1), 10);
+                return giant.Managed.getInstanceById(this.id.toInstanceIdFromWidgetId());
             }
-        },
-        false, false, false
-    );
-
-    giant.Properties.addProperties.call(
-        Number.prototype,
-        /** @lends Number# */{
-            /**
-             * Converts current number as instance ID to widget ID.
-             * The widget ID is used as the ID attribute of the rendered widget's container element.
-             * @returns {string}
-             */
-            toWidgetId: function () {
-                return 'w' + this;
-            }
-        },
-        false, false, false
-    );
-
-    if (Element) {
-        giant.Properties.addProperties.call(
-            Element.prototype,
-            /** @lends Element# */{
-                /**
-                 * Converts `Element` to `Widget` using the element's ID attribute as widget ID.
-                 * @returns {giant.Widget}
-                 */
-                toWidget: function () {
-                    return giant.Managed.getInstanceById(this.id.toInstanceIdFromWidgetId());
-                }
-            },
-            false, false, false
-        );
+        });
     }
 
     if (Event) {
-        giant.Properties.addProperties.call(
-            Event.prototype,
-            /** @lends Event# */{
-                /**
-                 * Converts `Event` to `Widget`.
-                 * Uses the event's target to look up the nearest parent element matching the specified class name.
-                 * Then uses the element that was found as basis for conversion from `Element` to `Widget`.
-                 * @param {string} [cssClassName]
-                 * @returns {giant.Widget}
-                 * @see Element#toWidget
-                 */
-                toWidget: function (cssClassName) {
-                    cssClassName = cssClassName || giant.Widget.className;
+        giant.extendBuiltIn(Event.prototype, /** @lends Event# */{
+            /**
+             * Converts `Event` to `Widget`.
+             * Uses the event's target to look up the nearest parent element matching the specified class name.
+             * Then uses the element that was found as basis for conversion from `Element` to `Widget`.
+             * @param {string} [cssClassName]
+             * @returns {giant.Widget}
+             * @see Element#toWidget
+             */
+            toWidget: function (cssClassName) {
+                cssClassName = cssClassName || giant.Widget.className;
 
-                    var childElement = this.target,
-                        widgetElement = giant.WidgetUtils.getParentNodeByClassName(childElement, cssClassName);
+                var childElement = this.target,
+                    widgetElement = giant.WidgetUtils.getParentNodeByClassName(childElement, cssClassName);
 
-                    return widgetElement ?
-                        giant.Managed.getInstanceById(widgetElement.id.toInstanceIdFromWidgetId()) :
-                        undefined;
-                }
-            },
-            false, false, false
-        );
+                return widgetElement ?
+                    giant.Managed.getInstanceById(widgetElement.id.toInstanceIdFromWidgetId()) :
+                    undefined;
+            }
+        });
     }
 }());

@@ -52,17 +52,13 @@ giant.amendPostponed(giant, 'Hash', function () {
 (function () {
     "use strict";
 
-    giant.Properties.addProperties.call(
-        Array.prototype,
-        /** @lends Array# */{
-            /**
-             * Converts array of `Widget` instances to a `WidgetCollection`.
-             * @returns {giant.WidgetCollection}
-             */
-            toWidgetCollection: function () {
-                return giant.WidgetCollection.create(this);
-            }
-        },
-        false, false, false
-    );
+    giant.extendBuiltIn(Array.prototype, /** @lends Array# */{
+        /**
+         * Converts array of `Widget` instances to a `WidgetCollection`.
+         * @returns {giant.WidgetCollection}
+         */
+        toWidgetCollection: function () {
+            return giant.WidgetCollection.create(this);
+        }
+    });
 }());

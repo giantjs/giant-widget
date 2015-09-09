@@ -62,7 +62,7 @@ giant.postpone(giant, 'WidgetUtils', function () {
                 var classList;
                 while (element && (element.classList || element.className)) {
                     classList = element.classList && slice.call(element.classList) ||
-                                element.className.split(/\s+/);
+                        element.className.split(/\s+/);
                     if (classList && classList.indexOf(className) > -1) {
                         return element;
                     }
@@ -76,17 +76,13 @@ giant.postpone(giant, 'WidgetUtils', function () {
 (function () {
     "use strict";
 
-    giant.Properties.addProperties.call(
-        String.prototype,
-        /** @lends String# */{
-            /**
-             * Converts string to HTML escaped string.
-             * @returns {string}
-             */
-            toHtml: function () {
-                return giant.WidgetUtils.htmlEscape(this);
-            }
-        },
-        false, false, false
-    );
+    giant.extendBuiltIn(String.prototype, /** @lends String# */{
+        /**
+         * Converts string to HTML escaped string.
+         * @returns {string}
+         */
+        toHtml: function () {
+            return giant.WidgetUtils.htmlEscape(this);
+        }
+    });
 }());
