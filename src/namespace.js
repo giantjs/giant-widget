@@ -8,6 +8,7 @@ if (typeof require === 'function') {
     require('giant-oop');
     require('giant-data');
     require('giant-event');
+    require('giant-utils');
 }
 
 /**
