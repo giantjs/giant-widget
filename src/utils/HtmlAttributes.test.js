@@ -49,7 +49,7 @@
     });
 
     test("ID attribute setter", function () {
-        raises(function () {
+        throws(function () {
             htmlAttributes.setIdAttribute();
         }, "should raise exception on missing arguments");
 

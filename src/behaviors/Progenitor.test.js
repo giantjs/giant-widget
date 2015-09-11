@@ -272,7 +272,7 @@
 
         child2.foo = 'bar';
 
-        raises(function () {
+        throws(function () {
             child4.getAncestor();
         }, "should raise exception on invalid arguments");
 

@@ -20,7 +20,7 @@
         var widget = giant.Widget.create(),
             widgetEvent = giant.WidgetEvent.create('foo', giant.widgetEventSpace);
 
-        raises(function () {
+        throws(function () {
             widgetEvent.setSenderWidget("invalid");
         }, "should raise exception on invalid argument");
 

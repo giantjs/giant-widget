@@ -137,11 +137,11 @@
         var childWidget = giant.Widget.create(),
             parentWidget = giant.Widget.create();
 
-        raises(function () {
+        throws(function () {
             childWidget.addToParent();
         }, "should raise exception on no arguments");
 
-        raises(function () {
+        throws(function () {
             childWidget.addToParent('foo');
         }, "should raise exception on invalid arguments");
 
@@ -469,11 +469,11 @@
             targetElement = document.createElement('div'),
             adjacentElement = {};
 
-        raises(function () {
+        throws(function () {
             widget.renderInto();
         }, "should raise exception on missing argument");
 
-        raises(function () {
+        throws(function () {
             widget.renderInto('foo');
         }, "should raise exception on invalid argument");
 
@@ -543,11 +543,11 @@
         var widget = giant.Widget.create(),
             targetElement = document.createElement('div');
 
-        raises(function () {
+        throws(function () {
             widget.renderBefore();
         }, "should raise exception on missing argument");
 
-        raises(function () {
+        throws(function () {
             widget.renderBefore('foo');
         }, "should raise exception on invalid argument");
 
