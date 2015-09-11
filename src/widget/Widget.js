@@ -138,7 +138,7 @@ giant.postpone(giant, 'Widget', function (ns, className) {
              * @example
              * var MyWidget = giant.Widget.extend('MyWidget');
              * @param {string} className
-             * @returns {giant.Widget}
+             * @returns {giant.Base}
              * @see giant.Base.extend
              * @see giant.Documented.extend
              */
