@@ -46,7 +46,7 @@ giant.postpone(giant, 'WidgetUtils', function () {
             /**
              * Escapes HTML entities, quotes, and placeholder markers in the specified text.
              * @param {string} text
-             * @return {string} Escaped string.
+             * @returns {string} Escaped string.
              */
             htmlEscape: function (text) {
                 return text.replace(this.RE_ESCAPE_CHARS, this.replaceHtmlEntity);

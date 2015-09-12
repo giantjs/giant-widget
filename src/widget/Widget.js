@@ -72,7 +72,7 @@ giant.postpone(giant, 'Widget', function (ns, className) {
             /**
              * Retrieves a list of widget IDs to be found under the specified DOM element.
              * @param {HTMLElement} element
-             * @return {string[]} List of widget IDs.
+             * @returns {string[]} List of widget IDs.
              * @private
              */
             _getWidgetIdsInDom: function (element) {
