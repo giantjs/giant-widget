@@ -26,7 +26,7 @@
   },
   "devDependencies": {},
   "files": [
-    "giant-widget.js"
+    "lib"
   ],
-  "main": "giant-widget.js"
+  "main": "lib/giant-widget.js"
 }
