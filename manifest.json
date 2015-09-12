@@ -1,0 +1,23 @@
+{
+  "main": {
+    "assets": {
+      "js": [
+        "src/namespace.js",
+        "src/utils/WidgetUtils.def.js",
+        "src/utils/HandlebarsTemplate.def.js",
+        "src/utils/MarkupTemplate.def.js",
+        "src/utils/CssClasses.def.js",
+        "src/utils/InlineStyles.def.js",
+        "src/utils/HtmlAttributes.def.js",
+        "src/behaviors/Progenitor.def.js",
+        "src/behaviors/Renderable.def.js",
+        "src/behaviors/JqueryWidget.def.js",
+        "src/widget/widgetEventSpace.def.js",
+        "src/widget/WidgetEvent.def.js",
+        "src/widget/Widget.def.js",
+        "src/widget/WidgetCollection.def.js",
+        "src/exports.js"
+      ]
+    }
+  }
+}
