@@ -35,10 +35,10 @@ giant.postpone(giant, 'Widget', function (ns, className) {
     giant.Widget = self
         .addConstants(/** @lends giant.Widget */{
             /** @constant */
-            EVENT_CHILD_ADD: 'child-add',
+            EVENT_CHILD_ADD: 'giant.Widget.child.add',
 
             /** @constant */
-            EVENT_CHILD_REMOVE: 'child-remove',
+            EVENT_CHILD_REMOVE: 'giant.Widget.child.remove',
 
             /**
              * @type {giant.Path}
@@ -213,7 +213,7 @@ giant.postpone(giant, 'Widget', function (ns, className) {
 
                 // initializing Evented trait
                 this.setEventSpace(giant.widgetEventSpace)
-                    .setEventPath(this.getLineage().prepend(this.DETACHED_EVENT_PATH_ROOT));
+                    .setEventPath(this.getLineage().prepend(self.DETACHED_EVENT_PATH_ROOT));
 
                 // setting default child name to (unique) widget ID
                 this.setChildName(widgetId);
@@ -269,7 +269,7 @@ giant.postpone(giant, 'Widget', function (ns, className) {
 
                     // triggering event about being added
                     parentWidget
-                        .spawnEvent(this.EVENT_CHILD_ADD)
+                        .spawnEvent(self.EVENT_CHILD_ADD)
                         .setPayloadItem('childWidget', this)
                         .triggerSync();
 
@@ -330,7 +330,7 @@ giant.postpone(giant, 'Widget', function (ns, className) {
                 if (parent) {
                     // triggering event about removal
                     parent
-                        .spawnEvent(this.EVENT_CHILD_REMOVE)
+                        .spawnEvent(self.EVENT_CHILD_REMOVE)
                         .setPayloadItem('childWidget', this)
                         .triggerSync();
                 }
@@ -487,7 +487,7 @@ giant.postpone(giant, 'Widget', function (ns, className) {
              */
             addToHierarchy: function () {
                 // setting event path for triggering widget events
-                this.setEventPath(this.getLineage().prepend(this.ATTACHED_EVENT_PATH_ROOT));
+                this.setEventPath(this.getLineage().prepend(self.ATTACHED_EVENT_PATH_ROOT));
 
                 // adding widget to lookup registry
                 this.addToRegistry();
@@ -520,7 +520,7 @@ giant.postpone(giant, 'Widget', function (ns, className) {
                 this.unsubscribeFrom();
 
                 // (re-)setting event path to new lineage
-                this.setEventPath(this.getLineage().prepend(this.DETACHED_EVENT_PATH_ROOT));
+                this.setEventPath(this.getLineage().prepend(self.DETACHED_EVENT_PATH_ROOT));
 
                 // removing widget from lookup registry
                 this.removeFromRegistry();

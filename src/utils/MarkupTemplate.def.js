@@ -54,7 +54,7 @@ giant.postpone(giant, 'MarkupTemplate', function () {
              * @private
              */
             _extractClassListFromTag: function (tag) {
-                var classNames = tag.split(this.RE_CLASS_LIST_FROM_TAG);
+                var classNames = tag.split(self.RE_CLASS_LIST_FROM_TAG);
                 return classNames && classNames[1];
             },
 
@@ -64,7 +64,7 @@ giant.postpone(giant, 'MarkupTemplate', function () {
              * @private
              */
             _extractClassesFromClassList: function (classList) {
-                return classList.match(this.RE_CLASS_FROM_CLASS_LIST);
+                return classList.match(self.RE_CLASS_FROM_CLASS_LIST);
             },
 
             /**
@@ -87,7 +87,7 @@ giant.postpone(giant, 'MarkupTemplate', function () {
                  * Blown up string where the placeholders need to be substituted and joined to get the final text.
                  * @type {giant.Collection}
                  */
-                this.preprocessedTemplate = templateString.split(this.RE_MARKUP_SPLITTER)
+                this.preprocessedTemplate = templateString.split(self.RE_MARKUP_SPLITTER)
                     .toCollection();
 
                 /**
@@ -95,7 +95,7 @@ giant.postpone(giant, 'MarkupTemplate', function () {
                  * @type {giant.StringDictionary}
                  */
                 this.containerLookup = this.preprocessedTemplate
-                    .mapValues(this._processTemplateFragment, this)
+                    .mapValues(self._processTemplateFragment, this)
                     .toStringDictionary()
                     .reverse()
                     .toCollection()

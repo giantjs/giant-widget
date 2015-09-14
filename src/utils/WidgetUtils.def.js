@@ -49,7 +49,7 @@ giant.postpone(giant, 'WidgetUtils', function () {
              * @returns {string} Escaped string.
              */
             htmlEscape: function (text) {
-                return text.replace(this.RE_ESCAPE_CHARS, this.replaceHtmlEntity);
+                return text.replace(self.RE_ESCAPE_CHARS, this.replaceHtmlEntity);
             },
 
             /**

@@ -49,7 +49,7 @@ giant.postpone(giant, 'HandlebarsTemplate', function () {
              * @returns {string}
              */
             setContent: function (placeholderValuePairs) {
-                return this.templateString.replace(this.RE_TEMPLATE_PLACEHOLDER, function (hit, placeholderName) {
+                return this.templateString.replace(self.RE_TEMPLATE_PLACEHOLDER, function (hit, placeholderName) {
                     return placeholderValuePairs.hasOwnProperty(placeholderName) ?
                         // filling in provided string (or object w/ .toString())
                         placeholderValuePairs[placeholderName] :
@@ -63,7 +63,7 @@ giant.postpone(giant, 'HandlebarsTemplate', function () {
              * @returns {string}
              */
             clearPlaceholders: function () {
-                return this.templateString.replace(this.RE_TEMPLATE_PLACEHOLDER, '');
+                return this.templateString.replace(self.RE_TEMPLATE_PLACEHOLDER, '');
             }
         });
 });
