@@ -146,8 +146,8 @@
         }, "should raise exception on invalid arguments");
 
         giant.Event.addMocks({
-            triggerSync: function (eventName) {
-                equal(eventName, this.EVENT_CHILD_ADD, "should trigger addition event");
+            triggerSync: function () {
+                equal(this.eventName, giant.EVENT_WIDGET_CHILD_ADD, "should trigger addition event");
                 strictEqual(this.payload.childWidget, childWidget,
                     "should set child widget in payload");
             }
@@ -210,8 +210,8 @@
             parentWidget = giant.Widget.create();
 
         giant.Event.addMocks({
-            triggerSync: function (eventName) {
-                equal(eventName, this.EVENT_CHILD_ADD, "should trigger addition event");
+            triggerSync: function () {
+                equal(this.eventName, giant.EVENT_WIDGET_CHILD_ADD, "should trigger addition event");
             }
         });
 
@@ -316,8 +316,8 @@
                 .addToParent(parentWidget);
 
         giant.Event.addMocks({
-            triggerSync: function (eventName) {
-                equal(eventName, this.EVENT_CHILD_REMOVE, "should trigger removal event");
+            triggerSync: function () {
+                equal(this.eventName, giant.EVENT_WIDGET_CHILD_REMOVE, "should trigger removal event");
                 strictEqual(this.payload.childWidget, childWidget,
                     "should set child widget in payload");
             }

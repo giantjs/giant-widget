@@ -34,12 +34,6 @@ giant.postpone(giant, 'Widget', function (ns, className) {
      */
     giant.Widget = self
         .addConstants(/** @lends giant.Widget */{
-            /** @constant */
-            EVENT_CHILD_ADD: 'giant.Widget.child.add',
-
-            /** @constant */
-            EVENT_CHILD_REMOVE: 'giant.Widget.child.remove',
-
             /**
              * @type {giant.Path}
              * @constant
@@ -269,7 +263,7 @@ giant.postpone(giant, 'Widget', function (ns, className) {
 
                     // triggering event about being added
                     parentWidget
-                        .spawnEvent(self.EVENT_CHILD_ADD)
+                        .spawnEvent(giant.EVENT_WIDGET_CHILD_ADD)
                         .setPayloadItem('childWidget', this)
                         .triggerSync();
 
@@ -330,7 +324,7 @@ giant.postpone(giant, 'Widget', function (ns, className) {
                 if (parent) {
                     // triggering event about removal
                     parent
-                        .spawnEvent(self.EVENT_CHILD_REMOVE)
+                        .spawnEvent(giant.EVENT_WIDGET_CHILD_REMOVE)
                         .setPayloadItem('childWidget', this)
                         .triggerSync();
                 }
@@ -564,6 +558,18 @@ giant.postpone(giant, 'Widget', function (ns, className) {
 
 (function () {
     "use strict";
+
+    /**
+     * Signals tha a Widget has been added as child.
+     * @constant
+     */
+    giant.EVENT_WIDGET_CHILD_ADD = 'giant.Widget.child.add';
+
+    /**
+     * Signals that a Widget was removed from its current parent.
+     * @constant
+     */
+    giant.EVENT_WIDGET_CHILD_REMOVE = 'giant.Widget.child.remove';
 
     giant.addTypes(/** @lends giant */{
         /** @param {giant.Widget} expr */
