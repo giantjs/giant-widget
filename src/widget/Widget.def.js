@@ -559,17 +559,19 @@ giant.postpone(giant, 'Widget', function (ns, className) {
 (function () {
     "use strict";
 
-    /**
-     * Signals tha a Widget has been added as child.
-     * @constant
-     */
-    giant.EVENT_WIDGET_CHILD_ADD = 'giant.Widget.child.add';
+    giant.addGlobalConstants(/** @lends giant */{
+        /**
+         * Signals tha a Widget has been added as child.
+         * @constant
+         */
+        EVENT_WIDGET_CHILD_ADD: 'giant.Widget.child.add',
 
-    /**
-     * Signals that a Widget was removed from its current parent.
-     * @constant
-     */
-    giant.EVENT_WIDGET_CHILD_REMOVE = 'giant.Widget.child.remove';
+        /**
+         * Signals that a Widget was removed from its current parent.
+         * @constant
+         */
+        EVENT_WIDGET_CHILD_REMOVE: 'giant.Widget.child.remove'
+    });
 
     giant.addTypes(/** @lends giant */{
         /** @param {giant.Widget} expr */
