@@ -564,13 +564,13 @@ giant.postpone(giant, 'Widget', function (ns, className) {
          * Signals tha a Widget has been added as child.
          * @constant
          */
-        EVENT_WIDGET_CHILD_ADD: 'giant.Widget.child.add',
+        EVENT_WIDGET_CHILD_ADD: 'widget.child.add',
 
         /**
          * Signals that a Widget was removed from its current parent.
          * @constant
          */
-        EVENT_WIDGET_CHILD_REMOVE: 'giant.Widget.child.remove'
+        EVENT_WIDGET_CHILD_REMOVE: 'widget.child.remove'
     });
 
     giant.addTypes(/** @lends giant */{
