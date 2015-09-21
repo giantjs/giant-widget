@@ -132,7 +132,7 @@
     });
 
     test("Adding to parent", function () {
-        expect(10);
+        expect(8);
 
         var childWidget = giant.Widget.create(),
             parentWidget = giant.Widget.create();
@@ -144,14 +144,6 @@
         throws(function () {
             childWidget.addToParent('foo');
         }, "should raise exception on invalid arguments");
-
-        giant.Event.addMocks({
-            triggerSync: function () {
-                equal(this.eventName, giant.EVENT_WIDGET_CHILD_ADD, "should trigger addition event");
-                strictEqual(this.payload.childWidget, childWidget,
-                    "should set child widget in payload");
-            }
-        });
 
         childWidget.addMocks({
             isOnRoot: function () {
@@ -178,7 +170,6 @@
 
         strictEqual(childWidget.addToParent(parentWidget), childWidget, "should be chainable");
 
-        giant.Event.removeMocks();
         giant.Progenitor.removeMocks();
     });
 
@@ -204,16 +195,10 @@
     });
 
     test("Adding to detached parent", function () {
-        expect(1);
+        expect(0);
 
         var childWidget = giant.Widget.create(),
             parentWidget = giant.Widget.create();
-
-        giant.Event.addMocks({
-            triggerSync: function () {
-                equal(this.eventName, giant.EVENT_WIDGET_CHILD_ADD, "should trigger addition event");
-            }
-        });
 
         childWidget.addMocks({
             isOnRoot: function () {
@@ -221,7 +206,7 @@
             },
 
             afterAdd: function () {
-                ok(true, "should NOT call afterAdd");
+                ok(false, "should NOT call afterAdd");
             },
 
             _renderIntoParent: function () {
@@ -229,8 +214,6 @@
         });
 
         childWidget.addToParent(parentWidget);
-
-        giant.Event.removeMocks();
     });
 
     test("Adding widget as root", function () {
@@ -309,19 +292,11 @@
     });
 
     test("Removal from parent", function () {
-        expect(7);
+        expect(5);
 
         var parentWidget = giant.Widget.create(),
             childWidget = giant.Widget.create()
                 .addToParent(parentWidget);
-
-        giant.Event.addMocks({
-            triggerSync: function () {
-                equal(this.eventName, giant.EVENT_WIDGET_CHILD_REMOVE, "should trigger removal event");
-                strictEqual(this.payload.childWidget, childWidget,
-                    "should set child widget in payload");
-            }
-        });
 
         childWidget.addMocks({
             isOnRoot: function () {
@@ -347,7 +322,6 @@
 
         strictEqual(childWidget.removeFromParent(), childWidget, "should be chainable");
 
-        giant.Event.removeMocks();
         giant.Progenitor.removeMocks();
     });
 

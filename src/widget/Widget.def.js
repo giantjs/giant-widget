@@ -261,12 +261,6 @@ giant.postpone(giant, 'Widget', function (ns, className) {
                             .afterAdd();
                     }
 
-                    // triggering event about being added
-                    parentWidget
-                        .spawnEvent(giant.EVENT_WIDGET_CHILD_ADD)
-                        .setPayloadItem('childWidget', this)
-                        .triggerSync();
-
                     if (document) {
                         this._renderIntoParent();
                     }
@@ -319,14 +313,6 @@ giant.postpone(giant, 'Widget', function (ns, className) {
                 if (wasAttachedToRoot) {
                     this.removeFromHierarchy()
                         .afterRemove();
-                }
-
-                if (parent) {
-                    // triggering event about removal
-                    parent
-                        .spawnEvent(giant.EVENT_WIDGET_CHILD_REMOVE)
-                        .setPayloadItem('childWidget', this)
-                        .triggerSync();
                 }
 
                 return this;
@@ -548,20 +534,6 @@ giant.postpone(giant, 'Widget', function (ns, className) {
 
 (function () {
     "use strict";
-
-    giant.addGlobalConstants(/** @lends giant */{
-        /**
-         * Signals tha a Widget has been added as child.
-         * @constant
-         */
-        EVENT_WIDGET_CHILD_ADD: 'widget.child.add',
-
-        /**
-         * Signals that a Widget was removed from its current parent.
-         * @constant
-         */
-        EVENT_WIDGET_CHILD_REMOVE: 'widget.child.remove'
-    });
 
     giant.addTypes(/** @lends giant */{
         /** @param {giant.Widget} expr */
