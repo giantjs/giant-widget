@@ -106,13 +106,13 @@ giant.postpone(giant, 'MarkupTemplate', function () {
             /**
              * Appends template with specified content.
              * Do not call this on the original template. Clone first.
-             * @param {object} contents Pairs of container CSS classes & associated content.
+             * @param {object} parameterValues Pairs of container CSS classes & associated content.
              * @returns {giant.MarkupTemplate}
              */
-            appendContent: function (contents) {
+            setParameterValues: function (parameterValues) {
                 var preprocessedTemplate = this.preprocessedTemplate.items,
                     containerLookup = this.containerLookup.items,
-                    containerNames = Object.keys(contents),
+                    containerNames = Object.keys(parameterValues),
                     i, containerName, targetIndex;
 
                 for (i = 0; i < containerNames.length; i++) {
@@ -122,7 +122,7 @@ giant.postpone(giant, 'MarkupTemplate', function () {
 
                     if (targetIndex >= 0) {
                         // placeholder is found in template
-                        preprocessedTemplate[targetIndex] += contents[containerName];
+                        preprocessedTemplate[targetIndex] += parameterValues[containerName];
                     }
                 }
 
@@ -131,12 +131,13 @@ giant.postpone(giant, 'MarkupTemplate', function () {
 
             /**
              * Sets template content and returns the resulting markup.
-             * @param {object} contents Pairs of container CSS classes & associated content.
+             * TODO: Break out a static MarkupTemplate, and make this one LiveMarkupTemplate.
+             * @param {object} parameterValues Pairs of container CSS classes & associated content.
              * @returns {string}
              */
-            setContent: function (contents) {
+            getResolvedString: function (parameterValues) {
                 return this.clone()
-                    .appendContent(contents)
+                    .setParameterValues(parameterValues)
                     .toString();
             },
 

@@ -641,7 +641,7 @@
         });
 
         giant.MarkupTemplate.addMocks({
-            appendContent: function (contents) {
+            setParameterValues: function (contents) {
                 deepEqual(contents, {
                     foo: child
                 }, "should append content to template");

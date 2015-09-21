@@ -459,7 +459,7 @@ giant.postpone(giant, 'Widget', function (ns, className) {
              */
             contentMarkupAsTemplate: function () {
                 return giant.Renderable.contentMarkupAsTemplate.call(this)
-                    .appendContent(this._getChildrenGroupedByContainer().items);
+                    .setParameterValues(this._getChildrenGroupedByContainer().items);
             },
 
             /**

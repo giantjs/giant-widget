@@ -89,7 +89,7 @@
             ].join(''),
             template = markup.toMarkupTemplate();
 
-        strictEqual(template.appendContent({
+        strictEqual(template.setParameterValues({
             hi   : "<baz />",
             world: '<span>Hello!</span>'
         }), template, "should be chainable");
@@ -115,7 +115,7 @@
             template = markup.toMarkupTemplate();
 
         equal(
-            template.setContent({
+            template.getResolvedString({
                 hi   : "<baz />",
                 world: '<span>Hello!</span>'
             }),
@@ -137,7 +137,7 @@
         var template = ''.toMarkupTemplate();
 
         equal(
-            template.setContent({
+            template.getResolvedString({
                 foo: "Hello",
                 bar: "World"
             }),
