@@ -282,8 +282,8 @@ giant.postpone(giant, 'Renderable', function () {
                 var element = this._createElementProxy(this.tagName),
                     attributeSetterProxy = this._attributeSetterProxy,
                     innerHtml = this.contentMarkup()
-                        .toHandlebarsTemplate()
-                        .clearPlaceholders();
+                        .toTemplate()
+                        .getResolvedString();
 
                 // adding attributes to element
                 this.htmlAttributes
@@ -363,8 +363,8 @@ giant.postpone(giant, 'Renderable', function () {
                 if (element) {
                     // generating current markup
                     innerHtml = this.contentMarkup()
-                        .toHandlebarsTemplate()
-                        .clearPlaceholders();
+                        .toTemplate()
+                        .getResolvedString();
 
                     // adding contents to element
                     this._innerHtmlSetterProxy(element, innerHtml);
@@ -401,8 +401,8 @@ giant.postpone(giant, 'Renderable', function () {
                 return [
                     '<' + tagName + ' ' + this.htmlAttributes + '>',
                     this.contentMarkup()
-                        .toHandlebarsTemplate()
-                        .clearPlaceholders(),
+                        .toTemplate()
+                        .getResolvedString(),
                     '</' + tagName + '>'
                 ].join('');
             }

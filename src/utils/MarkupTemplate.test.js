@@ -77,10 +77,6 @@
         }, "should set containerLookup contents");
     });
 
-    test("Conversion from string to placeholder", function () {
-        equal('foo'.toPlaceholder(), '{{foo}}', "should envelope placeholder in handlebars");
-    });
-
     test("Appending containers", function () {
         var markup = [
                 //@formatter:off

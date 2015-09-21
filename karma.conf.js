@@ -19,6 +19,7 @@ module.exports = function (config) {
             'node_modules/giant-utils/lib/giant-utils.js',
             'node_modules/giant-data/lib/giant-data.js',
             'node_modules/giant-event/lib/giant-event.js',
+            'node_modules/giant-templating/lib/giant-templating.js',
             'node_modules/jquery/dist/jquery.js',
 
             'src/namespace.js',

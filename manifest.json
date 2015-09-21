@@ -4,7 +4,6 @@
       "js": [
         "src/namespace.js",
         "src/utils/WidgetUtils.def.js",
-        "src/utils/HandlebarsTemplate.def.js",
         "src/utils/MarkupTemplate.def.js",
         "src/utils/CssClasses.def.js",
         "src/utils/InlineStyles.def.js",
