@@ -748,7 +748,7 @@
         var widget = giant.Widget.create(),
             event;
 
-        event = widget.spawnEvent('foo');
+        event = widget.spawnEvent('widget.foo');
 
         strictEqual(event.senderWidget, widget, "should set senderWidget on event");
     });

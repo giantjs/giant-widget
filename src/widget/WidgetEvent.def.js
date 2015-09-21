@@ -66,7 +66,8 @@ giant.amendPostponed(giant, 'Event', function () {
     "use strict";
 
     giant.Event
-        .addSurrogate(giant, 'WidgetEvent', function (eventName, eventSpace) {
-            return eventSpace === giant.widgetEventSpace;
+        .addSurrogate(giant, 'WidgetEvent', function (eventName) {
+            var prefix = 'widget';
+            return eventName.substr(0, prefix.length) === prefix;
         });
 });
