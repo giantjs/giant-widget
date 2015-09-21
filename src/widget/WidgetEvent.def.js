@@ -2,8 +2,7 @@
 giant.postpone(giant, 'WidgetEvent', function () {
     "use strict";
 
-    var base = giant.Event,
-        self = base.extend();
+    var base = giant.Event;
 
     /**
      * Creates a WidgetEvent instance.
@@ -23,43 +22,7 @@ giant.postpone(giant, 'WidgetEvent', function () {
      * @class
      * @extends giant.Event
      */
-    giant.WidgetEvent = self
-        .addMethods(/** @lends giant.WidgetEvent# */{
-            /**
-             * @param {string} [eventName]
-             * @param {giant.EventSpace} [eventSpace]
-             * @ignore
-             */
-            init: function (eventName, eventSpace) {
-                base.init.call(this, eventName, eventSpace);
-
-                /**
-                 * Widget from which the event originated.
-                 * @type {giant.Widget}
-                 */
-                this.senderWidget = undefined;
-            },
-
-            /**
-             * Sets `senderWidget` property.
-             * @param {giant.Widget} senderWidget
-             * @returns {giant.WidgetEvent}
-             */
-            setSenderWidget: function (senderWidget) {
-                giant.isWidget(senderWidget, "Invalid sender widget");
-                this.senderWidget = senderWidget;
-                return this;
-            },
-
-            /**
-             * Clones Event instance. Copies `senderWidget` reference to the new event instance.
-             * @returns {giant.WidgetEvent}
-             */
-            clone: function () {
-                return base.clone.apply(this, arguments)
-                    .setSenderWidget(this.senderWidget);
-            }
-        });
+    giant.WidgetEvent = base.extend();
 });
 
 giant.amendPostponed(giant, 'Event', function () {

@@ -743,13 +743,4 @@
 
         widget.afterRender();
     });
-
-    test("Spawning widget event", function () {
-        var widget = giant.Widget.create(),
-            event;
-
-        event = widget.spawnEvent('widget.foo');
-
-        strictEqual(event.senderWidget, widget, "should set senderWidget on event");
-    });
 }());

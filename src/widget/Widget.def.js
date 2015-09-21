@@ -542,16 +542,6 @@ giant.postpone(giant, 'Widget', function (ns, className) {
                 if (this.getElement()) {
                     this.children.afterRender();
                 }
-            },
-
-            /**
-             * Spawns a widget event that has the senderWidget property set.
-             * @param {string} eventName
-             * @returns {giant.WidgetEvent}
-             */
-            spawnEvent: function (eventName) {
-                return giant.Evented.spawnEvent.call(this, eventName)
-                    .setSenderWidget(this);
             }
         });
 });
