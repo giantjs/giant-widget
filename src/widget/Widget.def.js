@@ -156,7 +156,7 @@ giant.postpone(giant, 'Widget', function (ns, className) {
              * @returns {giant.Widget} Widget class the method was called on.
              */
             addTrait: function (trait, traitName) {
-                giant.isStringOptional(traitName, "Invalid trait name");
+                $assertion.isStringOptional(traitName, "Invalid trait name");
 
                 base.addTrait.call(this, trait);
 
@@ -220,7 +220,7 @@ giant.postpone(giant, 'Widget', function (ns, className) {
              * @returns {giant.Widget}
              */
             setContainerCssClass: function (containerCssClass) {
-                giant.isString(containerCssClass, "Invalid container selector");
+                $assertion.isString(containerCssClass, "Invalid container selector");
                 this.containerCssClass = containerCssClass;
                 return this;
             },
@@ -245,7 +245,7 @@ giant.postpone(giant, 'Widget', function (ns, className) {
              * @see giant.Widget#containerCssClass
              */
             addToParent: function (parentWidget) {
-                giant.isWidget(parentWidget, "Invalid parent widget");
+                $assertion.isWidget(parentWidget, "Invalid parent widget");
 
                 var childName = this.childName,
                     currentChild = parentWidget.children.getItem(childName);
@@ -382,7 +382,7 @@ giant.postpone(giant, 'Widget', function (ns, className) {
              * @returns {giant.Widget}
              */
             renderInto: function (element) {
-                giant.isElement(element, "Invalid target element");
+                $assertion.isElement(element, "Invalid target element");
 
                 var adjacentWidget = this.getAdjacentWidget(this.childName, element);
 
@@ -404,7 +404,7 @@ giant.postpone(giant, 'Widget', function (ns, className) {
              * @returns {giant.Widget}
              */
             renderBefore: function (element) {
-                giant.isElement(element, "Invalid target element");
+                $assertion.isElement(element, "Invalid target element");
                 giant.Renderable.renderBefore.call(this, element);
                 this.afterRender();
                 return this;
@@ -535,7 +535,7 @@ giant.postpone(giant, 'Widget', function (ns, className) {
 (function () {
     "use strict";
 
-    giant.addTypes(/** @lends giant */{
+    $assertion.addTypes(/** @lends giant */{
         /** @param {giant.Widget} expr */
         isWidget: function (expr) {
             return giant.Widget.isBaseOf(expr);

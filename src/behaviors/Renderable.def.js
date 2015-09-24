@@ -146,7 +146,7 @@ giant.postpone(giant, 'Renderable', function () {
              * @returns {giant.Renderable}
              */
             setTagName: function (tagName) {
-                giant.isString(tagName, "Invalid tag name");
+                $assertion.isString(tagName, "Invalid tag name");
                 this.tagName = tagName;
                 return this;
             },

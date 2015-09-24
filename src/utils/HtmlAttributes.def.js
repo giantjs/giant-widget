@@ -78,7 +78,7 @@ giant.postpone(giant, 'HtmlAttributes', function () {
              * @see giant.HtmlAttributes#setItem
              */
             setIdAttribute: function (idAttribute) {
-                giant.isString(idAttribute, "Invalid ID attribute");
+                $assertion.isString(idAttribute, "Invalid ID attribute");
                 this.idAttribute = idAttribute;
                 return this;
             },
@@ -199,7 +199,7 @@ giant.postpone(giant, 'HtmlAttributes', function () {
 (function () {
     "use strict";
 
-    giant.addTypes(/** @lends giant */{
+    $assertion.addTypes(/** @lends giant */{
         /** @param {giant.HtmlAttributes} expr */
         isHtmlAttributes: function (expr) {
             return giant.HtmlAttributes.isBaseOf(expr);

@@ -131,7 +131,7 @@ giant.postpone(giant, 'Progenitor', function (ns, className) {
              * @returns {giant.Progenitor}
              */
             setChildName: function (childName) {
-                giant.isString(childName, "Invalid child name");
+                $assertion.isString(childName, "Invalid child name");
 
                 var parent = this.parent;
 
@@ -201,7 +201,7 @@ giant.postpone(giant, 'Progenitor', function (ns, className) {
              * @returns {giant.Progenitor}
              */
             getAncestor: function (tester) {
-                giant.isFunction(tester, "Invalid tester function");
+                $assertion.isFunction(tester, "Invalid tester function");
 
                 var parent = this.parent;
 
