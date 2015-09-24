@@ -2,14 +2,14 @@
 $oop.postpone(giant, 'Progenitor', function (ns, className) {
     "use strict";
 
-    var base = giant.Managed,
+    var base = $data.Managed,
         self = base.extend(className),
         slice = Array.prototype.slice;
 
     /**
      * The Progenitor trait manages parent-children relation between instances of the host class.
      * @class
-     * @extends giant.Managed
+     * @extends $data.Managed
      */
     giant.Progenitor = self
         .addMethods(/** @lends giant.Progenitor# */{
@@ -32,9 +32,9 @@ $oop.postpone(giant, 'Progenitor', function (ns, className) {
 
                 /**
                  * Children: collection of other Progenitor instances.
-                 * @type {giant.Collection}
+                 * @type {$data.Collection}
                  */
-                this.children = giant.Collection.create();
+                this.children = $data.Collection.create();
             },
 
             /**
@@ -165,7 +165,7 @@ $oop.postpone(giant, 'Progenitor', function (ns, className) {
             /**
              * Retrieves a collection of child instances matching the names specified as arguments.
              * When no argument is given, retrieves reference to the children collection.
-             * @returns {giant.Collection}
+             * @returns {$data.Collection}
              */
             getChildren: function () {
                 if (arguments.length) {
@@ -177,10 +177,10 @@ $oop.postpone(giant, 'Progenitor', function (ns, className) {
 
             /**
              * Retrieves a collection of all instances in the current instance's progeny.
-             * @returns {giant.Collection}
+             * @returns {$data.Collection}
              */
             getAllDescendants: function () {
-                var result = giant.Collection.create();
+                var result = $data.Collection.create();
 
                 (function getAllDescendants(parent) {
                     parent.children
@@ -215,7 +215,7 @@ $oop.postpone(giant, 'Progenitor', function (ns, className) {
             /**
              * Retrieves the path that identifies the position of the current instance
              * relative to the root instance.
-             * @returns {giant.Path}
+             * @returns {$data.Path}
              */
             getLineage: function () {
                 var asArray = [],

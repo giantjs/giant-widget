@@ -2,7 +2,7 @@
 $oop.postpone(giant, 'CssClasses', function () {
     "use strict";
 
-    var base = giant.Collection,
+    var base = $data.Collection,
         self = base.extend();
 
     /**

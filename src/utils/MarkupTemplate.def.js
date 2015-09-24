@@ -85,14 +85,14 @@ $oop.postpone(giant, 'MarkupTemplate', function () {
             init: function (templateString) {
                 /**
                  * Blown up string where the placeholders need to be substituted and joined to get the final text.
-                 * @type {giant.Collection}
+                 * @type {$data.Collection}
                  */
                 this.preprocessedTemplate = templateString.split(self.RE_MARKUP_SPLITTER)
                     .toCollection();
 
                 /**
                  * Defines lookup between container names and positions in the preprocessed template.
-                 * @type {giant.StringDictionary}
+                 * @type {$data.StringDictionary}
                  */
                 this.containerLookup = this.preprocessedTemplate
                     .mapValues(self._processTemplateFragment, this)

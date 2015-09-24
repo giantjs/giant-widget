@@ -23,7 +23,7 @@
 
         ok(instance.hasOwnProperty('parent'), "should add 'patent' property");
         equal(typeof instance.parent, 'undefined', "should set 'patent' property to undefined");
-        ok(instance.children.isA(giant.Collection), "should add children property");
+        ok(instance.children.isA($data.Collection), "should add children property");
         equal(instance.childName, instance.instanceId.toString(), "should set (default) child name to instance ID");
     });
 
@@ -227,13 +227,13 @@
 
         var children = parent.getChildren(child1.childName, child2.childName);
 
-        ok(children.isA(giant.Collection), "should return a collection");
+        ok(children.isA($data.Collection), "should return a collection");
         deepEqual(children.getValues(), [child1, child2], "should return collection w/ specified children");
     });
 
     test("Descendant collector", function () {
         var items = [],
-            firstId = giant.Documented.nextInstanceId,
+            firstId = $data.Documented.nextInstanceId,
             parent = Progenitor.create()
                 .addChild(Progenitor.create()
                     .addChild(Progenitor.create()))
@@ -242,7 +242,7 @@
                     .addChild(Progenitor.create()))
                 .addChild(Progenitor.create());
 
-        giant.Collection.addMocks({
+        $data.Collection.addMocks({
             setItem: function (itemName) {
                 items.push(itemName);
                 return this;
@@ -251,9 +251,9 @@
 
         var descendants = parent.getAllDescendants();
 
-        giant.Collection.removeMocks();
+        $data.Collection.removeMocks();
 
-        ok(descendants.isA(giant.Collection), "should return Collection instance");
+        ok(descendants.isA($data.Collection), "should return Collection instance");
         deepEqual(
             items.sort(),
             [firstId + 1, firstId + 2, firstId + 3, firstId + 4, firstId + 5, firstId + 6],
@@ -290,7 +290,7 @@
     });
 
     test("Lineage getter", function () {
-        var firstId = giant.Documented.nextInstanceId,
+        var firstId = $data.Documented.nextInstanceId,
             child = Progenitor.create()
                 .addToParent(Progenitor.create()
                     .addToParent(Progenitor.create()
@@ -299,7 +299,7 @@
 
         result = child.getLineage();
 
-        ok(result.isA(giant.Path), "should return Path instance");
+        ok(result.isA($data.Path), "should return Path instance");
         deepEqual(result.asArray, [firstId + 3, firstId + 2, firstId + 1, firstId],
             "should return path containing lineage");
     });

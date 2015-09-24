@@ -2,7 +2,7 @@
 $oop.postpone(giant, 'WidgetCollection', function () {
     "use strict";
 
-    var base = giant.Collection.of(giant.Widget),
+    var base = $data.Collection.of(giant.Widget),
         self = base.extend();
 
     /**
@@ -17,7 +17,7 @@ $oop.postpone(giant, 'WidgetCollection', function () {
      * The WidgetCollection is a specified collection merging the Collection API with the Widget API.
      * Also allows serialization of all widgets in the collection into a single string.
      * @class
-     * @extends giant.Collection
+     * @extends $data.Collection
      * @extends giant.Widget
      */
     giant.WidgetCollection = self
@@ -34,11 +34,11 @@ $oop.postpone(giant, 'WidgetCollection', function () {
         });
 });
 
-$oop.amendPostponed(giant, 'Hash', function () {
+$oop.amendPostponed($data, 'Hash', function () {
     "use strict";
 
-    giant.Hash
-        .addMethods(/** @lends giant.Hash# */{
+    $data.Hash
+        .addMethods(/** @lends $data.Hash# */{
             /**
              * Converts `Hash` to `WidgetCollection`.
              * @returns {giant.WidgetCollection}

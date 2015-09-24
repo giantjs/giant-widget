@@ -50,7 +50,7 @@
 
         ok(widget.children.isA(giant.WidgetCollection), "should convert children to WidgetCollection");
 
-        ok(widget.eventPath.isA(giant.Path), "should set eventPath property");
+        ok(widget.eventPath.isA($data.Path), "should set eventPath property");
         ok(widget.eventPath.equals(widget.getLineage().prepend(widget.DETACHED_EVENT_PATH_ROOT)),
             "should set eventPath to lineage path");
     });
@@ -60,7 +60,7 @@
 
         var widget = {};
 
-        giant.Managed.addMocks({
+        $data.Managed.addMocks({
             getInstanceById: function (instanceId) {
                 equal(instanceId, 14, "should fetch instance from registry");
                 return widget;
@@ -69,7 +69,7 @@
 
         strictEqual('w14'.toWidget(), widget, "should return instance fetched by getInstanceId");
 
-        giant.Managed.removeMocks();
+        $data.Managed.removeMocks();
     });
 
     test("Conversion from Element", function () {
@@ -81,7 +81,7 @@
 
             element.id = 'w100';
 
-            giant.Managed.addMocks({
+            $data.Managed.addMocks({
                 getInstanceById: function (instanceId) {
                     equal(instanceId, 100, "should fetch instance from registry");
                     return widget;
@@ -90,7 +90,7 @@
 
             strictEqual(element.toWidget(), widget, "should fetch widget by instance ID");
 
-            giant.Managed.removeMocks();
+            $data.Managed.removeMocks();
         }
     });
 
@@ -110,7 +110,7 @@
                 }
             });
 
-            giant.Managed.addMocks({
+            $data.Managed.addMocks({
                 getInstanceById: function (instanceId) {
                     equal(instanceId, 100, "should fetch instance from registry");
                     return widget;
@@ -120,7 +120,7 @@
             strictEqual(uiEvent.toWidget('foo'), widget, "should return instance fetched by getInstanceId");
 
             giant.WidgetUtils.removeMocks();
-            giant.Managed.removeMocks();
+            $data.Managed.removeMocks();
         }
     });
 
@@ -398,21 +398,21 @@
             }
         });
 
-        giant.Managed.addMocks({
+        $data.Managed.addMocks({
             getInstanceById: function (instanceId) {
                 instanceIds.push(instanceId);
                 return widgets[instanceId];
             }
         });
 
-        giant.OrderedStringList.addMocks({
+        $data.OrderedStringList.addMocks({
             spliceIndexOf: function (widgetName) {
                 equal(widgetName, 'w11', "should fetch splice index for specified widget name");
                 return 100;
             }
         });
 
-        giant.Collection.addMocks({
+        $data.Collection.addMocks({
             getItem: function (itemName) {
                 return {
                     1  : widgets[1],
@@ -429,9 +429,9 @@
             "should fetch IDs of widgets under specified element");
 
         giant.Widget.removeMocks();
-        giant.Managed.removeMocks();
-        giant.OrderedStringList.removeMocks();
-        giant.Collection.removeMocks();
+        $data.Managed.removeMocks();
+        $data.OrderedStringList.removeMocks();
+        $data.Collection.removeMocks();
     });
 
     // TODO: Add test for when adjacent widget's name is smaller than current.
@@ -602,7 +602,7 @@
 
         widget.addMocks({
             _getChildrenGroupedByContainer: function () {
-                return giant.Collection.create({
+                return $data.Collection.create({
                     foo: child
                 });
             }

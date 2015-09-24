@@ -13,16 +13,16 @@
     test("Instantiation", function () {
         ok(htmlAttributes.hasOwnProperty('idAttribute'), "should add idAttribute property");
         equal(typeof htmlAttributes.idAttribute, 'undefined', "should set idAttribute property to undefined");
-        ok(htmlAttributes.cssClasses.isA(giant.Collection), "should set cssClasses property");
+        ok(htmlAttributes.cssClasses.isA($data.Collection), "should set cssClasses property");
         equal(htmlAttributes.cssClasses.getKeyCount(), 0, "should set cssClasses collection to empty");
-        ok(htmlAttributes.inlineStyles.isA(giant.Collection), "should set inlineStyles property");
+        ok(htmlAttributes.inlineStyles.isA($data.Collection), "should set inlineStyles property");
         equal(htmlAttributes.inlineStyles.getKeyCount(), 0, "should set inlineStyles collection to empty");
     });
 
     test("Attribute (item) removal", function () {
         expect(4);
 
-        giant.Collection.addMocks({
+        $data.Collection.addMocks({
             deleteItem: function () {
                 strictEqual(this, htmlAttributes, "should delete specified attribute");
             }
@@ -30,7 +30,7 @@
 
         strictEqual(htmlAttributes.deleteItem('foo'), htmlAttributes, "should be chainable");
 
-        giant.Collection.removeMocks();
+        $data.Collection.removeMocks();
 
         htmlAttributes.cssClasses.addMocks({
             clear: function () {

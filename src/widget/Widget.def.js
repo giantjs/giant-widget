@@ -35,13 +35,13 @@ $oop.postpone(giant, 'Widget', function (ns, className) {
     giant.Widget = self
         .addConstants(/** @lends giant.Widget */{
             /**
-             * @type {giant.Path}
+             * @type {$data.Path}
              * @constant
              */
             ATTACHED_EVENT_PATH_ROOT: 'widget>attached'.toPath(),
 
             /**
-             * @type {giant.Path}
+             * @type {$data.Path}
              * @constant
              */
             DETACHED_EVENT_PATH_ROOT: 'widget>detached'.toPath()
@@ -107,7 +107,7 @@ $oop.postpone(giant, 'Widget', function (ns, className) {
 
             /**
              * Retrieves current child widgets grouped by container CSS class name.
-             * @returns {giant.Collection}
+             * @returns {$data.Collection}
              * @private
              */
             _getChildrenGroupedByContainer: function () {
@@ -134,10 +134,10 @@ $oop.postpone(giant, 'Widget', function (ns, className) {
              * @param {string} className
              * @returns {$oop.Base}
              * @see $oop.Base.extend
-             * @see giant.Documented.extend
+             * @see $data.Documented.extend
              */
             extend: function (className) {
-                var that = giant.Documented.extend.call(this, className);
+                var that = $data.Documented.extend.call(this, className);
 
                 that.htmlAttributes = this.htmlAttributes.clone()
                     .addCssClass(className);
@@ -200,7 +200,7 @@ $oop.postpone(giant, 'Widget', function (ns, className) {
 
                 /**
                  * Child widgets. Modifies the `children` property delegated by `giant.Progenitor`
-                 * by treating it as a `WidgetCollection` rather than a regular `giant.Collection`.
+                 * by treating it as a `WidgetCollection` rather than a regular `$data.Collection`.
                  * @type {giant.WidgetCollection}
                  */
                 this.children = this.children.toWidgetCollection();
@@ -365,7 +365,7 @@ $oop.postpone(giant, 'Widget', function (ns, className) {
              * @returns {giant.Widget}
              */
             getAdjacentWidget: function (childName, parentElement) {
-                var childWidgetIds = giant.Collection.create(this._getWidgetIdsInDom(parentElement)),
+                var childWidgetIds = $data.Collection.create(this._getWidgetIdsInDom(parentElement)),
                     childWidgets = childWidgetIds
                         .callOnEachItem('toWidget'),
                     childWidgetNames = childWidgets
@@ -561,7 +561,7 @@ $oop.postpone(giant, 'Widget', function (ns, className) {
          * @returns {giant.Widget}
          */
         toWidget: function () {
-            return giant.Managed.getInstanceById(this.toInstanceIdFromWidgetId());
+            return $data.Managed.getInstanceById(this.toInstanceIdFromWidgetId());
         },
 
         /**
@@ -591,7 +591,7 @@ $oop.postpone(giant, 'Widget', function (ns, className) {
              * @returns {giant.Widget}
              */
             toWidget: function () {
-                return giant.Managed.getInstanceById(this.id.toInstanceIdFromWidgetId());
+                return $data.Managed.getInstanceById(this.id.toInstanceIdFromWidgetId());
             }
         });
     }
@@ -613,7 +613,7 @@ $oop.postpone(giant, 'Widget', function (ns, className) {
                     widgetElement = giant.WidgetUtils.getParentNodeByClassName(childElement, cssClassName);
 
                 return widgetElement ?
-                    giant.Managed.getInstanceById(widgetElement.id.toInstanceIdFromWidgetId()) :
+                    $data.Managed.getInstanceById(widgetElement.id.toInstanceIdFromWidgetId()) :
                     undefined;
             }
         });

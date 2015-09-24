@@ -2,7 +2,7 @@
 $oop.postpone(giant, 'HtmlAttributes', function () {
     "use strict";
 
-    var base = giant.Collection,
+    var base = $data.Collection,
         self = base.extend();
 
     /**
@@ -17,7 +17,7 @@ $oop.postpone(giant, 'HtmlAttributes', function () {
      * The HtmlAttributes class manages all aspects of an HTML element's attributes,
      * including CSS classes and inline styles.
      * @class
-     * @extends giant.Collection
+     * @extends $data.Collection
      */
     giant.HtmlAttributes = self
         .addMethods(/** @lends giant.HtmlAttributes# */{

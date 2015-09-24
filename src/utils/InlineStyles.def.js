@@ -2,7 +2,7 @@
 $oop.postpone(giant, 'InlineStyles', function () {
     "use strict";
 
-    var base = giant.Collection,
+    var base = $data.Collection,
         self = base.extend();
 
     /**
@@ -17,7 +17,7 @@ $oop.postpone(giant, 'InlineStyles', function () {
      * The InlineStyles class is a collection of style key-value pairs that can be
      * serialized in the correct style definition format.
      * @class
-     * @extends giant.Collection
+     * @extends $data.Collection
      */
     giant.InlineStyles = self
         .addMethods(/** @lends giant.InlineStyles# */{
