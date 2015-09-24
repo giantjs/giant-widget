@@ -1,6 +1,6 @@
 {
   "name": "giant-widget",
-  "version": "0.0.7",
+  "version": "0.1.0",
   "description": "Widget module for Giant",
   "keywords": [
     "widget",
@@ -15,13 +15,13 @@
     "url": "git@github.com:giantjs/giant-widget.git"
   },
   "dependencies": {
-    "giant-assertion": "0.0.7",
-    "giant-data": "0.0.7",
-    "giant-event": "0.0.7",
-    "giant-namespace": "0.0.7",
-    "giant-oop": "0.0.7",
-    "giant-templating": "0.0.7",
-    "giant-utils": "0.0.7",
+    "giant-assertion": "0.1.0",
+    "giant-data": "0.1.0",
+    "giant-event": "0.1.0",
+    "giant-namespace": "0.1.0",
+    "giant-oop": "0.1.0",
+    "giant-templating": "0.1.0",
+    "giant-utils": "0.1.0",
     "jquery": "~2.1.0",
     "q": "^1.4.0"
   },
