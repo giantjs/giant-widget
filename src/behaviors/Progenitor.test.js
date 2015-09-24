@@ -6,10 +6,10 @@
 
     /**
      * @class
-     * @extends giant.Base
+     * @extends $oop.Base
      * @extends giant.Progenitor
      */
-    var Progenitor = giant.Base.extend()
+    var Progenitor = $oop.Base.extend()
         .addTrait(giant.Progenitor)
         .extend('myClass')
         .addMethods({

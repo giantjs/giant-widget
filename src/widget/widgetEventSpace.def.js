@@ -1,5 +1,5 @@
 /*global giant */
-giant.postpone(giant, 'widgetEventSpace', function () {
+$oop.postpone(giant, 'widgetEventSpace', function () {
     "use strict";
 
     /**

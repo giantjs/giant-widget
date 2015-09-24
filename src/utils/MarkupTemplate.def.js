@@ -1,8 +1,8 @@
 /*global giant */
-giant.postpone(giant, 'MarkupTemplate', function () {
+$oop.postpone(giant, 'MarkupTemplate', function () {
     "use strict";
 
-    var base = giant.Base,
+    var base = $oop.Base,
         self = base.extend();
 
     /**
@@ -19,7 +19,7 @@ giant.postpone(giant, 'MarkupTemplate', function () {
      * Implements a template markup, where containers are identified by their CSS classes.
      * The template is filled in by specifying content for each container.
      * @class
-     * @extends giant.Base
+     * @extends $oop.Base
      */
     giant.MarkupTemplate = self
         .addConstants(/** @lends giant.MarkupTemplate */{
@@ -165,7 +165,7 @@ giant.postpone(giant, 'MarkupTemplate', function () {
 (function () {
     "use strict";
 
-    giant.extendBuiltIn(String.prototype, /** @lends String# */{
+    $oop.extendBuiltIn(String.prototype, /** @lends String# */{
         /**
          * Converts `String` to `MarkupTemplate` instance.
          * @returns {giant.MarkupTemplate}

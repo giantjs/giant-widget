@@ -1,15 +1,15 @@
 /*global giant */
-giant.postpone(giant, 'Renderable', function () {
+$oop.postpone(giant, 'Renderable', function () {
     "use strict";
 
-    var base = giant.Base,
+    var base = $oop.Base,
         self = base.extend();
 
     /**
      * The Renderable trait allows the host class to be rendered into the DOM.
      * Adds managed HTML attributes, markup, and rendering methods.
      * @class
-     * @extends giant.Base
+     * @extends $oop.Base
      */
     giant.Renderable = self
         .addPublic(/** @lends giant.Renderable */{

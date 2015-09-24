@@ -1,5 +1,5 @@
 /*global giant */
-giant.postpone(giant, 'WidgetCollection', function () {
+$oop.postpone(giant, 'WidgetCollection', function () {
     "use strict";
 
     var base = giant.Collection.of(giant.Widget),
@@ -34,7 +34,7 @@ giant.postpone(giant, 'WidgetCollection', function () {
         });
 });
 
-giant.amendPostponed(giant, 'Hash', function () {
+$oop.amendPostponed(giant, 'Hash', function () {
     "use strict";
 
     giant.Hash
@@ -52,7 +52,7 @@ giant.amendPostponed(giant, 'Hash', function () {
 (function () {
     "use strict";
 
-    giant.extendBuiltIn(Array.prototype, /** @lends Array# */{
+    $oop.extendBuiltIn(Array.prototype, /** @lends Array# */{
         /**
          * Converts array of `Widget` instances to a `WidgetCollection`.
          * @returns {giant.WidgetCollection}

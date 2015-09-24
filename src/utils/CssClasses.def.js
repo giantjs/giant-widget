@@ -1,5 +1,5 @@
 /*global giant */
-giant.postpone(giant, 'CssClasses', function () {
+$oop.postpone(giant, 'CssClasses', function () {
     "use strict";
 
     var base = giant.Collection,
@@ -16,7 +16,7 @@ giant.postpone(giant, 'CssClasses', function () {
     /**
      * The CssClasses class is a serializable Collection of CSS class names.
      * @class
-     * @extends giant.Base
+     * @extends $oop.Base
      */
     giant.CssClasses = self
         .addMethods(/** @lends giant.CssClasses# */{

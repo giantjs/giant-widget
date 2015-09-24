@@ -1,5 +1,5 @@
 /*global giant */
-giant.postpone(giant, 'InlineStyles', function () {
+$oop.postpone(giant, 'InlineStyles', function () {
     "use strict";
 
     var base = giant.Collection,

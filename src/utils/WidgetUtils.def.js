@@ -1,15 +1,15 @@
 /*global giant */
-giant.postpone(giant, 'WidgetUtils', function () {
+$oop.postpone(giant, 'WidgetUtils', function () {
     "use strict";
 
-    var base = giant.Base,
+    var base = $oop.Base,
         self = base.extend(),
         slice = Array.prototype.slice;
 
     /**
      * The WidgetUtils class is a static class containing general purpose utilities used by widgets.
      * @class
-     * @extends giant.Base
+     * @extends $oop.Base
      */
     giant.WidgetUtils = self
         .addConstants(/** @lends giant.WidgetUtils */{
@@ -76,7 +76,7 @@ giant.postpone(giant, 'WidgetUtils', function () {
 (function () {
     "use strict";
 
-    giant.extendBuiltIn(String.prototype, /** @lends String# */{
+    $oop.extendBuiltIn(String.prototype, /** @lends String# */{
         /**
          * Converts string to HTML escaped string.
          * @returns {string}

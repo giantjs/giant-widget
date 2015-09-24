@@ -6,10 +6,10 @@
 
     /**
      * @class
-     * @extends giant.Base
+     * @extends $oop.Base
      * @extends giant.Renderable
      */
-    var Renderable = giant.Base.extend()
+    var Renderable = $oop.Base.extend()
         .addTrait(giant.Renderable)
         .addMethods({
             init: function () {

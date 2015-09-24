@@ -1,5 +1,5 @@
 /*global giant */
-giant.postpone(giant, 'Progenitor', function (ns, className) {
+$oop.postpone(giant, 'Progenitor', function (ns, className) {
     "use strict";
 
     var base = giant.Managed,

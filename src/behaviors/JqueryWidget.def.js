@@ -1,8 +1,8 @@
 /*global giant, jQuery */
-giant.postpone(giant, 'JqueryWidget', function (ns, className, /**jQuery*/$) {
+$oop.postpone(giant, 'JqueryWidget', function (ns, className, /**jQuery*/$) {
     "use strict";
 
-    var base = giant.Base,
+    var base = $oop.Base,
         self = base.extend(),
         $document = document && $(document);
 
@@ -10,7 +10,7 @@ giant.postpone(giant, 'JqueryWidget', function (ns, className, /**jQuery*/$) {
      * The JqueryWidget trait adds class-level (delegated) jQuery event subscription capability to the host.
      * When used on other traits, call methods directly on JqueryWidget.
      * @class
-     * @extends giant.Base
+     * @extends $oop.Base
      * @extends giant.Widget
      */
     giant.JqueryWidget = self

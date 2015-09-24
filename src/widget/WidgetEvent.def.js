@@ -1,5 +1,5 @@
 /*global giant */
-giant.postpone(giant, 'WidgetEvent', function () {
+$oop.postpone(giant, 'WidgetEvent', function () {
     "use strict";
 
     var base = giant.Event;
@@ -25,7 +25,7 @@ giant.postpone(giant, 'WidgetEvent', function () {
     giant.WidgetEvent = base.extend();
 });
 
-giant.amendPostponed(giant, 'Event', function () {
+$oop.amendPostponed(giant, 'Event', function () {
     "use strict";
 
     giant.Event

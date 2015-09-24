@@ -1,9 +1,9 @@
 /*global giant, Event */
-giant.postpone(giant, 'Widget', function (ns, className) {
+$oop.postpone(giant, 'Widget', function (ns, className) {
     "use strict";
 
     var slice = Array.prototype.slice,
-        base = giant.Base,
+        base = $oop.Base,
         self = base.extend()
             // trait methods do not overlap, can go on same prototype level
             .addTrait(giant.Progenitor)
@@ -27,7 +27,7 @@ giant.postpone(giant, 'Widget', function (ns, className) {
      * The Widget implements the life cycle: created - added - rendered - removed, to each stage of which user-defined
      * handlers may be added.
      * @class
-     * @extends giant.Base
+     * @extends $oop.Base
      * @extends giant.Evented
      * @extends giant.Progenitor
      * @extends giant.Renderable
@@ -127,13 +127,13 @@ giant.postpone(giant, 'Widget', function (ns, className) {
         })
         .addMethods(/** @lends giant.Widget# */{
             /**
-             * Extends the widget class. Same as `giant.Base.extend()` in all respects except for incorporating the
+             * Extends the widget class. Same as `$oop.Base.extend()` in all respects except for incorporating the
              * functionality of `Documented.extend()`, and adding the class name to the HTML attributes as CSS class.
              * @example
              * var MyWidget = giant.Widget.extend('MyWidget');
              * @param {string} className
-             * @returns {giant.Base}
-             * @see giant.Base.extend
+             * @returns {$oop.Base}
+             * @see $oop.Base.extend
              * @see giant.Documented.extend
              */
             extend: function (className) {
@@ -170,7 +170,7 @@ giant.postpone(giant, 'Widget', function (ns, className) {
             /**
              * Adds trait to widget class, and extends the class afterwards. Same as `giant.addTrait()`,
              * except for optionally adding the trait name to the widget's HTML attributes as CSS class.
-             * @param {giant.Base} trait
+             * @param {$oop.Base} trait
              * @param {string} [traitName] Name of trait. Must be the same as the name of the trait object.
              * @returns {giant.Widget} Extended widget class.
              */
@@ -553,7 +553,7 @@ giant.postpone(giant, 'Widget', function (ns, className) {
         }
     });
 
-    giant.extendBuiltIn(String.prototype, /** @lends String# */{
+    $oop.extendBuiltIn(String.prototype, /** @lends String# */{
         /**
          * Converts `String` to `Widget` by looking up the widget corresponding to the current string
          * as its widget ID. Conversion yields no result when the widget is not in the hierarchy.
@@ -573,7 +573,7 @@ giant.postpone(giant, 'Widget', function (ns, className) {
         }
     });
 
-    giant.extendBuiltIn(Number.prototype, /** @lends Number# */{
+    $oop.extendBuiltIn(Number.prototype, /** @lends Number# */{
         /**
          * Converts current number as instance ID to widget ID.
          * The widget ID is used as the ID attribute of the rendered widget's container element.
@@ -585,7 +585,7 @@ giant.postpone(giant, 'Widget', function (ns, className) {
     });
 
     if (Element) {
-        giant.extendBuiltIn(Element.prototype, /** @lends Element# */{
+        $oop.extendBuiltIn(Element.prototype, /** @lends Element# */{
             /**
              * Converts `Element` to `Widget` using the element's ID attribute as widget ID.
              * @returns {giant.Widget}
@@ -597,7 +597,7 @@ giant.postpone(giant, 'Widget', function (ns, className) {
     }
 
     if (Event) {
-        giant.extendBuiltIn(Event.prototype, /** @lends Event# */{
+        $oop.extendBuiltIn(Event.prototype, /** @lends Event# */{
             /**
              * Converts `Event` to `Widget`.
              * Uses the event's target to look up the nearest parent element matching the specified class name.
