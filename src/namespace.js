@@ -15,9 +15,8 @@ var $utils = $utils || require('giant-utils');
 /** @namespace */
 var $data = $data || require('giant-data');
 
-if (typeof require === 'function') {
-    require('giant-event');
-}
+/** @namespace */
+var $event = $event || require('giant-event');
 
 /**
  * @function

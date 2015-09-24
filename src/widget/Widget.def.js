@@ -8,7 +8,7 @@ $oop.postpone(giant, 'Widget', function (ns, className) {
             // trait methods do not overlap, can go on same prototype level
             .addTrait(giant.Progenitor)
             .addTrait(giant.Renderable)
-            .addTrait(giant.Evented)
+            .addTrait($event.Evented)
             .extend(className);
 
     /**
@@ -28,7 +28,7 @@ $oop.postpone(giant, 'Widget', function (ns, className) {
      * handlers may be added.
      * @class
      * @extends $oop.Base
-     * @extends giant.Evented
+     * @extends $event.Evented
      * @extends giant.Progenitor
      * @extends giant.Renderable
      */

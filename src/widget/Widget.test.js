@@ -17,7 +17,7 @@
 
     test("Trait addition", function () {
         var CustomWidget = giant.Widget.extend('CustomWidget')
-            .addTrait(giant.Evented, 'Evented');
+            .addTrait($event.Evented, 'Evented');
 
         ok(!!CustomWidget.htmlAttributes.cssClasses.getItem('CustomWidget'),
             "should add trait name to CSS class collection");

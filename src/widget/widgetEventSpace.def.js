@@ -4,7 +4,7 @@ $oop.postpone(giant, 'widgetEventSpace', function () {
 
     /**
      * Event space dedicated to widget events.
-     * @type {giant.EventSpace}
+     * @type {$event.EventSpace}
      */
-    giant.widgetEventSpace = giant.EventSpace.create();
+    giant.widgetEventSpace = $event.EventSpace.create();
 });
