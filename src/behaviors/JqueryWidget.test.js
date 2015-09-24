@@ -1,4 +1,4 @@
-/*global giant */
+/*global $widget */
 (function () {
     "use strict";
 
@@ -8,8 +8,8 @@
     test("Event subscription", function () {
         expect(5);
 
-        var JqueryWidget = giant.Widget.extend('JqueryWidget')
-            .addTrait(giant.JqueryWidget);
+        var JqueryWidget = $widget.Widget.extend('JqueryWidget')
+            .addTrait($widget.JqueryWidget);
 
         JqueryWidget.addMocks({
             _getGlobalSelector: function (selector) {
@@ -32,8 +32,8 @@
     test("Event unsubscription", function () {
         expect(4);
 
-        var JqueryWidget = giant.Widget.extend('JqueryWidget')
-            .addTrait(giant.JqueryWidget);
+        var JqueryWidget = $widget.Widget.extend('JqueryWidget')
+            .addTrait($widget.JqueryWidget);
 
         JqueryWidget.addMocks({
             _getGlobalSelector: function (selector) {

@@ -1,4 +1,4 @@
-/*global giant */
+/*global $widget */
 (function () {
     "use strict";
 
@@ -7,22 +7,22 @@
     /**
      * @class
      * @extends $oop.Base
-     * @extends giant.Renderable
+     * @extends $widget.Renderable
      */
     var Renderable = $oop.Base.extend()
-        .addTrait(giant.Renderable)
+        .addTrait($widget.Renderable)
         .addMethods({
             init: function () {
-                giant.Renderable.init.apply(this, arguments);
+                $widget.Renderable.init.apply(this, arguments);
             }
         });
 
     test("Instantiation", function () {
-        var htmlAttributes = giant.HtmlAttributes.create({foo: 'bar'}),
+        var htmlAttributes = $widget.HtmlAttributes.create({foo: 'bar'}),
             instance = Renderable.create(htmlAttributes);
 
         equal(instance.tagName, 'div', "should set tag name to 'div'");
-        ok(instance.htmlAttributes.isA(giant.HtmlAttributes), "should add HTML attribute collection");
+        ok(instance.htmlAttributes.isA($widget.HtmlAttributes), "should add HTML attribute collection");
         strictEqual(instance.htmlAttributes, htmlAttributes, "should set HTML attribute");
     });
 
@@ -294,7 +294,7 @@
         instance.htmlAttributes.addMocks({
             getFinalAttributes: function () {
                 ok(true, "should fetch final HTML attributes");
-                return giant.HtmlAttributes.create({foo: 'bar'});
+                return $widget.HtmlAttributes.create({foo: 'bar'});
             }
         });
 
@@ -304,7 +304,7 @@
     test("Element getter", function () {
         expect(2);
 
-        var instance = Renderable.create(giant.HtmlAttributes.create().setIdAttribute('hello')),
+        var instance = Renderable.create($widget.HtmlAttributes.create().setIdAttribute('hello')),
             instanceElement = {};
 
         instance.addMocks({

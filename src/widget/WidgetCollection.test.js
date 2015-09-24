@@ -1,4 +1,4 @@
-/*global giant */
+/*global $widget */
 (function () {
     "use strict";
 
@@ -8,7 +8,7 @@
         var items = [1, 2, 3],
             widgets = items.toWidgetCollection();
 
-        ok(widgets.isA(giant.WidgetCollection), "should return WidgetCollection instance");
+        ok(widgets.isA($widget.WidgetCollection), "should return WidgetCollection instance");
         strictEqual(widgets.items, items, "should set items to widget array");
     });
 
@@ -16,7 +16,7 @@
         var items = [1, 2, 3],
             widgets = items.toWidgetCollection();
 
-        ok(widgets.isA(giant.WidgetCollection), "should return WidgetCollection instance");
+        ok(widgets.isA($widget.WidgetCollection), "should return WidgetCollection instance");
         strictEqual(widgets.items, items, "should set items to widget array");
     });
 

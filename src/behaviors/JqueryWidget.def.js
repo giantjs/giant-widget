@@ -1,5 +1,5 @@
-/*global giant, jQuery */
-$oop.postpone(giant, 'JqueryWidget', function (ns, className, /**jQuery*/$) {
+/*global $widget, jQuery */
+$oop.postpone($widget, 'JqueryWidget', function (ns, className, /**jQuery*/$) {
     "use strict";
 
     var base = $oop.Base,
@@ -11,10 +11,10 @@ $oop.postpone(giant, 'JqueryWidget', function (ns, className, /**jQuery*/$) {
      * When used on other traits, call methods directly on JqueryWidget.
      * @class
      * @extends $oop.Base
-     * @extends giant.Widget
+     * @extends $widget.Widget
      */
-    giant.JqueryWidget = self
-        .addPrivateMethods(/** @lends giant.JqueryWidget */{
+    $widget.JqueryWidget = self
+        .addPrivateMethods(/** @lends $widget.JqueryWidget */{
             /**
              * @param {string} eventName
              * @param {string} selector
@@ -55,13 +55,13 @@ $oop.postpone(giant, 'JqueryWidget', function (ns, className, /**jQuery*/$) {
                     selector;
             }
         })
-        .addMethods(/** @lends giant.JqueryWidget */{
+        .addMethods(/** @lends $widget.JqueryWidget */{
             /**
              * Subscribes to DOM events, jQuery-style.
              * @param {string} eventName
              * @param {string} selector
              * @param {string} methodName
-             * @returns {giant.JqueryWidget}
+             * @returns {$widget.JqueryWidget}
              */
             on: function (eventName, selector, methodName) {
                 var globalSelector = this._getGlobalSelector(selector),
@@ -81,7 +81,7 @@ $oop.postpone(giant, 'JqueryWidget', function (ns, className, /**jQuery*/$) {
              * Unsubscribes from DOM events, jQuery-style.
              * @param {string} eventName
              * @param {string} selector
-             * @returns {giant.JqueryWidget}
+             * @returns {$widget.JqueryWidget}
              */
             off: function (eventName, selector) {
                 var globalSelector = this._getGlobalSelector(selector);

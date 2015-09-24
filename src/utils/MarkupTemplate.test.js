@@ -1,4 +1,4 @@
-/*global giant */
+/*global $widget */
 (function () {
     "use strict";
 
@@ -15,7 +15,7 @@
                 '</foo> '
                 //@formatter:on
             ].join(''),
-            template = giant.MarkupTemplate.create(markup);
+            template = $widget.MarkupTemplate.create(markup);
 
 //        console.log(JSON.stringify(template.preprocessedTemplate.items, null, 2));
 //        console.log(JSON.stringify(template.containerLookup.items, null, 2));
@@ -36,7 +36,7 @@
     });
 
     test("Instantiation with empty template", function () {
-        var template = giant.MarkupTemplate.create('');
+        var template = $widget.MarkupTemplate.create('');
 
 //        console.log(JSON.stringify(template.preprocessedTemplate.items, null, 2));
 //        console.log(JSON.stringify(template.containerLookup.items, null, 2));
@@ -60,7 +60,7 @@
             //@formatter:on
         ].join('').toMarkupTemplate();
 
-        ok(template.isA(giant.MarkupTemplate), "should return a MarkupTemplate instance");
+        ok(template.isA($widget.MarkupTemplate), "should return a MarkupTemplate instance");
 
         deepEqual(template.preprocessedTemplate.items, [
             "<foo class=\"hello \">",
@@ -157,7 +157,7 @@
             ].join('').toMarkupTemplate(),
             clone = template.clone();
 
-        ok(clone.instanceOf(giant.MarkupTemplate), "should return MarkupTemplate instance");
+        ok(clone.instanceOf($widget.MarkupTemplate), "should return MarkupTemplate instance");
         notStrictEqual(clone.preprocessedTemplate.items, template.preprocessedTemplate.items,
             "should create new preprocessedTemplate buffer");
         notStrictEqual(clone.containerLookup.items, template.containerLookup.items,

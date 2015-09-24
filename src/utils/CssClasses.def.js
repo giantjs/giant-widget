@@ -1,5 +1,5 @@
-/*global giant */
-$oop.postpone(giant, 'CssClasses', function () {
+/*global $widget */
+$oop.postpone($widget, 'CssClasses', function () {
     "use strict";
 
     var base = $data.Collection,
@@ -7,10 +7,10 @@ $oop.postpone(giant, 'CssClasses', function () {
 
     /**
      * Creates a CssClasses instance.
-     * @name giant.CssClasses.create
+     * @name $widget.CssClasses.create
      * @function
      * @param {object|Array} [items] Initial contents.
-     * @returns {giant.CssClasses}
+     * @returns {$widget.CssClasses}
      */
 
     /**
@@ -18,12 +18,12 @@ $oop.postpone(giant, 'CssClasses', function () {
      * @class
      * @extends $oop.Base
      */
-    giant.CssClasses = self
-        .addMethods(/** @lends giant.CssClasses# */{
+    $widget.CssClasses = self
+        .addMethods(/** @lends $widget.CssClasses# */{
             /**
              * Adds specified CSS class to the collection.
              * @param {string} cssClass
-             * @returns {giant.CssClasses}
+             * @returns {$widget.CssClasses}
              */
             addCssClass: function (cssClass) {
                 var refCount = this.getItem(cssClass) || 0;
@@ -35,7 +35,7 @@ $oop.postpone(giant, 'CssClasses', function () {
              * Decreases reference count on the specified CSS class.
              * Removes CSS class when reference count drops below 1.
              * @param {string} cssClass
-             * @returns {giant.CssClasses}
+             * @returns {$widget.CssClasses}
              */
             decreaseRefCount: function (cssClass) {
                 var refCount = this.getItem(cssClass) || 0;
@@ -50,7 +50,7 @@ $oop.postpone(giant, 'CssClasses', function () {
             /**
              * Removes specified CSS class from the collection.
              * @param {string} cssClass
-             * @returns {giant.CssClasses}
+             * @returns {$widget.CssClasses}
              */
             removeCssClass: function (cssClass) {
                 this.deleteItem(cssClass);
@@ -60,7 +60,7 @@ $oop.postpone(giant, 'CssClasses', function () {
             /**
              * Serializes CSS classes into a space separated string that can be used as an HTML "class" attribute.
              * @example
-             * giant.CssClasses.create()
+             * $widget.CssClasses.create()
              *     .addCssClass('foo')
              *     .addCssClass('bar')
              *     .toString() // "foo bar"

@@ -1,16 +1,16 @@
-/*global giant */
-$oop.postpone(giant, 'WidgetCollection', function () {
+/*global $widget */
+$oop.postpone($widget, 'WidgetCollection', function () {
     "use strict";
 
-    var base = $data.Collection.of(giant.Widget),
+    var base = $data.Collection.of($widget.Widget),
         self = base.extend();
 
     /**
      * Creates a WidgetCollection instance.
-     * @name giant.WidgetCollection.create
+     * @name $widget.WidgetCollection.create
      * @function
      * @param {object} [items]
-     * @returns {giant.WidgetCollection}
+     * @returns {$widget.WidgetCollection}
      */
 
     /**
@@ -18,10 +18,10 @@ $oop.postpone(giant, 'WidgetCollection', function () {
      * Also allows serialization of all widgets in the collection into a single string.
      * @class
      * @extends $data.Collection
-     * @extends giant.Widget
+     * @extends $widget.Widget
      */
-    giant.WidgetCollection = self
-        .addMethods(/** @lends giant.WidgetCollection# */{
+    $widget.WidgetCollection = self
+        .addMethods(/** @lends $widget.WidgetCollection# */{
             /**
              * Generates the markup for all widgets in the collection, in the order of their names.
              * @returns {string}
@@ -41,10 +41,10 @@ $oop.amendPostponed($data, 'Hash', function () {
         .addMethods(/** @lends $data.Hash# */{
             /**
              * Converts `Hash` to `WidgetCollection`.
-             * @returns {giant.WidgetCollection}
+             * @returns {$widget.WidgetCollection}
              */
             toWidgetCollection: function () {
-                return giant.WidgetCollection.create(this.items);
+                return $widget.WidgetCollection.create(this.items);
             }
         });
 });
@@ -55,10 +55,10 @@ $oop.amendPostponed($data, 'Hash', function () {
     $oop.extendBuiltIn(Array.prototype, /** @lends Array# */{
         /**
          * Converts array of `Widget` instances to a `WidgetCollection`.
-         * @returns {giant.WidgetCollection}
+         * @returns {$widget.WidgetCollection}
          */
         toWidgetCollection: function () {
-            return giant.WidgetCollection.create(this);
+            return $widget.WidgetCollection.create(this);
         }
     });
 }());

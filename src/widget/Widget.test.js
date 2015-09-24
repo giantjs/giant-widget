@@ -1,22 +1,22 @@
-/*global giant, Event */
+/*global $widget, Event */
 (function () {
     "use strict";
 
     module("Widget");
 
     test("Extension", function () {
-        var CustomWidget = giant.Widget.extend('CustomWidget');
+        var CustomWidget = $widget.Widget.extend('CustomWidget');
 
-        ok(CustomWidget.isA(giant.Widget), "should return Widget subclass");
-        strictEqual(CustomWidget.getBase(), giant.Widget, "should extend base class");
-        notStrictEqual(CustomWidget.htmlAttributes, giant.Widget.htmlAttributes,
+        ok(CustomWidget.isA($widget.Widget), "should return Widget subclass");
+        strictEqual(CustomWidget.getBase(), $widget.Widget, "should extend base class");
+        notStrictEqual(CustomWidget.htmlAttributes, $widget.Widget.htmlAttributes,
             "should clone html attribute collection");
         ok(!!CustomWidget.htmlAttributes.cssClasses.getItem('CustomWidget'),
             "should add class name to CSS class collection");
     });
 
     test("Trait addition", function () {
-        var CustomWidget = giant.Widget.extend('CustomWidget')
+        var CustomWidget = $widget.Widget.extend('CustomWidget')
             .addTrait($event.Evented, 'Evented');
 
         ok(!!CustomWidget.htmlAttributes.cssClasses.getItem('CustomWidget'),
@@ -26,29 +26,29 @@
     test("Instantiation", function () {
         expect(9);
 
-        giant.Renderable.addMocks({
+        $widget.Renderable.addMocks({
             init: function (htmlAttributes) {
                 ok(true, "should initialize Renderable trait");
-                ok(htmlAttributes.isA(giant.HtmlAttributes), "should pass HtmlAttributes instance");
+                ok(htmlAttributes.isA($widget.HtmlAttributes), "should pass HtmlAttributes instance");
                 ok(htmlAttributes.idAttribute, 'w0', "should set ID attribute");
             }
         });
 
-        giant.Widget.addMocks({
+        $widget.Widget.addMocks({
             setChildName: function (childName) {
                 equal(childName, this.instanceId.toWidgetId(), "should set widget ID as child name");
             }
         });
 
-        var widget = giant.Widget.create();
+        var widget = $widget.Widget.create();
 
-        giant.Renderable.removeMocks();
-        giant.Widget.removeMocks();
+        $widget.Renderable.removeMocks();
+        $widget.Widget.removeMocks();
 
         ok(widget.hasOwnProperty('containerCssClass'), "should add containerCssClass property");
         equal(typeof widget.containerCssClass, 'undefined', "should set containerCssClass to undefined");
 
-        ok(widget.children.isA(giant.WidgetCollection), "should convert children to WidgetCollection");
+        ok(widget.children.isA($widget.WidgetCollection), "should convert children to WidgetCollection");
 
         ok(widget.eventPath.isA($data.Path), "should set eventPath property");
         ok(widget.eventPath.equals(widget.getLineage().prepend(widget.DETACHED_EVENT_PATH_ROOT)),
@@ -101,7 +101,7 @@
             var uiEvent = document.createEvent('MouseEvent'),
                 widget = {};
 
-            giant.WidgetUtils.addMocks({
+            $widget.WidgetUtils.addMocks({
                 getParentNodeByClassName: function (childElement, cssClassName) {
                     equal(cssClassName, 'foo', "should fetch nearest widget parent element");
                     return {
@@ -119,13 +119,13 @@
 
             strictEqual(uiEvent.toWidget('foo'), widget, "should return instance fetched by getInstanceId");
 
-            giant.WidgetUtils.removeMocks();
+            $widget.WidgetUtils.removeMocks();
             $data.Managed.removeMocks();
         }
     });
 
     test("Container setter", function () {
-        var widget = giant.Widget.create();
+        var widget = $widget.Widget.create();
 
         strictEqual(widget.setContainerCssClass('foo'), widget, "should be chainable");
         equal(widget.containerCssClass, 'foo', "should set container CSS class");
@@ -134,8 +134,8 @@
     test("Adding to parent", function () {
         expect(8);
 
-        var childWidget = giant.Widget.create(),
-            parentWidget = giant.Widget.create();
+        var childWidget = $widget.Widget.create(),
+            parentWidget = $widget.Widget.create();
 
         throws(function () {
             childWidget.addToParent();
@@ -160,7 +160,7 @@
             }
         });
 
-        giant.Progenitor.addMocks({
+        $widget.Progenitor.addMocks({
             addToParent: function (parent) {
                 strictEqual(this, childWidget, "should call trait's method on current widget");
                 strictEqual(parent, parentWidget, "should pass parent widget to trait");
@@ -170,14 +170,14 @@
 
         strictEqual(childWidget.addToParent(parentWidget), childWidget, "should be chainable");
 
-        giant.Progenitor.removeMocks();
+        $widget.Progenitor.removeMocks();
     });
 
     test("Re-adding to parent", function () {
         expect(0);
 
-        var childWidget = giant.Widget.create(),
-            parentWidget = giant.Widget.create();
+        var childWidget = $widget.Widget.create(),
+            parentWidget = $widget.Widget.create();
 
         parentWidget.children.addMocks({
             getItem: function () {
@@ -197,8 +197,8 @@
     test("Adding to detached parent", function () {
         expect(0);
 
-        var childWidget = giant.Widget.create(),
-            parentWidget = giant.Widget.create();
+        var childWidget = $widget.Widget.create(),
+            parentWidget = $widget.Widget.create();
 
         childWidget.addMocks({
             isOnRoot: function () {
@@ -219,10 +219,10 @@
     test("Adding widget as root", function () {
         expect(6);
 
-        var widget = giant.Widget.create(),
-            rootWidget = giant.Widget.create();
+        var widget = $widget.Widget.create(),
+            rootWidget = $widget.Widget.create();
 
-        giant.Widget.rootWidget = rootWidget;
+        $widget.Widget.rootWidget = rootWidget;
 
         rootWidget.addMocks({
             removeRootWidget: function () {
@@ -246,15 +246,15 @@
         });
 
         strictEqual(widget.setRootWidget(), widget, "should be chainable");
-        strictEqual(giant.Widget.rootWidget, widget, "should set root widget");
+        strictEqual($widget.Widget.rootWidget, widget, "should set root widget");
     });
 
     test("Re-adding widget as root", function () {
         expect(0);
 
-        var widget = giant.Widget.create();
+        var widget = $widget.Widget.create();
 
-        giant.Widget.rootWidget = widget;
+        $widget.Widget.rootWidget = widget;
 
         widget.addMocks({
             afterAdd: function () {
@@ -272,20 +272,20 @@
     });
 
     test("Root tester", function () {
-        giant.Widget.addMocks({
+        $widget.Widget.addMocks({
             afterAdd: function () {
             }
         });
 
-        var rootWidget = giant.Widget.create()
+        var rootWidget = $widget.Widget.create()
                 .setRootWidget(),
-            parentWidget = giant.Widget.create(),
-            childWidget1 = giant.Widget.create()
+            parentWidget = $widget.Widget.create(),
+            childWidget1 = $widget.Widget.create()
                 .addToParent(parentWidget),
-            childWidget2 = giant.Widget.create()
+            childWidget2 = $widget.Widget.create()
                 .addToParent(rootWidget);
 
-        giant.Widget.removeMocks();
+        $widget.Widget.removeMocks();
 
         ok(!childWidget1.isOnRoot(), "should return false for widgets not connected to root widget");
         ok(childWidget2.isOnRoot(), "should return true for widgets connected to root widget");
@@ -294,8 +294,8 @@
     test("Removal from parent", function () {
         expect(5);
 
-        var parentWidget = giant.Widget.create(),
-            childWidget = giant.Widget.create()
+        var parentWidget = $widget.Widget.create(),
+            childWidget = $widget.Widget.create()
                 .addToParent(parentWidget);
 
         childWidget.addMocks({
@@ -313,7 +313,7 @@
             }
         });
 
-        giant.Progenitor.addMocks({
+        $widget.Progenitor.addMocks({
             removeFromParent: function () {
                 strictEqual(this, childWidget, "should call trait's method on current widget");
                 return this;
@@ -322,15 +322,15 @@
 
         strictEqual(childWidget.removeFromParent(), childWidget, "should be chainable");
 
-        giant.Progenitor.removeMocks();
+        $widget.Progenitor.removeMocks();
     });
 
     test("Root widget removal", function () {
         expect(3);
 
-        var widget = giant.Widget.create();
+        var widget = $widget.Widget.create();
 
-        giant.Widget.rootWidget = widget;
+        $widget.Widget.rootWidget = widget;
 
         widget.addMocks({
             removeFromParent: function () {
@@ -339,13 +339,13 @@
         });
 
         strictEqual(widget.removeRootWidget(), widget, "should be chainable");
-        equal(typeof giant.Widget.rootWidget, 'undefined', "should root widget to undefined");
+        equal(typeof $widget.Widget.rootWidget, 'undefined', "should root widget to undefined");
     });
 
     test("Child widget name setter", function () {
         expect(5);
 
-        var widget = giant.Widget.create(),
+        var widget = $widget.Widget.create(),
             oldChildName = widget.childName;
 
         widget.addMocks({
@@ -360,7 +360,7 @@
             }
         });
 
-        giant.Progenitor.addMocks({
+        $widget.Progenitor.addMocks({
             setChildName: function (childName) {
                 strictEqual(this, widget, "should call trait's setChildName on current widget");
                 equal(childName, 'foo', "should pass specified child name to trait");
@@ -370,13 +370,13 @@
 
         strictEqual(widget.setChildName('foo'), widget, "should be chainable");
 
-        giant.Progenitor.removeMocks();
+        $widget.Progenitor.removeMocks();
     });
 
     test("Adjacent widget getter", function () {
         expect(4);
 
-        var widget = giant.Widget.create(),
+        var widget = $widget.Widget.create(),
             targetParentElement = document.createElement('div'),
             instanceIds = [],
             widgets = {
@@ -428,7 +428,7 @@
             [1, 10, 100].sort(),
             "should fetch IDs of widgets under specified element");
 
-        giant.Widget.removeMocks();
+        $widget.Widget.removeMocks();
         $data.Managed.removeMocks();
         $data.OrderedStringList.removeMocks();
         $data.Collection.removeMocks();
@@ -438,8 +438,8 @@
     test("Rendering into element", function () {
         expect(8);
 
-        var widget = giant.Widget.create().setChildName('A'),
-            adjacentWidget = giant.Widget.create().setChildName('B'),
+        var widget = $widget.Widget.create().setChildName('A'),
+            adjacentWidget = $widget.Widget.create().setChildName('B'),
             targetElement = document.createElement('div'),
             adjacentElement = {};
 
@@ -469,7 +469,7 @@
             }
         });
 
-        giant.Renderable.addMocks({
+        $widget.Renderable.addMocks({
             renderBefore: function (element) {
                 strictEqual(this, widget, "should call trait's method");
                 strictEqual(element, adjacentElement, "should call renderBefore with adjacent element");
@@ -479,13 +479,13 @@
 
         strictEqual(widget.renderInto(targetElement), widget, "should be chainable");
 
-        giant.Renderable.removeMocks();
+        $widget.Renderable.removeMocks();
     });
 
     test("Rendering into element w/ no adjacent widget", function () {
         expect(3);
 
-        var widget = giant.Widget.create(),
+        var widget = $widget.Widget.create(),
             targetElement = document.createElement('div');
 
         widget.addMocks({
@@ -498,7 +498,7 @@
             }
         });
 
-        giant.Renderable.addMocks({
+        $widget.Renderable.addMocks({
             renderInto: function (element) {
                 strictEqual(this, widget, "should call trait's method");
                 strictEqual(element, targetElement, "should call renderInto with target element");
@@ -508,13 +508,13 @@
 
         widget.renderInto(targetElement);
 
-        giant.Renderable.removeMocks();
+        $widget.Renderable.removeMocks();
     });
 
     test("Rendering before element", function () {
         expect(6);
 
-        var widget = giant.Widget.create(),
+        var widget = $widget.Widget.create(),
             targetElement = document.createElement('div');
 
         throws(function () {
@@ -532,7 +532,7 @@
             }
         });
 
-        giant.Renderable.addMocks({
+        $widget.Renderable.addMocks({
             renderBefore: function (element) {
                 strictEqual(this, widget, "should call trait's method");
                 strictEqual(element, targetElement, "should call trait's method with target element");
@@ -542,13 +542,13 @@
 
         strictEqual(widget.renderBefore(targetElement), widget, "should be chainable");
 
-        giant.Renderable.removeMocks();
+        $widget.Renderable.removeMocks();
     });
 
     test("Re-rendering", function () {
         expect(3);
 
-        var widget = giant.Widget.create();
+        var widget = $widget.Widget.create();
 
         widget.addMocks({
             afterRender: function () {
@@ -557,7 +557,7 @@
             }
         });
 
-        giant.Renderable.addMocks({
+        $widget.Renderable.addMocks({
             reRender: function () {
                 strictEqual(this, widget, "should call trait's method");
                 return this;
@@ -566,13 +566,13 @@
 
         strictEqual(widget.reRender(), widget, "should be chainable");
 
-        giant.Renderable.removeMocks();
+        $widget.Renderable.removeMocks();
     });
 
     test("Re-rendering content", function () {
         expect(3);
 
-        var widget = giant.Widget.create();
+        var widget = $widget.Widget.create();
 
         widget.addMocks({
             afterRender: function () {
@@ -581,7 +581,7 @@
             }
         });
 
-        giant.Renderable.addMocks({
+        $widget.Renderable.addMocks({
             reRenderContents: function () {
                 strictEqual(this, widget, "should call trait's method");
                 return this;
@@ -590,14 +590,14 @@
 
         strictEqual(widget.reRenderContents(), widget, "should be chainable");
 
-        giant.Renderable.removeMocks();
+        $widget.Renderable.removeMocks();
     });
 
     test("Default content markup template generation", function () {
         expect(2);
 
-        var widget = giant.Widget.create(),
-            child = giant.Widget.create(),
+        var widget = $widget.Widget.create(),
+            child = $widget.Widget.create(),
             template = ''.toMarkupTemplate();
 
         widget.addMocks({
@@ -608,13 +608,13 @@
             }
         });
 
-        giant.Renderable.addMocks({
+        $widget.Renderable.addMocks({
             contentMarkupAsTemplate: function () {
                 return template;
             }
         });
 
-        giant.MarkupTemplate.addMocks({
+        $widget.MarkupTemplate.addMocks({
             setParameterValues: function (contents) {
                 deepEqual(contents, {
                     foo: child
@@ -625,14 +625,14 @@
 
         strictEqual(widget.contentMarkupAsTemplate(), template, "should return cloned template instance");
 
-        giant.Renderable.removeMocks();
-        giant.MarkupTemplate.removeMocks();
+        $widget.Renderable.removeMocks();
+        $widget.MarkupTemplate.removeMocks();
     });
 
     test("Adding to hierarchy", function () {
         expect(4);
 
-        var widget = giant.Widget.create();
+        var widget = $widget.Widget.create();
 
         widget.children.addMocks({
             addToHierarchy: function () {
@@ -643,7 +643,7 @@
         widget.addMocks({
             getLineage: function () {
                 ok(true, "should fetch widget's lineage");
-                return giant.Progenitor.getLineage.call(this);
+                return $widget.Progenitor.getLineage.call(this);
             },
 
             setEventPath: function (eventPath) {
@@ -663,7 +663,7 @@
     test("Removing from hierarchy", function () {
         expect(5);
 
-        var widget = giant.Widget.create(),
+        var widget = $widget.Widget.create(),
             lineage = [widget.instanceId].toPath();
 
         widget.children.addMocks({
@@ -700,7 +700,7 @@
     test("After render handler", function () {
         expect(2);
 
-        var widget = giant.Widget.create();
+        var widget = $widget.Widget.create();
 
         widget.addMocks({
             getElement: function () {

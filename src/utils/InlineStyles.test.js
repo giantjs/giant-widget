@@ -1,11 +1,11 @@
-/*global giant */
+/*global $widget */
 (function () {
     "use strict";
 
     module("Inline Styles");
 
     test("Serialization", function () {
-        var inlineStyles = giant.InlineStyles.create()
+        var inlineStyles = $widget.InlineStyles.create()
             .setItem('foo', 'bar')
             .setItem('hello', 'world');
 

@@ -1,10 +1,10 @@
-/*global giant */
-$oop.postpone(giant, 'widgetEventSpace', function () {
+/*global $widget */
+$oop.postpone($widget, 'widgetEventSpace', function () {
     "use strict";
 
     /**
      * Event space dedicated to widget events.
      * @type {$event.EventSpace}
      */
-    giant.widgetEventSpace = $event.EventSpace.create();
+    $widget.widgetEventSpace = $event.EventSpace.create();
 });

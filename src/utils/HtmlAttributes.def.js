@@ -1,5 +1,5 @@
-/*global giant */
-$oop.postpone(giant, 'HtmlAttributes', function () {
+/*global $widget */
+$oop.postpone($widget, 'HtmlAttributes', function () {
     "use strict";
 
     var base = $data.Collection,
@@ -7,10 +7,10 @@ $oop.postpone(giant, 'HtmlAttributes', function () {
 
     /**
      * Creates a HtmlAttributes instance.
-     * @name giant.HtmlAttributes.create
+     * @name $widget.HtmlAttributes.create
      * @function
      * @param {object|Array} [items] Initial contents.
-     * @returns {giant.HtmlAttributes}
+     * @returns {$widget.HtmlAttributes}
      */
 
     /**
@@ -19,8 +19,8 @@ $oop.postpone(giant, 'HtmlAttributes', function () {
      * @class
      * @extends $data.Collection
      */
-    giant.HtmlAttributes = self
-        .addMethods(/** @lends giant.HtmlAttributes# */{
+    $widget.HtmlAttributes = self
+        .addMethods(/** @lends $widget.HtmlAttributes# */{
             /**
              * @param {object|Array} [items] Initial contents.
              * @ignore
@@ -36,22 +36,22 @@ $oop.postpone(giant, 'HtmlAttributes', function () {
 
                 /**
                  * Collection of CSS classes.
-                 * @type {giant.CssClasses}
+                 * @type {$widget.CssClasses}
                  */
-                this.cssClasses = giant.CssClasses.create();
+                this.cssClasses = $widget.CssClasses.create();
 
                 /**
                  * Collection of inline styles.
-                 * @type {giant.InlineStyles}
+                 * @type {$widget.InlineStyles}
                  */
-                this.inlineStyles = giant.InlineStyles.create();
+                this.inlineStyles = $widget.InlineStyles.create();
             },
 
             /**
              * Removes the specified attribute from the collection.
              * @param {string} attributeName Name of attribute to be removed. Values 'class' and 'style' also
              * clear the corresponding collections. Use carefully!
-             * @returns {giant.HtmlAttributes}
+             * @returns {$widget.HtmlAttributes}
              */
             deleteItem: function (attributeName) {
                 switch (attributeName) {
@@ -74,8 +74,8 @@ $oop.postpone(giant, 'HtmlAttributes', function () {
             /**
              * Sets ID attribute. ID attribute set this way will override ID attribute set via `setItem`.
              * @param {string} idAttribute
-             * @returns {giant.HtmlAttributes}
-             * @see giant.HtmlAttributes#setItem
+             * @returns {$widget.HtmlAttributes}
+             * @see $widget.HtmlAttributes#setItem
              */
             setIdAttribute: function (idAttribute) {
                 $assertion.isString(idAttribute, "Invalid ID attribute");
@@ -86,7 +86,7 @@ $oop.postpone(giant, 'HtmlAttributes', function () {
             /**
              * Adds CSS class to the 'class' attribute.
              * @param {string} cssClass
-             * @returns {giant.HtmlAttributes}
+             * @returns {$widget.HtmlAttributes}
              */
             addCssClass: function (cssClass) {
                 this.cssClasses.addCssClass(cssClass);
@@ -96,7 +96,7 @@ $oop.postpone(giant, 'HtmlAttributes', function () {
             /**
              * Decreases ref count on specified CSS class.
              * @param {string} cssClass
-             * @returns {giant.HtmlAttributes}
+             * @returns {$widget.HtmlAttributes}
              */
             decreaseCssClassRefCount: function (cssClass) {
                 this.cssClasses.decreaseRefCount(cssClass);
@@ -106,7 +106,7 @@ $oop.postpone(giant, 'HtmlAttributes', function () {
             /**
              * Removes CSS class from the 'class' attribute.
              * @param {string} cssClass
-             * @returns {giant.HtmlAttributes}
+             * @returns {$widget.HtmlAttributes}
              */
             removeCssClass: function (cssClass) {
                 this.cssClasses.removeCssClass(cssClass);
@@ -117,7 +117,7 @@ $oop.postpone(giant, 'HtmlAttributes', function () {
              * Adds style definition to the 'style' attribute.
              * @param {string} styleName Style name, eg. "overflow".
              * @param {string} styleValue Style value, eg. "hidden".
-             * @returns {giant.HtmlAttributes}
+             * @returns {$widget.HtmlAttributes}
              */
             addInlineStyle: function (styleName, styleValue) {
                 this.inlineStyles.setItem(styleName, styleValue);
@@ -127,7 +127,7 @@ $oop.postpone(giant, 'HtmlAttributes', function () {
             /**
              * Adds style definition to the 'style' attribute.
              * @param {string} styleName Style name, eg. "overflow".
-             * @returns {giant.HtmlAttributes}
+             * @returns {$widget.HtmlAttributes}
              */
             removeInlineStyle: function (styleName) {
                 this.inlineStyles.deleteItem(styleName);
@@ -137,7 +137,7 @@ $oop.postpone(giant, 'HtmlAttributes', function () {
             /**
              * Generates a new HtmlAttributes instance on which the `id`, `class`, and `style` attributes are set
              * based on the corresponding properties of the current instance.
-             * @returns {giant.HtmlAttributes}
+             * @returns {$widget.HtmlAttributes}
              */
             getFinalAttributes: function () {
                 // not cloning on purpose so collections and properties don't carry over
@@ -162,7 +162,7 @@ $oop.postpone(giant, 'HtmlAttributes', function () {
 
             /**
              * Clones HTML attributes with attached ID attribute, inline styles, and CSS classes.
-             * @returns {giant.HtmlAttributes}
+             * @returns {$widget.HtmlAttributes}
              */
             clone: function () {
                 var result = base.clone.call(this);
@@ -178,7 +178,7 @@ $oop.postpone(giant, 'HtmlAttributes', function () {
              * Serializes HTML attributes to string so that it can be used when composing an HTML tag.
              * The order of attributes is not determined.
              * @example
-             * giant.HtmlAttributes.create()
+             * $widget.HtmlAttributes.create()
              *     .setIdAttribute('foo')
              *     .addCssClass('bar')
              *     .addInlineStyle('overflow', 'hidden')
@@ -199,16 +199,16 @@ $oop.postpone(giant, 'HtmlAttributes', function () {
 (function () {
     "use strict";
 
-    $assertion.addTypes(/** @lends giant */{
-        /** @param {giant.HtmlAttributes} expr */
+    $assertion.addTypes(/** @lends $widget */{
+        /** @param {$widget.HtmlAttributes} expr */
         isHtmlAttributes: function (expr) {
-            return giant.HtmlAttributes.isBaseOf(expr);
+            return $widget.HtmlAttributes.isBaseOf(expr);
         },
 
-        /** @param {giant.HtmlAttributes} [expr] */
+        /** @param {$widget.HtmlAttributes} [expr] */
         isHtmlAttributesOptional: function (expr) {
             return typeof expr === 'undefined' ||
-                   giant.HtmlAttributes.isBaseOf(expr);
+                   $widget.HtmlAttributes.isBaseOf(expr);
         }
     });
 }());

@@ -1,5 +1,5 @@
-/*global giant */
-$oop.postpone(giant, 'InlineStyles', function () {
+/*global $widget */
+$oop.postpone($widget, 'InlineStyles', function () {
     "use strict";
 
     var base = $data.Collection,
@@ -7,10 +7,10 @@ $oop.postpone(giant, 'InlineStyles', function () {
 
     /**
      * Creates an InlineStyles instance.
-     * @name giant.InlineStyles.create
+     * @name $widget.InlineStyles.create
      * @function
      * @param {object|Array} [items] Initial contents.
-     * @returns {giant.InlineStyles}
+     * @returns {$widget.InlineStyles}
      */
 
     /**
@@ -19,13 +19,13 @@ $oop.postpone(giant, 'InlineStyles', function () {
      * @class
      * @extends $data.Collection
      */
-    giant.InlineStyles = self
-        .addMethods(/** @lends giant.InlineStyles# */{
+    $widget.InlineStyles = self
+        .addMethods(/** @lends $widget.InlineStyles# */{
             /**
              * Serializes style collection so that it can be used in a tag as attribute.
              * The order of styles is not determined.
              * @example
-             * giant.InlineStyles.create()
+             * $widget.InlineStyles.create()
              *      .setItem('display', 'inline-block')
              *      .setItem('overflow', 'hidden')
              *      .toString() // "display: inline-block; overflow: hidden"

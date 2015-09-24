@@ -1,13 +1,13 @@
-/*global giant, Event */
-$oop.postpone(giant, 'Widget', function (ns, className) {
+/*global $widget, Event */
+$oop.postpone($widget, 'Widget', function (ns, className) {
     "use strict";
 
     var slice = Array.prototype.slice,
         base = $oop.Base,
         self = base.extend()
             // trait methods do not overlap, can go on same prototype level
-            .addTrait(giant.Progenitor)
-            .addTrait(giant.Renderable)
+            .addTrait($widget.Progenitor)
+            .addTrait($widget.Renderable)
             .addTrait($event.Evented)
             .extend(className);
 
@@ -16,24 +16,24 @@ $oop.postpone(giant, 'Widget', function (ns, className) {
      * Widgets already inserted into the hierarchy may be retrieved via conversion from their widget IDs.
      * @example
      * 'w1'.toWidget()
-     * @name giant.Widget.create
+     * @name $widget.Widget.create
      * @function
-     * @returns {giant.Widget}
+     * @returns {$widget.Widget}
      */
 
     /**
-     * The Widget class is the base class for all *giant*-based widgets.
+     * The Widget class is the base class for all *$widget*-based widgets.
      * As stateful view-controllers, the widgets' role is to keep the view (DOM) in sync with the model.
      * The Widget implements the life cycle: created - added - rendered - removed, to each stage of which user-defined
      * handlers may be added.
      * @class
      * @extends $oop.Base
      * @extends $event.Evented
-     * @extends giant.Progenitor
-     * @extends giant.Renderable
+     * @extends $widget.Progenitor
+     * @extends $widget.Renderable
      */
-    giant.Widget = self
-        .addConstants(/** @lends giant.Widget */{
+    $widget.Widget = self
+        .addConstants(/** @lends $widget.Widget */{
             /**
              * @type {$data.Path}
              * @constant
@@ -46,23 +46,23 @@ $oop.postpone(giant, 'Widget', function (ns, className) {
              */
             DETACHED_EVENT_PATH_ROOT: 'widget>detached'.toPath()
         })
-        .addPublic(/** @lends giant.Widget */{
+        .addPublic(/** @lends $widget.Widget */{
             /**
              * Stores all HTML attributes, including CSS classes and inline styles.
-             * @type {giant.HtmlAttributes}
+             * @type {$widget.HtmlAttributes}
              */
-            htmlAttributes: giant.HtmlAttributes.create()
+            htmlAttributes: $widget.HtmlAttributes.create()
                 .addCssClass(className),
 
             /**
              * Root widget. All other widgets descend from this.
              * There can be only one root widget at a time, but the root widget may be replaced at any time.
-             * @type {giant.Widget}
-             * @see giant.Widget#setRootWidget
+             * @type {$widget.Widget}
+             * @see $widget.Widget#setRootWidget
              */
             rootWidget: undefined
         })
-        .addPrivateMethods(/** @lends giant.Widget# */{
+        .addPrivateMethods(/** @lends $widget.Widget# */{
             /**
              * Retrieves a list of widget IDs to be found under the specified DOM element.
              * @param {HTMLElement} element
@@ -125,12 +125,12 @@ $oop.postpone(giant, 'Widget', function (ns, className) {
                     });
             }
         })
-        .addMethods(/** @lends giant.Widget# */{
+        .addMethods(/** @lends $widget.Widget# */{
             /**
              * Extends the widget class. Same as `$oop.Base.extend()` in all respects except for incorporating the
              * functionality of `Documented.extend()`, and adding the class name to the HTML attributes as CSS class.
              * @example
-             * var MyWidget = giant.Widget.extend('MyWidget');
+             * var MyWidget = $widget.Widget.extend('MyWidget');
              * @param {string} className
              * @returns {$oop.Base}
              * @see $oop.Base.extend
@@ -146,14 +146,14 @@ $oop.postpone(giant, 'Widget', function (ns, className) {
             },
 
             /**
-             * Adds trait to widget class. Same as `giant.addTrait()`, except for optionally adding the trait name
+             * Adds trait to widget class. Same as `$widget.addTrait()`, except for optionally adding the trait name
              * to the widget's HTML attributes as CSS class.
              * @example
-             * var MyWidget = giant.Widget.extend('MyWidget')
+             * var MyWidget = $widget.Widget.extend('MyWidget')
              *     .addTrait(TraitClass, 'TraitClass');
              * @param {object} trait
              * @param {string} [traitName] Name of trait. Must be the same as the name of the trait object.
-             * @returns {giant.Widget} Widget class the method was called on.
+             * @returns {$widget.Widget} Widget class the method was called on.
              */
             addTrait: function (trait, traitName) {
                 $assertion.isStringOptional(traitName, "Invalid trait name");
@@ -168,11 +168,11 @@ $oop.postpone(giant, 'Widget', function (ns, className) {
             },
 
             /**
-             * Adds trait to widget class, and extends the class afterwards. Same as `giant.addTrait()`,
+             * Adds trait to widget class, and extends the class afterwards. Same as `$widget.addTrait()`,
              * except for optionally adding the trait name to the widget's HTML attributes as CSS class.
              * @param {$oop.Base} trait
              * @param {string} [traitName] Name of trait. Must be the same as the name of the trait object.
-             * @returns {giant.Widget} Extended widget class.
+             * @returns {$widget.Widget} Extended widget class.
              */
             addTraitAndExtend: function (trait, traitName) {
                 return this
@@ -182,11 +182,11 @@ $oop.postpone(giant, 'Widget', function (ns, className) {
 
             /** @ignore */
             init: function () {
-                giant.Progenitor.init.call(this);
+                $widget.Progenitor.init.call(this);
 
                 var widgetId = this.instanceId.toWidgetId();
 
-                giant.Renderable.init.call(this,
+                $widget.Renderable.init.call(this,
                     this.htmlAttributes.clone()
                         .setIdAttribute(widgetId));
 
@@ -199,14 +199,14 @@ $oop.postpone(giant, 'Widget', function (ns, className) {
                 this.containerCssClass = undefined;
 
                 /**
-                 * Child widgets. Modifies the `children` property delegated by `giant.Progenitor`
+                 * Child widgets. Modifies the `children` property delegated by `$widget.Progenitor`
                  * by treating it as a `WidgetCollection` rather than a regular `$data.Collection`.
-                 * @type {giant.WidgetCollection}
+                 * @type {$widget.WidgetCollection}
                  */
                 this.children = this.children.toWidgetCollection();
 
                 // initializing Evented trait
-                this.setEventSpace(giant.widgetEventSpace)
+                this.setEventSpace($widget.widgetEventSpace)
                     .setEventPath(this.getLineage().prepend(self.DETACHED_EVENT_PATH_ROOT));
 
                 // setting default child name to (unique) widget ID
@@ -217,7 +217,7 @@ $oop.postpone(giant, 'Widget', function (ns, className) {
              * Sets container CSS class property. The widget, when added to a parent, will be rendered inside the first
              * element to be found inside the parent's DOM bearing this CSS class.
              * @param {string} containerCssClass
-             * @returns {giant.Widget}
+             * @returns {$widget.Widget}
              */
             setContainerCssClass: function (containerCssClass) {
                 $assertion.isString(containerCssClass, "Invalid container selector");
@@ -240,9 +240,9 @@ $oop.postpone(giant, 'Widget', function (ns, className) {
             /**
              * Adds current widget to specified parent as child.
              * Also triggers rendering the child inside the parent's DOM, according to `.containerCssClass`.
-             * @param {giant.Widget} parentWidget
-             * @returns {giant.Widget}
-             * @see giant.Widget#containerCssClass
+             * @param {$widget.Widget} parentWidget
+             * @returns {$widget.Widget}
+             * @see $widget.Widget#containerCssClass
              */
             addToParent: function (parentWidget) {
                 $assertion.isWidget(parentWidget, "Invalid parent widget");
@@ -250,7 +250,7 @@ $oop.postpone(giant, 'Widget', function (ns, className) {
                 var childName = this.childName,
                     currentChild = parentWidget.children.getItem(childName);
 
-                giant.Progenitor.addToParent.call(this, parentWidget);
+                $widget.Progenitor.addToParent.call(this, parentWidget);
 
                 if (currentChild !== this) {
                     // child on parent may be replaced
@@ -271,7 +271,7 @@ $oop.postpone(giant, 'Widget', function (ns, className) {
 
             /**
              * Sets / replaces root widget with current widget.
-             * @returns {giant.Widget}
+             * @returns {$widget.Widget}
              */
             setRootWidget: function () {
                 var rootWidget = this.rootWidget;
@@ -281,7 +281,7 @@ $oop.postpone(giant, 'Widget', function (ns, className) {
                         rootWidget.removeRootWidget();
                     }
 
-                    giant.Widget.rootWidget = this;
+                    $widget.Widget.rootWidget = this;
 
                     this.addToHierarchy()
                         .afterAdd();
@@ -297,14 +297,14 @@ $oop.postpone(giant, 'Widget', function (ns, className) {
             /**
              * Removes current widget from its parent.
              * Has no effect when current widget has no parent.
-             * @returns {giant.Widget}
+             * @returns {$widget.Widget}
              */
             removeFromParent: function () {
                 var element = this.getElement(),
                     parent = this.parent,
                     wasAttachedToRoot = this.isOnRoot();
 
-                giant.Progenitor.removeFromParent.call(this);
+                $widget.Progenitor.removeFromParent.call(this);
 
                 if (element && element.parentNode) {
                     element.parentNode.removeChild(element);
@@ -320,7 +320,7 @@ $oop.postpone(giant, 'Widget', function (ns, className) {
 
             /**
              * Removes current widget as root widget.
-             * @returns {giant.Widget}
+             * @returns {$widget.Widget}
              */
             removeRootWidget: function () {
                 this.removeFromParent();
@@ -332,12 +332,12 @@ $oop.postpone(giant, 'Widget', function (ns, className) {
              * Sets name of current widget in the context of its parent.
              * For widgets it also determines the order in which they are rendered inside the same container element.
              * @param {string} childName
-             * @returns {giant.Widget}
+             * @returns {$widget.Widget}
              */
             setChildName: function (childName) {
                 var oldChildName = this.childName;
 
-                giant.Progenitor.setChildName.call(this, childName);
+                $widget.Progenitor.setChildName.call(this, childName);
 
                 if (childName !== oldChildName) {
                     this.removeCssClass(oldChildName)
@@ -349,11 +349,11 @@ $oop.postpone(giant, 'Widget', function (ns, className) {
 
             /**
              * Fetches child widgets and returns them as a WidgetCollection.
-             * @returns {giant.WidgetCollection}
+             * @returns {$widget.WidgetCollection}
              */
             getChildren: function () {
-                return giant.Progenitor.getChildren.apply(this, arguments)
-                    .filterByType(giant.Widget)
+                return $widget.Progenitor.getChildren.apply(this, arguments)
+                    .filterByType($widget.Widget)
                     .toWidgetCollection();
             },
 
@@ -362,7 +362,7 @@ $oop.postpone(giant, 'Widget', function (ns, className) {
              * in the context of the specified parent (DOM) element.
              * @param {string} childName
              * @param {HTMLElement} parentElement
-             * @returns {giant.Widget}
+             * @returns {$widget.Widget}
              */
             getAdjacentWidget: function (childName, parentElement) {
                 var childWidgetIds = $data.Collection.create(this._getWidgetIdsInDom(parentElement)),
@@ -379,7 +379,7 @@ $oop.postpone(giant, 'Widget', function (ns, className) {
             /**
              * Renders current widget into the specified (DOM) element.
              * @param {HTMLElement} element
-             * @returns {giant.Widget}
+             * @returns {$widget.Widget}
              */
             renderInto: function (element) {
                 $assertion.isElement(element, "Invalid target element");
@@ -388,9 +388,9 @@ $oop.postpone(giant, 'Widget', function (ns, className) {
 
                 if (adjacentWidget && adjacentWidget.childName >= this.childName) {
                     // when there is an adjacent widget whose childName is bigger than that of the current widget
-                    giant.Renderable.renderBefore.call(this, adjacentWidget.getElement());
+                    $widget.Renderable.renderBefore.call(this, adjacentWidget.getElement());
                 } else {
-                    giant.Renderable.renderInto.call(this, element);
+                    $widget.Renderable.renderInto.call(this, element);
                 }
 
                 this.afterRender();
@@ -401,11 +401,11 @@ $oop.postpone(giant, 'Widget', function (ns, className) {
             /**
              * Renders current widget before the specified (DOM) element.
              * @param {HTMLElement} element
-             * @returns {giant.Widget}
+             * @returns {$widget.Widget}
              */
             renderBefore: function (element) {
                 $assertion.isElement(element, "Invalid target element");
-                giant.Renderable.renderBefore.call(this, element);
+                $widget.Renderable.renderBefore.call(this, element);
                 this.afterRender();
                 return this;
             },
@@ -415,10 +415,10 @@ $oop.postpone(giant, 'Widget', function (ns, className) {
              * Using `reRender` is considered an anti-pattern. Even though re-rendering an already rendered widget
              * does update the widget's DOM, but it is proven to be slow, and risks memory leaks in case there are
              * hard references held to the old DOM. It also makes transitions, input focus, etc. harder to manage.
-             * @returns {giant.Widget}
+             * @returns {$widget.Widget}
              */
             reRender: function () {
-                giant.Renderable.reRender.call(this);
+                $widget.Renderable.reRender.call(this);
                 this.afterRender();
                 return this;
             },
@@ -429,10 +429,10 @@ $oop.postpone(giant, 'Widget', function (ns, className) {
              * widget does update the widget's DOM, but it is proven to be slow, and risks memory leaks
              * in case there are hard references held to the old DOM contents. It also makes transitions,
              * input focus, etc. harder to manage.
-             * @returns {giant.Widget}
+             * @returns {$widget.Widget}
              */
             reRenderContents: function () {
-                giant.Renderable.reRenderContents.call(this);
+                $widget.Renderable.reRenderContents.call(this);
                 this.afterRender();
                 return this;
             },
@@ -440,11 +440,11 @@ $oop.postpone(giant, 'Widget', function (ns, className) {
             /**
              * Retrieves content markup as a filled-in MarkupTemplate.
              * Override this method to add more content to the template.
-             * @returns {giant.MarkupTemplate}
+             * @returns {$widget.MarkupTemplate}
              * @ignore
              */
             contentMarkupAsTemplate: function () {
-                return giant.Renderable.contentMarkupAsTemplate.call(this)
+                return $widget.Renderable.contentMarkupAsTemplate.call(this)
                     .setParameterValues(this._getChildrenGroupedByContainer().items);
             },
 
@@ -463,7 +463,7 @@ $oop.postpone(giant, 'Widget', function (ns, className) {
             /**
              * Adds widget and its children to the hierarchy, updating their event paths and adding them to registry.
              * Not part of the public Widget API, do not call directly.
-             * @returns {giant.Widget}
+             * @returns {$widget.Widget}
              */
             addToHierarchy: function () {
                 // setting event path for triggering widget events
@@ -491,7 +491,7 @@ $oop.postpone(giant, 'Widget', function (ns, className) {
              * Removes widget and its children from the hierarchy, updating their event path,
              * unsubscribing from widget events, and removing them from registry.
              * Not part of the public Widget API, do not call directly.
-             * @returns {giant.Widget}
+             * @returns {$widget.Widget}
              */
             removeFromHierarchy: function () {
                 this.children.removeFromHierarchy();
@@ -535,16 +535,16 @@ $oop.postpone(giant, 'Widget', function (ns, className) {
 (function () {
     "use strict";
 
-    $assertion.addTypes(/** @lends giant */{
-        /** @param {giant.Widget} expr */
+    $assertion.addTypes(/** @lends $widget */{
+        /** @param {$widget.Widget} expr */
         isWidget: function (expr) {
-            return giant.Widget.isBaseOf(expr);
+            return $widget.Widget.isBaseOf(expr);
         },
 
-        /** @param {giant.Widget} expr */
+        /** @param {$widget.Widget} expr */
         isWidgetOptional: function (expr) {
             return typeof expr === 'undefined' ||
-                giant.Widget.isBaseOf(expr);
+                $widget.Widget.isBaseOf(expr);
         },
 
         /** @param {Element} expr */
@@ -558,7 +558,7 @@ $oop.postpone(giant, 'Widget', function (ns, className) {
          * Converts `String` to `Widget` by looking up the widget corresponding to the current string
          * as its widget ID. Conversion yields no result when the widget is not in the hierarchy.
          * String must be in the 'w#' format (lowercase 'w' followed by digits).
-         * @returns {giant.Widget}
+         * @returns {$widget.Widget}
          */
         toWidget: function () {
             return $data.Managed.getInstanceById(this.toInstanceIdFromWidgetId());
@@ -588,7 +588,7 @@ $oop.postpone(giant, 'Widget', function (ns, className) {
         $oop.extendBuiltIn(Element.prototype, /** @lends Element# */{
             /**
              * Converts `Element` to `Widget` using the element's ID attribute as widget ID.
-             * @returns {giant.Widget}
+             * @returns {$widget.Widget}
              */
             toWidget: function () {
                 return $data.Managed.getInstanceById(this.id.toInstanceIdFromWidgetId());
@@ -603,14 +603,14 @@ $oop.postpone(giant, 'Widget', function (ns, className) {
              * Uses the event's target to look up the nearest parent element matching the specified class name.
              * Then uses the element that was found as basis for conversion from `Element` to `Widget`.
              * @param {string} [cssClassName]
-             * @returns {giant.Widget}
+             * @returns {$widget.Widget}
              * @see Element#toWidget
              */
             toWidget: function (cssClassName) {
-                cssClassName = cssClassName || giant.Widget.className;
+                cssClassName = cssClassName || $widget.Widget.className;
 
                 var childElement = this.target,
-                    widgetElement = giant.WidgetUtils.getParentNodeByClassName(childElement, cssClassName);
+                    widgetElement = $widget.WidgetUtils.getParentNodeByClassName(childElement, cssClassName);
 
                 return widgetElement ?
                     $data.Managed.getInstanceById(widgetElement.id.toInstanceIdFromWidgetId()) :

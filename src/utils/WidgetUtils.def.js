@@ -1,5 +1,5 @@
-/*global giant */
-$oop.postpone(giant, 'WidgetUtils', function () {
+/*global $widget */
+$oop.postpone($widget, 'WidgetUtils', function () {
     "use strict";
 
     var base = $oop.Base,
@@ -11,8 +11,8 @@ $oop.postpone(giant, 'WidgetUtils', function () {
      * @class
      * @extends $oop.Base
      */
-    giant.WidgetUtils = self
-        .addConstants(/** @lends giant.WidgetUtils */{
+    $widget.WidgetUtils = self
+        .addConstants(/** @lends $widget.WidgetUtils */{
             /**
              * @type {RegExp}
              * @constant
@@ -33,7 +33,7 @@ $oop.postpone(giant, 'WidgetUtils', function () {
                 '}}': '&#125;&#125;'
             }
         })
-        .addMethods(/** @lends giant.WidgetUtils */{
+        .addMethods(/** @lends $widget.WidgetUtils */{
             /**
              * Replace callback function for escaping HTML entities.
              * @param {string} hit
@@ -82,7 +82,7 @@ $oop.postpone(giant, 'WidgetUtils', function () {
          * @returns {string}
          */
         toHtml: function () {
-            return giant.WidgetUtils.htmlEscape(this);
+            return $widget.WidgetUtils.htmlEscape(this);
         }
     });
 }());

@@ -1,5 +1,5 @@
-/*global giant */
-$oop.postpone(giant, 'MarkupTemplate', function () {
+/*global $widget */
+$oop.postpone($widget, 'MarkupTemplate', function () {
     "use strict";
 
     var base = $oop.Base,
@@ -8,10 +8,10 @@ $oop.postpone(giant, 'MarkupTemplate', function () {
     /**
      * Creates a MarkupTemplate instance.
      * MarkupTemplate instances may also be created via conversion from string.
-     * @name giant.MarkupTemplate.create
+     * @name $widget.MarkupTemplate.create
      * @function
      * @param {string} text MarkupTemplate string.
-     * @returns {giant.MarkupTemplate}
+     * @returns {$widget.MarkupTemplate}
      * @see String#toMarkupTemplate
      */
 
@@ -21,8 +21,8 @@ $oop.postpone(giant, 'MarkupTemplate', function () {
      * @class
      * @extends $oop.Base
      */
-    giant.MarkupTemplate = self
-        .addConstants(/** @lends giant.MarkupTemplate */{
+    $widget.MarkupTemplate = self
+        .addConstants(/** @lends $widget.MarkupTemplate */{
             /**
              * Splits along template placeholders and tags.
              * Leaves an empty slot after each tag and placeholder in the resulting array.
@@ -47,7 +47,7 @@ $oop.postpone(giant, 'MarkupTemplate', function () {
              */
             RE_CLASS_FROM_CLASS_LIST: /[\w-]+/g
         })
-        .addPrivateMethods(/** @lends giant.MarkupTemplate */{
+        .addPrivateMethods(/** @lends $widget.MarkupTemplate */{
             /**
              * @param {string} tag
              * @returns {string}
@@ -77,7 +77,7 @@ $oop.postpone(giant, 'MarkupTemplate', function () {
                 return classList && this._extractClassesFromClassList(classList);
             }
         })
-        .addMethods(/** @lends giant.MarkupTemplate# */{
+        .addMethods(/** @lends $widget.MarkupTemplate# */{
             /**
              * @param {string} templateString
              * @ignore
@@ -107,7 +107,7 @@ $oop.postpone(giant, 'MarkupTemplate', function () {
              * Appends template with specified content.
              * Do not call this on the original template. Clone first.
              * @param {object} parameterValues Pairs of container CSS classes & associated content.
-             * @returns {giant.MarkupTemplate}
+             * @returns {$widget.MarkupTemplate}
              */
             setParameterValues: function (parameterValues) {
                 var preprocessedTemplate = this.preprocessedTemplate.items,
@@ -143,7 +143,7 @@ $oop.postpone(giant, 'MarkupTemplate', function () {
 
             /**
              * Clones markup template.
-             * @returns {giant.MarkupTemplate}
+             * @returns {$widget.MarkupTemplate}
              */
             clone: function () {
                 var result = this.getBase().create('');
@@ -168,10 +168,10 @@ $oop.postpone(giant, 'MarkupTemplate', function () {
     $oop.extendBuiltIn(String.prototype, /** @lends String# */{
         /**
          * Converts `String` to `MarkupTemplate` instance.
-         * @returns {giant.MarkupTemplate}
+         * @returns {$widget.MarkupTemplate}
          */
         toMarkupTemplate: function () {
-            return giant.MarkupTemplate.create(this);
+            return $widget.MarkupTemplate.create(this);
         }
     });
 }());

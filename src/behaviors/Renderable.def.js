@@ -1,5 +1,5 @@
-/*global giant */
-$oop.postpone(giant, 'Renderable', function () {
+/*global $widget */
+$oop.postpone($widget, 'Renderable', function () {
     "use strict";
 
     var base = $oop.Base,
@@ -11,14 +11,14 @@ $oop.postpone(giant, 'Renderable', function () {
      * @class
      * @extends $oop.Base
      */
-    giant.Renderable = self
-        .addPublic(/** @lends giant.Renderable */{
+    $widget.Renderable = self
+        .addPublic(/** @lends $widget.Renderable */{
             /**
-             * @type {giant.MarkupTemplate}
+             * @type {$widget.MarkupTemplate}
              */
             contentTemplate: undefined
         })
-        .addPrivateMethods(/** @lends giant.Renderable# */{
+        .addPrivateMethods(/** @lends $widget.Renderable# */{
             /**
              * Proxy for document.createElement.
              * @param {string} tagName
@@ -123,10 +123,10 @@ $oop.postpone(giant, 'Renderable', function () {
                 element.style.cssText = styleAttribute;
             }
         })
-        .addMethods(/** @lends giant.Renderable# */{
+        .addMethods(/** @lends $widget.Renderable# */{
             /**
              * Call from host's .init.
-             * @param {giant.HtmlAttributes} htmlAttributes
+             * @param {$widget.HtmlAttributes} htmlAttributes
              */
             init: function (htmlAttributes) {
                 /**
@@ -135,15 +135,15 @@ $oop.postpone(giant, 'Renderable', function () {
                 this.tagName = 'div';
 
                 /**
-                 * @type {giant.HtmlAttributes}
+                 * @type {$widget.HtmlAttributes}
                  */
-                this.htmlAttributes = htmlAttributes || giant.HtmlAttributes.create();
+                this.htmlAttributes = htmlAttributes || $widget.HtmlAttributes.create();
             },
 
             /**
              * Sets tag name property.
              * @param {string} tagName
-             * @returns {giant.Renderable}
+             * @returns {$widget.Renderable}
              */
             setTagName: function (tagName) {
                 $assertion.isString(tagName, "Invalid tag name");
@@ -154,7 +154,7 @@ $oop.postpone(giant, 'Renderable', function () {
             /**
              * Adds CSS class to the instance, modifying both buffer and DOM element.
              * @param {string} cssClass
-             * @returns {giant.Renderable}
+             * @returns {$widget.Renderable}
              */
             addCssClass: function (cssClass) {
                 var htmlAttributes = this.htmlAttributes,
@@ -172,7 +172,7 @@ $oop.postpone(giant, 'Renderable', function () {
             /**
              * Decreases ref count of CSS class on the instance, modifying both buffer and DOM element.
              * @param {string} cssClass
-             * @returns {giant.Renderable}
+             * @returns {$widget.Renderable}
              */
             decreaseCssClassRefCount: function (cssClass) {
                 var htmlAttributes = this.htmlAttributes,
@@ -190,7 +190,7 @@ $oop.postpone(giant, 'Renderable', function () {
             /**
              * Removes a CSS class from the instance, modifying both buffer and DOM element.
              * @param {string} cssClass
-             * @returns {giant.Renderable}
+             * @returns {$widget.Renderable}
              */
             removeCssClass: function (cssClass) {
                 var htmlAttributes = this.htmlAttributes,
@@ -218,7 +218,7 @@ $oop.postpone(giant, 'Renderable', function () {
              * Sets inline style on instance, modifying both buffer and DOM element.
              * @param {string} styleName
              * @param {string} [styleValue]
-             * @returns {giant.Renderable}
+             * @returns {$widget.Renderable}
              */
             setInlineStyle: function (styleName, styleValue) {
                 var htmlAttributes = this.htmlAttributes,
@@ -242,7 +242,7 @@ $oop.postpone(giant, 'Renderable', function () {
              * TODO: Handle 'id' and 'class' attributes.
              * @param {string} attributeName
              * @param {string} attributeValue
-             * @returns {giant.Renderable}
+             * @returns {$widget.Renderable}
              */
             addAttribute: function (attributeName, attributeValue) {
                 this.htmlAttributes.setItem(attributeName, attributeValue);
@@ -259,7 +259,7 @@ $oop.postpone(giant, 'Renderable', function () {
              * Removes attribute from instance, modifying both buffer and DOM element.
              * @param {string} attributeName Name of the HTML attribute to remove. Values 'class' and 'style' also
              * clear the corresponding collections. Use carefully!
-             * @returns {giant.Renderable}
+             * @returns {$widget.Renderable}
              */
             removeAttribute: function (attributeName) {
                 this.htmlAttributes.deleteItem(attributeName);
@@ -311,7 +311,7 @@ $oop.postpone(giant, 'Renderable', function () {
              * Moves existing element to new location by default. Override by forcing rendering.
              * @param {HTMLElement} parentElement
              * @param {boolean} [force]
-             * @returns {giant.Renderable}
+             * @returns {$widget.Renderable}
              */
             renderInto: function (parentElement, force) {
                 var element = (!force && this.getElement()) || this.createElement();
@@ -324,7 +324,7 @@ $oop.postpone(giant, 'Renderable', function () {
              * Moves existing element to new location by default. Override by forcing rendering.
              * @param {HTMLElement} adjacentElement
              * @param {boolean} [force]
-             * @returns {giant.Renderable}
+             * @returns {$widget.Renderable}
              */
             renderBefore: function (adjacentElement, force) {
                 var parentElement = adjacentElement.parentNode,
@@ -339,7 +339,7 @@ $oop.postpone(giant, 'Renderable', function () {
              * Re-renders instance by replacing the current DOM element with a new one.
              * Has no effect when instance has never been rendered.
              * External references to the instance's DOM must be invalidated afterwards.
-             * @returns {giant.Renderable}
+             * @returns {$widget.Renderable}
              */
             reRender: function () {
                 var element = this.getElement();
@@ -354,7 +354,7 @@ $oop.postpone(giant, 'Renderable', function () {
              * Has no effect when instance has never been rendered.
              * External references to the instance's internal DOM must be invalidated afterwards.
              * TODO: Remove template conversion & placeholder clearing.
-             * @returns {giant.Renderable}
+             * @returns {$widget.Renderable}
              */
             reRenderContents: function () {
                 var element = this.getElement(),
@@ -375,7 +375,7 @@ $oop.postpone(giant, 'Renderable', function () {
 
             /**
              * Retrieves the widget's markup as a MarkupTemplate instance.
-             * @returns {giant.MarkupTemplate}
+             * @returns {$widget.MarkupTemplate}
              */
             contentMarkupAsTemplate: function () {
                 return this.contentTemplate.clone();

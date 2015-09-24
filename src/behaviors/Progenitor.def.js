@@ -1,5 +1,5 @@
-/*global giant */
-$oop.postpone(giant, 'Progenitor', function (ns, className) {
+/*global $widget */
+$oop.postpone($widget, 'Progenitor', function (ns, className) {
     "use strict";
 
     var base = $data.Managed,
@@ -11,8 +11,8 @@ $oop.postpone(giant, 'Progenitor', function (ns, className) {
      * @class
      * @extends $data.Managed
      */
-    giant.Progenitor = self
-        .addMethods(/** @lends giant.Progenitor# */{
+    $widget.Progenitor = self
+        .addMethods(/** @lends $widget.Progenitor# */{
             /** Call from host's .init */
             init: function () {
                 base.init.call(this);
@@ -20,7 +20,7 @@ $oop.postpone(giant, 'Progenitor', function (ns, className) {
                 /**
                  * Parent of current instance.
                  * When undefined, progenitor is considered a root instance.
-                 * @type {giant.Progenitor}
+                 * @type {$widget.Progenitor}
                  */
                 this.parent = undefined;
 
@@ -39,8 +39,8 @@ $oop.postpone(giant, 'Progenitor', function (ns, className) {
 
             /**
              * Adds current instance to the specified parent Progenitor instance as child.
-             * @param {giant.Progenitor} parent
-             * @returns {giant.Progenitor}
+             * @param {$widget.Progenitor} parent
+             * @returns {$widget.Progenitor}
              */
             addToParent: function (parent) {
                 var childName, currentChild;
@@ -75,8 +75,8 @@ $oop.postpone(giant, 'Progenitor', function (ns, className) {
 
             /**
              * Adds the specified Progenitor instance to the current instance as child.
-             * @param {giant.Progenitor} child
-             * @returns {giant.Progenitor}
+             * @param {$widget.Progenitor} child
+             * @returns {$widget.Progenitor}
              */
             addChild: function (child) {
                 child.addToParent(this);
@@ -86,7 +86,7 @@ $oop.postpone(giant, 'Progenitor', function (ns, className) {
             /**
              * Removes current instance from its parent.
              * Has no effect when current instance has no parent.
-             * @returns {giant.Progenitor}
+             * @returns {$widget.Progenitor}
              */
             removeFromParent: function () {
                 var parent = this.parent;
@@ -105,8 +105,8 @@ $oop.postpone(giant, 'Progenitor', function (ns, className) {
             /**
              * Removes specified Progenitor instance from current instance.
              * Has no effect if the specified instance is not child of the current instance.
-             * @param {giant.Progenitor} child
-             * @returns {giant.Progenitor}
+             * @param {$widget.Progenitor} child
+             * @returns {$widget.Progenitor}
              */
             removeChild: function (child) {
                 if (this.children.getItem(child.childName) === child) {
@@ -117,7 +117,7 @@ $oop.postpone(giant, 'Progenitor', function (ns, className) {
 
             /**
              * Removes all children from the current instance.
-             * @returns {giant.Progenitor}
+             * @returns {$widget.Progenitor}
              */
             removeChildren: function () {
                 this.children.callOnEachItem('removeFromParent');
@@ -128,7 +128,7 @@ $oop.postpone(giant, 'Progenitor', function (ns, className) {
              * Changes child name for current instance.
              * Has no effect when specified child name is same as the current child name.
              * @param {string} childName
-             * @returns {giant.Progenitor}
+             * @returns {$widget.Progenitor}
              */
             setChildName: function (childName) {
                 $assertion.isString(childName, "Invalid child name");
@@ -156,7 +156,7 @@ $oop.postpone(giant, 'Progenitor', function (ns, className) {
             /**
              * Retrieves child instance matching the specified child name.
              * @param {string} childName
-             * @returns {giant.Progenitor}
+             * @returns {$widget.Progenitor}
              */
             getChild: function (childName) {
                 return this.children.getItem(childName);
@@ -198,7 +198,7 @@ $oop.postpone(giant, 'Progenitor', function (ns, className) {
              * matching the specified tester function. The tester receives one argument, which
              * is the Progenitor instance being traversed in the parent chain.
              * @param {function} tester
-             * @returns {giant.Progenitor}
+             * @returns {$widget.Progenitor}
              */
             getAncestor: function (tester) {
                 $assertion.isFunction(tester, "Invalid tester function");

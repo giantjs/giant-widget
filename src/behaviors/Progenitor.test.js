@@ -1,4 +1,4 @@
-/*global giant */
+/*global $widget */
 (function () {
     "use strict";
 
@@ -7,14 +7,14 @@
     /**
      * @class
      * @extends $oop.Base
-     * @extends giant.Progenitor
+     * @extends $widget.Progenitor
      */
     var Progenitor = $oop.Base.extend()
-        .addTrait(giant.Progenitor)
+        .addTrait($widget.Progenitor)
         .extend('myClass')
         .addMethods({
             init: function () {
-                giant.Progenitor.init.call(this);
+                $widget.Progenitor.init.call(this);
             }
         });
 

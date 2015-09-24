@@ -1,19 +1,19 @@
-/*global giant */
+/*global $widget */
 (function () {
     "use strict";
 
     module("Widget Utils");
 
     test("HTML escape", function () {
-        equal(giant.WidgetUtils.htmlEscape("Q&A"), "Q&amp;A",
+        equal($widget.WidgetUtils.htmlEscape("Q&A"), "Q&amp;A",
             "should escape ampersand");
         equal(
-            giant.WidgetUtils.htmlEscape("<script>alert('foo');</script>"),
+            $widget.WidgetUtils.htmlEscape("<script>alert('foo');</script>"),
             "&lt;script&gt;alert(&#39;foo&#39;);&lt;/script&gt;",
             "should escape injected HTML"
         );
         equal(
-            giant.WidgetUtils.htmlEscape("Hello {{name}}!"),
+            $widget.WidgetUtils.htmlEscape("Hello {{name}}!"),
             "Hello &#123;&#123;name&#125;&#125;!",
             "should escape template"
         );
@@ -38,11 +38,11 @@
             e2 = element.getElementsByClassName('middle')[0],
             e3 = element.getElementsByClassName('innermost')[0];
 
-        strictEqual(giant.WidgetUtils.getParentNodeByClassName(e3, 'innermost'), e3,
+        strictEqual($widget.WidgetUtils.getParentNodeByClassName(e3, 'innermost'), e3,
             "should fetch self when specified class is matching");
-        strictEqual(giant.WidgetUtils.getParentNodeByClassName(e3, 'middle'), e2,
+        strictEqual($widget.WidgetUtils.getParentNodeByClassName(e3, 'middle'), e2,
             "should fetch parent with specified class");
-        equal(typeof giant.WidgetUtils.getParentNodeByClassName(e3, 'foo'), 'undefined',
+        equal(typeof $widget.WidgetUtils.getParentNodeByClassName(e3, 'foo'), 'undefined',
             "should return undefined when no such parent exists");
     });
 }());

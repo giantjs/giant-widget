@@ -1,11 +1,11 @@
-/*global giant */
+/*global $widget */
 (function () {
     "use strict";
 
     module("Css Classes");
 
     test("Adding CSS class", function () {
-        var cssClasses = giant.CssClasses.create();
+        var cssClasses = $widget.CssClasses.create();
 
         strictEqual(cssClasses.addCssClass('foo'), cssClasses, "should be chainable");
         deepEqual(cssClasses.items, {
@@ -19,7 +19,7 @@
     });
 
     test("Decreasing ref count CSS class", function () {
-        var cssClasses = giant.CssClasses.create()
+        var cssClasses = $widget.CssClasses.create()
             .addCssClass('foo')
             .addCssClass('foo');
 
@@ -33,7 +33,7 @@
     });
 
     test("Removing CSS class", function () {
-        var cssClasses = giant.CssClasses.create()
+        var cssClasses = $widget.CssClasses.create()
             .addCssClass('foo');
 
         strictEqual(cssClasses.removeCssClass('foo'), cssClasses, "should be chainable");
@@ -41,7 +41,7 @@
     });
 
     test("Serialization", function () {
-        var cssClasses = giant.CssClasses.create()
+        var cssClasses = $widget.CssClasses.create()
             .addCssClass('foo')
             .addCssClass('bar');
 
