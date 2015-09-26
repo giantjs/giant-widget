@@ -1,4 +1,3 @@
-/*global $widget */
 $oop.postpone($widget, 'WidgetEvent', function () {
     "use strict";
 

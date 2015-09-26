@@ -1,4 +1,3 @@
-/*global $widget, jQuery */
 $oop.postpone($widget, 'JqueryWidget', function (ns, className, /**jQuery*/$) {
     "use strict";
 

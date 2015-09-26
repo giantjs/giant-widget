@@ -1,4 +1,3 @@
-/*global $widget */
 $oop.postpone($widget, 'widgetEventSpace', function () {
     "use strict";
 

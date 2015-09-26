@@ -1,4 +1,3 @@
-/*global $widget */
 (function () {
     "use strict";
 
