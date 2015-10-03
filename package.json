@@ -14,13 +14,15 @@
     "type": "git",
     "url": "git@github.com:giantjs/giant-widget.git"
   },
-  "dependencies": {
+  "peerDependencies": {
     "giant-assertion": "0.1.0",
     "giant-data": "0.1.0",
     "giant-event": "0.1.0",
     "giant-oop": "0.1.0",
     "giant-templating": "0.1.0",
-    "giant-utils": "0.1.0",
+    "giant-utils": "0.1.0"
+  },
+  "dependencies": {
     "jquery": "~2.1.0",
     "q": "^1.4.0"
   },
