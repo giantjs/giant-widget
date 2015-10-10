@@ -59,7 +59,7 @@
 
         var widget = {};
 
-        $data.Managed.addMocks({
+        $utils.Managed.addMocks({
             getInstanceById: function (instanceId) {
                 equal(instanceId, 14, "should fetch instance from registry");
                 return widget;
@@ -68,7 +68,7 @@
 
         strictEqual('w14'.toWidget(), widget, "should return instance fetched by getInstanceId");
 
-        $data.Managed.removeMocks();
+        $utils.Managed.removeMocks();
     });
 
     test("Conversion from Element", function () {
@@ -80,7 +80,7 @@
 
             element.id = 'w100';
 
-            $data.Managed.addMocks({
+            $utils.Managed.addMocks({
                 getInstanceById: function (instanceId) {
                     equal(instanceId, 100, "should fetch instance from registry");
                     return widget;
@@ -89,7 +89,7 @@
 
             strictEqual(element.toWidget(), widget, "should fetch widget by instance ID");
 
-            $data.Managed.removeMocks();
+            $utils.Managed.removeMocks();
         }
     });
 
@@ -109,7 +109,7 @@
                 }
             });
 
-            $data.Managed.addMocks({
+            $utils.Managed.addMocks({
                 getInstanceById: function (instanceId) {
                     equal(instanceId, 100, "should fetch instance from registry");
                     return widget;
@@ -119,7 +119,7 @@
             strictEqual(uiEvent.toWidget('foo'), widget, "should return instance fetched by getInstanceId");
 
             $widget.WidgetUtils.removeMocks();
-            $data.Managed.removeMocks();
+            $utils.Managed.removeMocks();
         }
     });
 
@@ -397,7 +397,7 @@
             }
         });
 
-        $data.Managed.addMocks({
+        $utils.Managed.addMocks({
             getInstanceById: function (instanceId) {
                 instanceIds.push(instanceId);
                 return widgets[instanceId];
@@ -428,7 +428,7 @@
             "should fetch IDs of widgets under specified element");
 
         $widget.Widget.removeMocks();
-        $data.Managed.removeMocks();
+        $utils.Managed.removeMocks();
         $data.OrderedStringList.removeMocks();
         $data.Collection.removeMocks();
     });

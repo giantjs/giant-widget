@@ -232,7 +232,7 @@
 
     test("Descendant collector", function () {
         var items = [],
-            firstId = $data.Documented.nextInstanceId,
+            firstId = $utils.Documented.nextInstanceId,
             parent = Progenitor.create()
                 .addChild(Progenitor.create()
                     .addChild(Progenitor.create()))
@@ -289,7 +289,7 @@
     });
 
     test("Lineage getter", function () {
-        var firstId = $data.Documented.nextInstanceId,
+        var firstId = $utils.Documented.nextInstanceId,
             child = Progenitor.create()
                 .addToParent(Progenitor.create()
                     .addToParent(Progenitor.create()

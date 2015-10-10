@@ -133,10 +133,10 @@ $oop.postpone($widget, 'Widget', function (ns, className) {
              * @param {string} className
              * @returns {$oop.Base}
              * @see $oop.Base.extend
-             * @see $data.Documented.extend
+             * @see $utils.Documented.extend
              */
             extend: function (className) {
-                var that = $data.Documented.extend.call(this, className);
+                var that = $utils.Documented.extend.call(this, className);
 
                 that.htmlAttributes = this.htmlAttributes.clone()
                     .addCssClass(className);
@@ -560,7 +560,7 @@ $oop.postpone($widget, 'Widget', function (ns, className) {
          * @returns {$widget.Widget}
          */
         toWidget: function () {
-            return $data.Managed.getInstanceById(this.toInstanceIdFromWidgetId());
+            return $utils.Managed.getInstanceById(this.toInstanceIdFromWidgetId());
         },
 
         /**
@@ -590,7 +590,7 @@ $oop.postpone($widget, 'Widget', function (ns, className) {
              * @returns {$widget.Widget}
              */
             toWidget: function () {
-                return $data.Managed.getInstanceById(this.id.toInstanceIdFromWidgetId());
+                return $utils.Managed.getInstanceById(this.id.toInstanceIdFromWidgetId());
             }
         });
     }
@@ -612,7 +612,7 @@ $oop.postpone($widget, 'Widget', function (ns, className) {
                     widgetElement = $widget.WidgetUtils.getParentNodeByClassName(childElement, cssClassName);
 
                 return widgetElement ?
-                    $data.Managed.getInstanceById(widgetElement.id.toInstanceIdFromWidgetId()) :
+                    $utils.Managed.getInstanceById(widgetElement.id.toInstanceIdFromWidgetId()) :
                     undefined;
             }
         });

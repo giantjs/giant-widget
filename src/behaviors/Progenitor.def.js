@@ -1,14 +1,14 @@
 $oop.postpone($widget, 'Progenitor', function (ns, className) {
     "use strict";
 
-    var base = $data.Managed,
+    var base = $utils.Managed,
         self = base.extend(className),
         slice = Array.prototype.slice;
 
     /**
      * The Progenitor trait manages parent-children relation between instances of the host class.
      * @class
-     * @extends $data.Managed
+     * @extends $utils.Managed
      */
     $widget.Progenitor = self
         .addMethods(/** @lends $widget.Progenitor# */{
