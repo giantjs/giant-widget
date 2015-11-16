@@ -24,8 +24,7 @@
     "giant-oop": "0.2.0",
     "giant-templating": "0.2.0",
     "giant-utils": "0.2.0",
-    "jquery": "~2.1.0",
-    "q": "^1.4.0"
+    "jquery": "~2.1.0"
   },
   "devDependencies": {
     "giant-asset": "0.2.0",
