@@ -141,6 +141,7 @@ $oop.postpone($widget, 'Renderable', function () {
 
             /**
              * Sets tag name property.
+             * TODO: Shouldn't allow setting tag name when rendered.
              * @param {string} tagName
              * @returns {$widget.Renderable}
              */
