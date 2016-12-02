@@ -356,21 +356,46 @@ $oop.postpone($widget, 'Widget', function (ns, className) {
                     .toWidgetCollection();
             },
 
+
             /**
-             * Retrieves the widget that is adjacent to the widget specified by its `childName` property
+             * Retrieves the widget that follows the widget specified by its `childName` property
              * in the context of the specified parent (DOM) element.
              * @param {string} childName
              * @param {HTMLElement} parentElement
              * @returns {$widget.Widget}
              */
-            getAdjacentWidget: function (childName, parentElement) {
-                var childWidgetIds = $data.Collection.create(this._getWidgetIdsInDom(parentElement)),
-                    childWidgets = childWidgetIds
-                        .callOnEachItem('toWidget'),
-                    childWidgetNames = childWidgets
-                        .collectProperty('childName')
-                        .toOrderedStringList(),
-                    spliceIndex = childWidgetNames.spliceIndexOf(childName);
+            getFollowingWidget: function (childName, parentElement) {
+                var childWidgets = $data.Collection.create(this._getWidgetIdsInDom(parentElement)).callOnEachItem('toWidget'),
+                    childWidgetNames = childWidgets.collectProperty('childName'),
+                    childOrder = this.parent && this.parent.childOrder,
+                    childNameArray = childWidgetNames.getValues().concat([childName]),
+                    spliceIndex;
+
+                if (childOrder) {
+                    // sort children first by childOrder, then alphabetical by childName
+                    childNameArray.sort(function (a, b) {
+                        var indexA = childOrder.indexOf(a),
+                            indexB = childOrder.indexOf(b);
+
+                        if (indexA === -1 && indexB === -1) {
+                            // neither in childOrder - sort by name
+                            return (a === b ? 0 : (a > b ? 1 : -1));
+                        } else if (indexA === -1) {
+                            // B in childOrder
+                            return 1;
+                        } else if (indexB === -1) {
+                            // A in childOrder
+                            return -1;
+                        } else {
+                            // both in childOrder
+                            return (indexA === indexB ? 0 : (indexA > indexB ? 1 : -1));
+                        }
+                    });
+
+                    spliceIndex = childNameArray.indexOf(childName);
+                } else {
+                    spliceIndex = childWidgetNames.toOrderedStringList().spliceIndexOf(childName);
+                }
 
                 return childWidgets.getItem(spliceIndex.toString());
             },
@@ -383,11 +408,11 @@ $oop.postpone($widget, 'Widget', function (ns, className) {
             renderInto: function (element) {
                 $assertion.isElement(element, "Invalid target element");
 
-                var adjacentWidget = this.getAdjacentWidget(this.childName, element);
+                var followingWidget = this.getFollowingWidget(this.childName, element);
 
-                if (adjacentWidget && adjacentWidget.childName >= this.childName) {
+                if (followingWidget) {
                     // when there is an adjacent widget whose childName is bigger than that of the current widget
-                    $widget.Renderable.renderBefore.call(this, adjacentWidget.getElement());
+                    $widget.Renderable.renderBefore.call(this, followingWidget.getElement());
                 } else {
                     $widget.Renderable.renderInto.call(this, element);
                 }
@@ -443,8 +468,42 @@ $oop.postpone($widget, 'Widget', function (ns, className) {
              * @ignore
              */
             contentMarkupAsTemplate: function () {
+                var items = this._getChildrenGroupedByContainer().items,
+                    containerNames = Object.keys(items),
+                    childOrder = this.childOrder,
+                    parameterValues = {},
+                    i;
+
+                for (i = 0; i < containerNames.length; i++) {
+                    if (childOrder && items[containerNames[i]].isA($widget.WidgetCollection)) {
+                        parameterValues[containerNames[i]] = items[containerNames[i]]
+                            .callOnEachItem('toString')
+                            .getSortedValues(function (a, b) {
+                                var indexA = childOrder.indexOf(a),
+                                    indexB = childOrder.indexOf(b);
+
+                                if (indexA === -1 && indexB === -1) {
+                                    // neither in childOrder - sort by name
+                                    return (a === b ? 0 : (a > b ? 1 : -1));
+                                } else if (indexA === -1) {
+                                    // B in childOrder
+                                    return 1;
+                                } else if (indexB === -1) {
+                                    // A in childOrder
+                                    return -1;
+                                } else {
+                                    // both in childOrder
+                                    return (indexA === indexB ? 0 : (indexA > indexB ? 1 : -1));
+                                }
+                            })
+                            .join('');
+                    } else {
+                        parameterValues[containerNames[i]] = items[containerNames[i]].toString();
+                    }
+                }
+
                 return $widget.Renderable.contentMarkupAsTemplate.call(this)
-                    .setParameterValues(this._getChildrenGroupedByContainer().items);
+                    .setParameterValues(parameterValues);
             },
 
             /**
@@ -618,3 +677,4 @@ $oop.postpone($widget, 'Widget', function (ns, className) {
         });
     }
 }());
+
