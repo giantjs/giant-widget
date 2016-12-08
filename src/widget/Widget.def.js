@@ -92,7 +92,8 @@ $oop.postpone($widget, 'Widget', function (ns, className) {
              * @private
              */
             _renderIntoParent: function () {
-                var parentElement = this.parent.getElement(),
+                var parent = this.parent,
+                    parentElement = parent && parent.getElement(),
                     containerCssClass = this.containerCssClass;
 
                 if (parentElement) {
